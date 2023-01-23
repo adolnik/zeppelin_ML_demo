@@ -1,0 +1,332 @@
+{
+  "paragraphs": [
+    {
+      "text": "%sh\nls /var",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 04:11:59.680",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "backups\ncache\nlib\nlocal\nlock\nlog\nmail\nopt\nrun\nspool\ntmp\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672290496748_976021300",
+      "id": "paragraph_1672290496748_976021300",
+      "dateCreated": "2022-12-29 05:08:16.748",
+      "dateStarted": "2022-12-30 04:11:59.691",
+      "dateFinished": "2022-12-30 04:12:00.039",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nimport pandas as pd\nimport requests \n\nurl \u003d \u0027https://docs.google.com/spreadsheets/d/1J4lUpCAztLpO378ZUTriIplYENUqY4oBDByauF39Dp4/export?format\u003dcsv\u0027\n#s \u003d requests.get(url).content\n#print(s[0:100])\ndata \u003d pd.read_csv(url,sep\u003d\";\")\ndata.head()\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 04:12:01.934",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eid\u003c/th\u003e\n      \u003cth\u003efull_sq\u003c/th\u003e\n      \u003cth\u003elife_sq\u003c/th\u003e\n      \u003cth\u003efloor\u003c/th\u003e\n      \u003cth\u003esub_area\u003c/th\u003e\n      \u003cth\u003epreschool_quota\u003c/th\u003e\n      \u003cth\u003epreschool_education_centers_raion\u003c/th\u003e\n      \u003cth\u003eschool_quota\u003c/th\u003e\n      \u003cth\u003eschool_education_centers_raion\u003c/th\u003e\n      \u003cth\u003eschool_education_centers_top_20_raion\u003c/th\u003e\n      \u003cth\u003e...\u003c/th\u003e\n      \u003cth\u003eshopping_centers_km\u003c/th\u003e\n      \u003cth\u003eoffice_km\u003c/th\u003e\n      \u003cth\u003eadditional_education_km\u003c/th\u003e\n      \u003cth\u003epreschool_km\u003c/th\u003e\n      \u003cth\u003ebig_church_km\u003c/th\u003e\n      \u003cth\u003echurch_synagogue_km\u003c/th\u003e\n      \u003cth\u003etheater_km\u003c/th\u003e\n      \u003cth\u003emuseum_km\u003c/th\u003e\n      \u003cth\u003eecology\u003c/th\u003e\n      \u003cth\u003eprice_doc\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e1\u003c/td\u003e\n      \u003ctd\u003e43\u003c/td\u003e\n      \u003ctd\u003e27.0\u003c/td\u003e\n      \u003ctd\u003e4.0\u003c/td\u003e\n      \u003ctd\u003eBibirevo\u003c/td\u003e\n      \u003ctd\u003e5001.0\u003c/td\u003e\n      \u003ctd\u003e5\u003c/td\u003e\n      \u003ctd\u003e11065.0\u003c/td\u003e\n      \u003ctd\u003e5\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0.648488\u003c/td\u003e\n      \u003ctd\u003e0.637189\u003c/td\u003e\n      \u003ctd\u003e0.947962\u003c/td\u003e\n      \u003ctd\u003e0.177975\u003c/td\u003e\n      \u003ctd\u003e0.625783\u003c/td\u003e\n      \u003ctd\u003e0.628187\u003c/td\u003e\n      \u003ctd\u003e14.053047\u003c/td\u003e\n      \u003ctd\u003e7.389498\u003c/td\u003e\n      \u003ctd\u003egood\u003c/td\u003e\n      \u003ctd\u003e5850000\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e2\u003c/td\u003e\n      \u003ctd\u003e34\u003c/td\u003e\n      \u003ctd\u003e19.0\u003c/td\u003e\n      \u003ctd\u003e3.0\u003c/td\u003e\n      \u003ctd\u003eNagatinskij Zaton\u003c/td\u003e\n      \u003ctd\u003e3119.0\u003c/td\u003e\n      \u003ctd\u003e5\u003c/td\u003e\n      \u003ctd\u003e6237.0\u003c/td\u003e\n      \u003ctd\u003e8\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0.519311\u003c/td\u003e\n      \u003ctd\u003e0.688796\u003c/td\u003e\n      \u003ctd\u003e1.072315\u003c/td\u003e\n      \u003ctd\u003e0.273345\u003c/td\u003e\n      \u003ctd\u003e0.967821\u003c/td\u003e\n      \u003ctd\u003e0.471447\u003c/td\u003e\n      \u003ctd\u003e6.829889\u003c/td\u003e\n      \u003ctd\u003e0.709260\u003c/td\u003e\n      \u003ctd\u003eexcellent\u003c/td\u003e\n      \u003ctd\u003e6000000\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e3\u003c/td\u003e\n      \u003ctd\u003e43\u003c/td\u003e\n      \u003ctd\u003e29.0\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n      \u003ctd\u003eTekstil\u0027shhiki\u003c/td\u003e\n      \u003ctd\u003e1463.0\u003c/td\u003e\n      \u003ctd\u003e4\u003c/td\u003e\n      \u003ctd\u003e5580.0\u003c/td\u003e\n      \u003ctd\u003e7\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e1.486533\u003c/td\u003e\n      \u003ctd\u003e1.543049\u003c/td\u003e\n      \u003ctd\u003e0.391957\u003c/td\u003e\n      \u003ctd\u003e0.158072\u003c/td\u003e\n      \u003ctd\u003e3.178751\u003c/td\u003e\n      \u003ctd\u003e0.755946\u003c/td\u003e\n      \u003ctd\u003e4.273200\u003c/td\u003e\n      \u003ctd\u003e3.156423\u003c/td\u003e\n      \u003ctd\u003epoor\u003c/td\u003e\n      \u003ctd\u003e5700000\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e3\u003c/th\u003e\n      \u003ctd\u003e4\u003c/td\u003e\n      \u003ctd\u003e89\u003c/td\u003e\n      \u003ctd\u003e50.0\u003c/td\u003e\n      \u003ctd\u003e9.0\u003c/td\u003e\n      \u003ctd\u003eMitino\u003c/td\u003e\n      \u003ctd\u003e6839.0\u003c/td\u003e\n      \u003ctd\u003e9\u003c/td\u003e\n      \u003ctd\u003e17063.0\u003c/td\u003e\n      \u003ctd\u003e10\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0.599914\u003c/td\u003e\n      \u003ctd\u003e0.934273\u003c/td\u003e\n      \u003ctd\u003e0.892674\u003c/td\u003e\n      \u003ctd\u003e0.236455\u003c/td\u003e\n      \u003ctd\u003e1.031777\u003c/td\u003e\n      \u003ctd\u003e1.561505\u003c/td\u003e\n      \u003ctd\u003e16.990677\u003c/td\u003e\n      \u003ctd\u003e16.041521\u003c/td\u003e\n      \u003ctd\u003egood\u003c/td\u003e\n      \u003ctd\u003e13100000\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e4\u003c/th\u003e\n      \u003ctd\u003e5\u003c/td\u003e\n      \u003ctd\u003e77\u003c/td\u003e\n      \u003ctd\u003e77.0\u003c/td\u003e\n      \u003ctd\u003e4.0\u003c/td\u003e\n      \u003ctd\u003eBasmannoe\u003c/td\u003e\n      \u003ctd\u003e3240.0\u003c/td\u003e\n      \u003ctd\u003e7\u003c/td\u003e\n      \u003ctd\u003e7770.0\u003c/td\u003e\n      \u003ctd\u003e9\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0.429052\u003c/td\u003e\n      \u003ctd\u003e0.077901\u003c/td\u003e\n      \u003ctd\u003e0.810801\u003c/td\u003e\n      \u003ctd\u003e0.376838\u003c/td\u003e\n      \u003ctd\u003e0.378756\u003c/td\u003e\n      \u003ctd\u003e0.121681\u003c/td\u003e\n      \u003ctd\u003e1.112486\u003c/td\u003e\n      \u003ctd\u003e1.800125\u003c/td\u003e\n      \u003ctd\u003eexcellent\u003c/td\u003e\n      \u003ctd\u003e16331452\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003cp\u003e5 rows × 56 columns\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672290556973_2098521933",
+      "id": "paragraph_1672290556973_2098521933",
+      "dateCreated": "2022-12-29 05:09:16.973",
+      "dateStarted": "2022-12-30 04:12:01.938",
+      "dateFinished": "2022-12-30 04:12:15.689",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n#data.columns\nlen(np.unique(data.sub_area))",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 04:15:27.947",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "146"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672373542273_236513297",
+      "id": "paragraph_1672373542273_236513297",
+      "dateCreated": "2022-12-30 04:12:22.274",
+      "dateStarted": "2022-12-30 04:15:27.962",
+      "dateFinished": "2022-12-30 04:15:28.088",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nvis_data\u003ddata[data.sub_area.isin([\"Lefortovo\", \"Perovo\", \"Basmannoe\", \"Bogorodskoe\"])]\nn_df \u003d pd.DataFrame(vis_data,columns\u003d[\u0027sub_area\u0027,\u0027price_doc\u0027])\nn_df.head()\n\nimport seaborn as sns\n#df \u003d sns.load_dataset(n_df)\nsns.set(rc\u003d{\u0027figure.figsize\u0027:(11.7,8.27)})\n\nsns.boxplot( x\u003dn_df[\"sub_area\"], y\u003dn_df[\"price_doc\"] )\n#np.unique(data.sub_area)Lefortovo",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 23:32:57.627",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 263.0,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cAxesSubplot:xlabel\u003d\u0027sub_area\u0027, ylabel\u003d\u0027price_doc\u0027\u003e\n"
+          },
+          {
+            "type": "IMG",
+            "data": "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Cy+8oMsuu4zC61FufBZWVlYqIYEfe6h/R/fnzz77TDfccIPS09Pr9LnIPukc3mWXlJeXq7y8XM2bN1coFNKf/vQnlZeXKxKJ6M4774z9dvjEE09o0aJFSkxMjJWE5s2bq0uXLvrNb36jd955R+FwWFOmTNGqVau0cuVKVVZWaubMmTrnnHO0b98+jR49Wl9//bXKy8uVmZmpBx54QJI0a9YsbdmyRaWlpdq+fbs6duyomTNn6tRTT631vq+//lpTpkzRJ598IknKzs7W7bffLknau3evpkyZop07d6q8vFyDBg3SnXfe6c6bjHqRn5+vv/zlLzpy5IiaNGmi3/72t+rRo4eGDRum8vJy3XLLLQoGgxozZozmzJmjhQsXSpJ+/OMfa9y4cTr99NM1a9Ysbd26Vd988422b9+ugQMHau/evRo1apQSExP12GOPKS0t7bj71QcffKApU6ZowYIFsUxDhw7V2LFjdfHFF9e4TTQOx34W1vbZsmnTJv32t7/VoUOH1LVrV23btk0jR47U5Zdfrq1bt2rChAk6ePCgEhISdM8996hv376SpC5duuj+++9Xfn6+evXqpZtuukkTJ07Utm3bJEm33Xabrr76aknSBx98oIcffliJiYnq0aOHjDGSqn5JmzRpklavXq2mTZvqtNNO08svv1zt73HkyBHdf//9atu2rcaOHas33nhDzz77rCSpY8eOmjRpUuyXu6efflpLlixRJBLRGWecocmTJ6t169bxfaPhiB/96Ec6/fTT9cUXX+h3v/vdcX8W9u/fX9dcc41Wr16tDh066KGHHuKzzwkGjrn88svNgAEDTHZ2tunRo4f5z//8T2OMMeFw2FRWVhpjjNm3b5/p06ePCYfDJhwOmx49ephDhw4ZY4wpLS01FRUVxhhjOnfubP77v//bGGPMm2++aXr06GHeffddY4wxc+bMMffee68xxpjDhw+bsrIyY4wxR44cMcOHDzf5+fnGGGMef/xx89Of/tSUlJSYaDRqbr31VvPKK698533Tpk0zDzzwgIlGo6a0tNQMHDjQLF++3BhjzC9+8Qvz3nvvGWOMKS8vNz//+c9NQUFB/N5U1KvLL7/cbNiwITbeunWrue6660xpaakxxpiNGzeazMzM2P2dO3eO7V/Lly83gwYNMqWlpSYajZr777/fTJs2zRhTtT9lZmaaAwcO1Lit2varn/70p+bzzz83xhizYcMGc8UVV5hoNFrrNtFw1fRZWNs+kJOTYxYsWGCMMWbdunWma9euZtmyZcYYY6699lrz6quvGmOMKSoqMhdffHFsX+vcubN56qmnYtu+++67zYwZM4wxxuzZs8dkZGSYDRs2mPLychMMBs3q1auNMcYsXrzYdO7c2WzYsMF8+umn5sorrzSRSMQYU/WZbYwx27dvNxdffLEpLi42N910k3n++eeNMVX7aEZGhtmzZ48xxpgZM2aYu+++2xhjzIIFC8y4ceNir/Xiiy+a0aNH1/M7DCcd+1kWCoXMhRdeWOvPwssvv9xMnDgx9nw++5zBQWsOe/zxx/XGG29o9erVKi8v1/PPP6+DBw9q1KhRGjx4sG677TaVlJRoy5YtSkpK0tlnn637779fr776qr755ptqX31cddVVkqTzzjtPktSvXz9J0vnnnx+bvYhEIpo2bZqys7M1dOhQFRUVaf369bHXCAaDat68uXw+n7p37x57Xm33hUIh/exnP5PP51NSUpIGDRqkUCikb775Ru+9956mTJmiIUOG6Gc/+5n27t2rzZs3x/U9RfysXLlS27Zt04033qghQ4bovvvuU2Vlpfbv3/+tx4ZCIQ0cOFBJSUny+Xy67rrrFAqFYvf37du31q/4atqvJGnIkCGaP3++JOn1119XTk6OfD7fd24TDdfxPgtr2gfKysq0ceNGZWVlSaqazerSpYskqaysTJ9//rmuueYaSdK5556rbt266aOPPoptKycnJ/bnUCikG264QZLUpk0bZWZmas2aNfriiy906qmn6pJLLpEkDRw4UM2aNZMkdejQQZFIRA899FC12TapamZ32LBhGjZsmG655RZJ0po1a5SZmak2bdpIkm644YbYfrls2TKtWrVKOTk5GjJkiObOnasdO3bU51sLF4waNUpDhgzRrFmzNG3atO/8WXj0WwWJzz6nsKTBJYmJierXr5+WL1+ud999V/3799cTTzwhn8+nAQMGqLy8XIFAQK+++qrWrl2r1atXa+jQoXrmmWfUtWvX2GtIkt/vV9OmTWOv7ff7VVlZKalqjeVXX32l//mf/1FiYqLGjx+v8vLyajmOCgQCdbrPGCOfz1ft7+Pz+WJrM+fNm9fgDj7ByevTp4+mTZv2nY873n5xrO/6qq2m/UqqKizXXXedRo8erUWLFumVV16p0zbR8B37WVjTPnD09hP5tz72saeddlqN9x1v/O+aNWumxYsXa82aNQqFQpo+fXqshDRp0kQXXHCBli1bpiuvvFKBQKDW/dIYo5EjR+raa6+t898FDd/RNbxS1S9h3/Wz8Nh9ks8+ZzDD65JoNKr3339fZ511lkpLS9W+fXv5fD4VFhZq69atkqr+0xw8eFAXX3yxRo0apc6dO6uoqOiEtlNaWqrWrVsrMTFRe/bs0dKlS7939ssuu0zz5s2TMUZlZWV68803lZ6erqSkJPXq1Utz5syJPXbXrl3at2/f994m3JGRkaGVK1dW2+/WrVt33MdedtllevPNN1VWViZjjObNm6fLLrusxtc+/fTTVVpaWu35x9uvJKldu3Y655xzNGXKFJ177rlq3779SW0TDc+xn4U17QPNmjXTueeeq0WLFkmSPv30U23cuFGSlJSUpG7dusUK6ObNm7V+/XpdcMEFx91eenp6rDTs27dP+fn5uuSSS/TDH/5Qhw8f1vvvvy9Jeuutt2L758GDB3X48GH17dtX9913n5o1a6bt27dLqiomv//975WUlKR77rlHFRUVSk9PV35+fuyz79VXX43tl/3799fcuXNVUlIiqWqG+Nhv3dD4nejPQj77nMEMr8OOHqRTUVGhTp066de//rX+8Y9/6OGHH9bTTz+tLl26VPuq7r/+6790+PBhGWP0ox/9SFdeeeUJbW/48OG6++67dfXVV6tt27ax/0Tfx1133aXJkyfHvl7Mzs6OHSAyffp0Pfroo7H7Tj/9dD3yyCMckNGI3HrrrQoEArHx+PHj9dBDD+nw4cOqqKhQz5491b179289LzMzUxs2bIh9XXz++edr5MiRNW7n5ptv1oMPPqhTTjlFjz32WK37lVR1sMYDDzxQbbb5RLeJhuN4n4UJCQk17gO5ubl68MEH9dxzz+m8885T165dY0sOpk+frgkTJuj5559XQkKCpk2bVuPymXHjxmnChAmxbdx3333q1KmTJOmPf/xj7KC1Sy+9VO3atZNUVVbGjx+vyspKRSIR9e3bVz169NDOnTslVZXeiRMnKjc3V7/+9a81a9Ys3XvvvRoxYoSkqiURkyZNklT1VXY4HNZNN90kqWqm7uc//3nsmzvY4UR+FvLZ5wyfMf86DBUAgAbqm2++0amnniqfz6dNmzZp+PDheuutt5ScnOx2NACNADO8AIAGb+3atZo2bVrsVGGTJ0+m7AKoM2Z4AQAAYDUOWgMAAIDVKLwAAACwGoUXAAAAVqPwAgAAwGoUXgBwWf/+/bVq1Sq3YwCAtSi8AAAAsBqFFwAsZ4xRNBp1OwYAuIbCCwD1aM6cOerTp48uvPBCDRgwQKFQSGPHjtWMGTNij1mzZk21S4dK0ieffKKBAwfqoosu0m9/+1uVl5fXup2SkhLdcccduvTSS3XRRRfpjjvu0O7du2P3Dx8+XDNmzNANN9ygCy64QNu3b9fmzZt166236uKLL9aAAQP05ptvxh6/fPlyXX311erZs6cyMzM1a9asenpHAMB9FF4AqCdffPGFXnzxRc2bN08ffvihnn32WbVv375Oz83Ly9Ozzz6rt99+W1u2bNGf//znWh8fjUY1dOhQvfvuu3r33XeVmJioSZMmVXvMG2+8ocmTJ2vt2rVq2bKlRowYocGDB2vVqlX64x//qIcfflhFRUWSpFNPPVW5ubn64IMP9NRTT+mll17SO++8c3JvBAA0MBReAKgngUBAR44c0ebNm1VRUaEf/OAH6tixY52ee+ONNyotLU0pKSkaOXKkFi9eXOvjW7RooQEDBujUU09VUlKSRo4cqffff7/aY3JyctSpUyclJCRo5cqVat++va655holJCTovPPO04ABA7RkyRJJ0iWXXKIuXbrI7/era9euGjRokN57772TeyMAoIFJcDsAANjizDPP1IMPPqhZs2Zp06ZNCgaDGjt2bJ2em5aWFvtzu3bttHfv3loff+jQIT366KNauXKlSkpKJElff/21IpGIAoHAt15zx44dWrdunXr37h27LRKJKDs7W5L08ccfa/r06SoqKlJFRYWOHDmi//iP/6jbXxwAGjgKLwDUo6ysLGVlZamsrEwTJkzQ9OnTlZSUpMOHD8ces3///m89b9euXbE/79y5U23atKl1O3/961+1ZcsWvfrqq2rdurU+//xzXX311TLGxB7j8/lif05LS9NFF12k55577rivd++99+qmm27SM888o8TERD3yyCMqLi6u898bABoyljQAQD354osvFAqFdOTIETVt2lSJiYkKBALq1q2b8vPzFQ6HtW/fPv3tb3/71nPnzp2r3bt3KxwO66mnntLAgQNr3dbXX3+txMRENW/eXOFwWE888UStj+/Xr5/++c9/asGCBaqoqFBFRYXWrVunzZs3x14vOTlZiYmJWrdunRYtWnTybwQANDAUXgCoJ0eOHNFjjz2mSy65RMFgUAcPHtQ999yjIUOGqGvXrurfv79GjBhx3DI7ePBgjRgxQj/5yU/UoUMHjRw5stZt3XLLLSovL9ell16q66+/Xn369Kn18UlJSXr22Wf15ptvqk+fPgoGg5o+fbqOHDkiSZo4caIef/xxXXjhhXryySd11VVXnfwbAQANjM8c+/0XAAAAYBlmeAEAAGA1DloDgAZq9uzZeuqpp751e69evfTMM8+4kAgAGieWNAAAAMBqLGkAAACA1Si8AAAAsBqFFwAAAFaj8AIAAMBqFF4AAABY7f8DkfPBRcVstx8AAAAASUVORK5CYII\u003d\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672355678987_293652202",
+      "id": "paragraph_1672355678987_293652202",
+      "dateCreated": "2022-12-29 23:14:38.988",
+      "dateStarted": "2022-12-29 23:32:57.635",
+      "dateFinished": "2022-12-29 23:32:58.208",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ndata.info()\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 23:28:09.003",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cclass \u0027pandas.core.frame.DataFrame\u0027\u003e\nRangeIndex: 30469 entries, 0 to 30468\nData columns (total 56 columns):\n #   Column                                 Non-Null Count  Dtype  \n---  ------                                 --------------  -----  \n 0   id                                     30469 non-null  int64  \n 1   full_sq                                30469 non-null  int64  \n 2   life_sq                                24086 non-null  float64\n 3   floor                                  30302 non-null  float64\n 4   sub_area                               30469 non-null  object \n 5   preschool_quota                        23781 non-null  float64\n 6   preschool_education_centers_raion      30469 non-null  int64  \n 7   school_quota                           23784 non-null  float64\n 8   school_education_centers_raion         30469 non-null  int64  \n 9   school_education_centers_top_20_raion  30469 non-null  int64  \n 10  hospital_beds_raion                    16029 non-null  float64\n 11  healthcare_centers_raion               30469 non-null  int64  \n 12  university_top_20_raion                30469 non-null  int64  \n 13  sport_objects_raion                    30469 non-null  int64  \n 14  additional_education_raion             30469 non-null  int64  \n 15  culture_objects_top_25_raion           30469 non-null  int64  \n 16  shopping_centers_raion                 30469 non-null  int64  \n 17  office_raion                           30469 non-null  int64  \n 18  metro_min_avto                         30469 non-null  float64\n 19  metro_km_avto                          30469 non-null  float64\n 20  metro_min_walk                         30444 non-null  float64\n 21  metro_km_walk                          30444 non-null  float64\n 22  kindergarten_km                        30469 non-null  float64\n 23  school_km                              30469 non-null  float64\n 24  park_km                                30469 non-null  float64\n 25  green_zone_km                          30469 non-null  float64\n 26  industrial_km                          30469 non-null  float64\n 27  railroad_station_walk_km               30444 non-null  float64\n 28  railroad_station_walk_min              30444 non-null  float64\n 29  public_transport_station_km            30469 non-null  float64\n 30  public_transport_station_min_walk      30469 non-null  float64\n 31  mkad_km                                30469 non-null  float64\n 32  ttk_km                                 30469 non-null  float64\n 33  sadovoe_km                             30469 non-null  float64\n 34  bulvar_ring_km                         30469 non-null  float64\n 35  kremlin_km                             30469 non-null  float64\n 36  big_market_km                          30469 non-null  float64\n 37  market_shop_km                         30469 non-null  float64\n 38  fitness_km                             30469 non-null  float64\n 39  swim_pool_km                           30469 non-null  float64\n 40  ice_rink_km                            30469 non-null  float64\n 41  stadium_km                             30469 non-null  float64\n 42  basketball_km                          30469 non-null  float64\n 43  hospice_morgue_km                      30469 non-null  float64\n 44  university_km                          30469 non-null  float64\n 45  workplaces_km                          30469 non-null  float64\n 46  shopping_centers_km                    30469 non-null  float64\n 47  office_km                              30469 non-null  float64\n 48  additional_education_km                30469 non-null  float64\n 49  preschool_km                           30469 non-null  float64\n 50  big_church_km                          30469 non-null  float64\n 51  church_synagogue_km                    30469 non-null  float64\n 52  theater_km                             30469 non-null  float64\n 53  museum_km                              30469 non-null  float64\n 54  ecology                                30469 non-null  object \n 55  price_doc                              30469 non-null  int64  \ndtypes: float64(41), int64(13), object(2)\nmemory usage: 13.0+ MB\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672290993337_2094834000",
+      "id": "paragraph_1672290993337_2094834000",
+      "dateCreated": "2022-12-29 05:16:33.349",
+      "dateStarted": "2022-12-29 23:28:09.012",
+      "dateFinished": "2022-12-29 23:28:09.180",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nnp.unique(data.ecology)\necology_dict \u003d {\"no data\" : 0, \"poor\" : 1, \"satisfactory\": 2, \"good\" : 3, \"excellent\": 4}\ndata.ecology \u003d data.ecology.replace(to_replace\u003decology_dict)\n\nnp.average(data.ecology)\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 04:25:01.751",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "1.7282483836030063"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672291317920_1810109368",
+      "id": "paragraph_1672291317920_1810109368",
+      "dateCreated": "2022-12-29 05:21:57.978",
+      "dateStarted": "2022-12-30 04:25:01.766",
+      "dateFinished": "2022-12-30 04:25:01.834",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ndata.dropna().count()",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 18:55:40.824",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "id                                       13652\nfull_sq                                  13652\nlife_sq                                  13652\nfloor                                    13652\nsub_area                                 13652\npreschool_quota                          13652\npreschool_education_centers_raion        13652\nschool_quota                             13652\nschool_education_centers_raion           13652\nschool_education_centers_top_20_raion    13652\nhospital_beds_raion                      13652\nhealthcare_centers_raion                 13652\nuniversity_top_20_raion                  13652\nsport_objects_raion                      13652\nadditional_education_raion               13652\nculture_objects_top_25_raion             13652\nshopping_centers_raion                   13652\noffice_raion                             13652\nmetro_min_avto                           13652\nmetro_km_avto                            13652\nmetro_min_walk                           13652\nmetro_km_walk                            13652\nkindergarten_km                          13652\nschool_km                                13652\npark_km                                  13652\ngreen_zone_km                            13652\nindustrial_km                            13652\nrailroad_station_walk_km                 13652\nrailroad_station_walk_min                13652\npublic_transport_station_km              13652\npublic_transport_station_min_walk        13652\nmkad_km                                  13652\nttk_km                                   13652\nsadovoe_km                               13652\nbulvar_ring_km                           13652\nkremlin_km                               13652\nbig_market_km                            13652\nmarket_shop_km                           13652\nfitness_km                               13652\nswim_pool_km                             13652\nice_rink_km                              13652\nstadium_km                               13652\nbasketball_km                            13652\nhospice_morgue_km                        13652\nuniversity_km                            13652\nworkplaces_km                            13652\nshopping_centers_km                      13652\noffice_km                                13652\nadditional_education_km                  13652\npreschool_km                             13652\nbig_church_km                            13652\nchurch_synagogue_km                      13652\ntheater_km                               13652\nmuseum_km                                13652\necology                                  13652\nprice_doc                                13652\ndtype: int64"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672291459922_485435359",
+      "id": "paragraph_1672291459922_485435359",
+      "dateCreated": "2022-12-29 05:24:19.928",
+      "dateStarted": "2022-12-29 18:55:40.832",
+      "dateFinished": "2022-12-29 18:55:40.993",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 18:55:10.819",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672340110819_1957892236",
+      "id": "paragraph_1672340110819_1957892236",
+      "dateCreated": "2022-12-29 18:55:10.819",
+      "status": "READY"
+    }
+  ],
+  "name": "Flats_Moscow",
+  "id": "2HMYTM7RC",
+  "defaultInterpreterGroup": "jupyter",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

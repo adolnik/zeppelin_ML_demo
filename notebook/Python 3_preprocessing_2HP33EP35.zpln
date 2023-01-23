@@ -1,0 +1,1009 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# Обработка пропусков",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:49.701",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eОбработка пропусков\u003c/h1\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238827_2119712654",
+      "id": "20221229-175038_1112395190",
+      "dateCreated": "2022-12-29 17:50:38.827",
+      "dateStarted": "2022-12-29 17:50:49.704",
+      "dateFinished": "2022-12-29 17:50:53.525",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nimport pandas as pd\nimport numpy as np",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:55.329",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238830_1127255041",
+      "id": "20221229-175038_2006398790",
+      "dateCreated": "2022-12-29 17:50:38.830",
+      "dateStarted": "2022-12-29 17:50:55.339",
+      "dateFinished": "2022-12-29 17:51:06.901",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nСоздадим и выведем небольшой набор тестовых данных.",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:51:16.925",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eСоздадим и выведем небольшой набор тестовых данных.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238830_1445619280",
+      "id": "20221229-175038_1182099624",
+      "dateCreated": "2022-12-29 17:50:38.830",
+      "dateStarted": "2022-12-29 17:51:16.926",
+      "dateFinished": "2022-12-29 17:51:16.955",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ntest_data \u003d pd.DataFrame([[1, 2, np.nan, np.nan], [3, np.nan, 4, \u0027T\u0027], \n                          [0, 1, 2, \u0027A\u0027], [0, 1, 2, \u0027A\u0027]], columns\u003d[\u0027one\u0027, \u0027two\u0027, \u0027three\u0027, \u0027state\u0027])",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 18:21:47.893",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238831_1548051993",
+      "id": "20221229-175038_181255476",
+      "dateCreated": "2022-12-29 17:50:38.831",
+      "dateStarted": "2022-12-29 18:21:47.901",
+      "dateFinished": "2022-12-29 18:21:47.964",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ntest_data",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 18:21:49.951",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eone\u003c/th\u003e\n      \u003cth\u003etwo\u003c/th\u003e\n      \u003cth\u003ethree\u003c/th\u003e\n      \u003cth\u003estate\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e1\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e3\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e4.0\u003c/td\u003e\n      \u003ctd\u003eT\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n      \u003ctd\u003eA\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e3\u003c/th\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n      \u003ctd\u003eA\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238831_257382957",
+      "id": "20221229-175038_1737536749",
+      "dateCreated": "2022-12-29 17:50:38.831",
+      "dateStarted": "2022-12-29 18:21:49.957",
+      "dateFinished": "2022-12-29 18:21:50.030",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nvis_data \u003d test_data\n# Напишите ваш код ниже\nimport numpy as np\nmax_val_arr \u003d vis_data[\u0027state\u0027].dropna()\n\nunique,pos \u003d np.unique(max_val_arr,return_inverse\u003dTrue) #Finds all unique elements and their positions\ncounts \u003d np.bincount(pos)                     #Count the number of each unique element\nmaxpos \u003d counts.argmax()  \n#print(maxpos, )\nvis_data[\u0027state\u0027].fillna(unique[maxpos])",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 18:49:51.458",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0    A\n1    T\n2    A\n3    A\nName: state, dtype: object"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672338117711_427496800",
+      "id": "paragraph_1672338117711_427496800",
+      "dateCreated": "2022-12-29 18:21:57.712",
+      "dateStarted": "2022-12-29 18:49:51.475",
+      "dateFinished": "2022-12-29 18:49:51.551",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Поиск пропусков\n\nВ данных часто бывают пропуски. В Pandas их можно находить с помощью метода `.isna()`:",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:51:39.097",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eПоиск пропусков\u003c/h2\u003e\n\u003cp\u003eВ данных часто бывают пропуски. В Pandas их можно находить с помощью метода \u003ccode\u003e.isna()\u003c/code\u003e:\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238832_672248351",
+      "id": "20221229-175038_909733418",
+      "dateCreated": "2022-12-29 17:50:38.832",
+      "dateStarted": "2022-12-29 17:51:39.097",
+      "dateFinished": "2022-12-29 17:51:39.121",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ntest_data.isna()",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:51:42.347",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eone\u003c/th\u003e\n      \u003cth\u003etwo\u003c/th\u003e\n      \u003cth\u003ethree\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003eFalse\u003c/td\u003e\n      \u003ctd\u003eFalse\u003c/td\u003e\n      \u003ctd\u003eTrue\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003eFalse\u003c/td\u003e\n      \u003ctd\u003eTrue\u003c/td\u003e\n      \u003ctd\u003eFalse\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003eFalse\u003c/td\u003e\n      \u003ctd\u003eFalse\u003c/td\u003e\n      \u003ctd\u003eFalse\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238832_637543387",
+      "id": "20221229-175038_929404075",
+      "dateCreated": "2022-12-29 17:50:38.832",
+      "dateStarted": "2022-12-29 17:51:42.353",
+      "dateFinished": "2022-12-29 17:51:42.431",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nМожно находить пропуски в пределах одного признака (столбца):",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:51:48.632",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eМожно находить пропуски в пределах одного признака (столбца):\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238833_840366407",
+      "id": "20221229-175038_950638788",
+      "dateCreated": "2022-12-29 17:50:38.833",
+      "dateStarted": "2022-12-29 17:51:48.632",
+      "dateFinished": "2022-12-29 17:51:48.648",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ntest_data[\u0027two\u0027].isna()",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:51:52.351",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0    False\n1     True\n2    False\nName: two, dtype: bool"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238833_776118495",
+      "id": "20221229-175038_240638616",
+      "dateCreated": "2022-12-29 17:50:38.833",
+      "dateStarted": "2022-12-29 17:51:52.358",
+      "dateFinished": "2022-12-29 17:51:52.428",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Удаление столбцов/строк с пропусками",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.834",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eУдаление столбцов/строк с пропусками\u003c/h2\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238834_1596791208",
+      "id": "20221229-175038_1944239430",
+      "dateCreated": "2022-12-29 17:50:38.834",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nС помощью метода `.dropna()` можно удалять столбцы/строки с пропусками, указывая ось с помощью параметра `axis`.  \nЕсли нужно удалить строки, в которых встречается пропуск (NaN), `axis\u003d0`:",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.834",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eС помощью метода \u003ccode\u003e.dropna()\u003c/code\u003e можно удалять столбцы/строки с пропусками, указывая ось с помощью параметра \u003ccode\u003eaxis\u003c/code\u003e.\u003cbr/\u003eЕсли нужно удалить строки, в которых встречается пропуск (NaN), \u003ccode\u003eaxis\u003d0\u003c/code\u003e:\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238834_1660145583",
+      "id": "20221229-175038_1748615005",
+      "dateCreated": "2022-12-29 17:50:38.834",
+      "status": "READY"
+    },
+    {
+      "text": "%python\ntest_data",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.834",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eone\u003c/th\u003e\n      \u003cth\u003etwo\u003c/th\u003e\n      \u003cth\u003ethree\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e1\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e3\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e4.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238834_540418943",
+      "id": "20221229-175038_1258258297",
+      "dateCreated": "2022-12-29 17:50:38.834",
+      "status": "READY"
+    },
+    {
+      "text": "%python\ntest_data.dropna(axis\u003d0)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.835",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eone\u003c/th\u003e\n      \u003cth\u003etwo\u003c/th\u003e\n      \u003cth\u003ethree\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238835_1102872931",
+      "id": "20221229-175038_1872355884",
+      "dateCreated": "2022-12-29 17:50:38.835",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nЕсли нужно удалить столбцы, в которых встречается пропуск (NaN), `axis\u003d1`:",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.835",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eЕсли нужно удалить столбцы, в которых встречается пропуск (NaN), \u003ccode\u003eaxis\u003d1\u003c/code\u003e:\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238835_269959338",
+      "id": "20221229-175038_1620943276",
+      "dateCreated": "2022-12-29 17:50:38.835",
+      "status": "READY"
+    },
+    {
+      "text": "%python\ntest_data.dropna(axis\u003d1)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.836",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eone\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e1\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e3\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238836_509829779",
+      "id": "20221229-175038_1129720416",
+      "dateCreated": "2022-12-29 17:50:38.836",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nПо умолчанию, параметр `axis` равен 0:",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.836",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eПо умолчанию, параметр \u003ccode\u003eaxis\u003c/code\u003e равен 0:\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238836_1048613089",
+      "id": "20221229-175038_1927516612",
+      "dateCreated": "2022-12-29 17:50:38.836",
+      "status": "READY"
+    },
+    {
+      "text": "%python\ntest_data.dropna()",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.837",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eone\u003c/th\u003e\n      \u003cth\u003etwo\u003c/th\u003e\n      \u003cth\u003ethree\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238837_157858994",
+      "id": "20221229-175038_1380681014",
+      "dateCreated": "2022-12-29 17:50:38.837",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nЕсли нужно удалить пропуски только для определенных столбцов (или строк, при указании другого значения параметра `axis`), нужно передать список индексов (номеров строк или названий столбцов) столбцов (или строк) в параметр `subset`:",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.837",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eЕсли нужно удалить пропуски только для определенных столбцов (или строк, при указании другого значения параметра \u003ccode\u003eaxis\u003c/code\u003e), нужно передать список индексов (номеров строк или названий столбцов) столбцов (или строк) в параметр \u003ccode\u003esubset\u003c/code\u003e:\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238837_301098138",
+      "id": "20221229-175038_1607912978",
+      "dateCreated": "2022-12-29 17:50:38.837",
+      "status": "READY"
+    },
+    {
+      "text": "%python\ntest_data",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.838",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eone\u003c/th\u003e\n      \u003cth\u003etwo\u003c/th\u003e\n      \u003cth\u003ethree\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e1\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e3\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e4.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238838_1518958873",
+      "id": "20221229-175038_757201570",
+      "dateCreated": "2022-12-29 17:50:38.838",
+      "status": "READY"
+    },
+    {
+      "text": "%python\ntest_data.dropna(subset\u003d[0], axis\u003d1)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.838",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eone\u003c/th\u003e\n      \u003cth\u003etwo\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e1\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e3\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238838_1012808640",
+      "id": "20221229-175038_1134699379",
+      "dateCreated": "2022-12-29 17:50:38.838",
+      "status": "READY"
+    },
+    {
+      "text": "%python\ntest_data.dropna(subset\u003d[\u0027two\u0027], axis\u003d0)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:52:28.688",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eone\u003c/th\u003e\n      \u003cth\u003etwo\u003c/th\u003e\n      \u003cth\u003ethree\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e1\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238839_1184264483",
+      "id": "20221229-175038_1296985092",
+      "dateCreated": "2022-12-29 17:50:38.839",
+      "dateStarted": "2022-12-29 17:52:28.693",
+      "dateFinished": "2022-12-29 17:52:28.765",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Заполнение статистиками\n\nИногда удаление строк/столбцов с пропусками - слишком грубое решение. Можно заменять пропуски статистиками или каким-то константным значением с помощью метода `fillna()`:",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.839",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eЗаполнение статистиками\u003c/h2\u003e\n\u003cp\u003eИногда удаление строк/столбцов с пропусками - слишком грубое решение. Можно заменять пропуски статистиками или каким-то константным значением с помощью метода \u003ccode\u003efillna()\u003c/code\u003e:\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238839_1153917177",
+      "id": "20221229-175038_612474337",
+      "dateCreated": "2022-12-29 17:50:38.839",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# По умолчанию заменяет все пропуски\ntest_data.fillna(-1)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.840",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eone\u003c/th\u003e\n      \u003cth\u003etwo\u003c/th\u003e\n      \u003cth\u003ethree\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e1\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n      \u003ctd\u003e-1.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e3\u003c/td\u003e\n      \u003ctd\u003e-1.0\u003c/td\u003e\n      \u003ctd\u003e4.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n      \u003ctd\u003e2.0\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238839_1160396608",
+      "id": "20221229-175038_668580402",
+      "dateCreated": "2022-12-29 17:50:38.840",
+      "status": "READY"
+    },
+    {
+      "text": "%md\nМожно заменять разными статистиками, например:\n - среднее значение, `np.mean()`\n - максимальное значение, `np.max()`\n - минимальное значение, `np.min()`\n - медиана, `np.median()`\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.840",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eМожно заменять разными статистиками, например:\u003cbr/\u003e - среднее значение, \u003ccode\u003enp.mean()\u003c/code\u003e\u003cbr/\u003e - максимальное значение, \u003ccode\u003enp.max()\u003c/code\u003e\u003cbr/\u003e - минимальное значение, \u003ccode\u003enp.min()\u003c/code\u003e\u003cbr/\u003e - медиана, \u003ccode\u003enp.median()\u003c/code\u003e\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238840_1381973099",
+      "id": "20221229-175038_1804436245",
+      "dateCreated": "2022-12-29 17:50:38.840",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n#max_two \u003d np.max(test_data[\u0027two\u0027])\nmax_two \u003d test_data[\u0027two\u0027].max()\ntest_data[\u0027two\u0027].fillna(max_two)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 18:18:34.928",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0    2.0\n1    2.0\n2    1.0\nName: two, dtype: float64"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238840_2007467220",
+      "id": "20221229-175038_771615883",
+      "dateCreated": "2022-12-29 17:50:38.840",
+      "dateStarted": "2022-12-29 18:18:34.935",
+      "dateFinished": "2022-12-29 18:18:35.011",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nМетоды типа `np.mean()` можно вызывать у самих столбцов с помощью `column.mean()`:",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.841",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eМетоды типа \u003ccode\u003enp.mean()\u003c/code\u003e можно вызывать у самих столбцов с помощью \u003ccode\u003ecolumn.mean()\u003c/code\u003e:\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238841_1875590693",
+      "id": "20221229-175038_1570100322",
+      "dateCreated": "2022-12-29 17:50:38.841",
+      "status": "READY"
+    },
+    {
+      "text": "%python\ntest_data[\u0027three\u0027].fillna(test_data[\u0027three\u0027].mean())",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 17:50:38.841",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0    3.0\n1    4.0\n2    2.0\nName: three, dtype: float64"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672336238841_1848058417",
+      "id": "20221229-175038_930610632",
+      "dateCreated": "2022-12-29 17:50:38.841",
+      "status": "READY"
+    }
+  ],
+  "name": "Python 3_preprocessing",
+  "id": "2HP33EP35",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

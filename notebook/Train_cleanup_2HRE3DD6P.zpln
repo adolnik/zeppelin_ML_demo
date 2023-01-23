@@ -1,0 +1,432 @@
+{
+  "paragraphs": [
+    {
+      "text": "%python\nimport pandas as pd\nimport numpy as np\n\ndata \u003d pd.read_csv(\u0027https://docs.google.com/spreadsheets/d/11lq3pXPUWSU6y_OXu5aUP8cDt3m23aZwne4ODOAHqgU/export?format\u003dcsv\u0027)\ndata.head()",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 21:57:04.817",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/IPython/core/interactiveshell.py:3524: DtypeWarning: Columns (11,12,31) have mixed types.Specify dtype option on import or set low_memory\u003dFalse.\n  exec(code_obj, self.user_global_ns, self.user_ns)\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eticket_id\u003c/th\u003e\n      \u003cth\u003eagency_name\u003c/th\u003e\n      \u003cth\u003einspector_name\u003c/th\u003e\n      \u003cth\u003eviolator_name\u003c/th\u003e\n      \u003cth\u003eviolation_street_number\u003c/th\u003e\n      \u003cth\u003eviolation_street_name\u003c/th\u003e\n      \u003cth\u003eviolation_zip_code\u003c/th\u003e\n      \u003cth\u003emailing_address_str_number\u003c/th\u003e\n      \u003cth\u003emailing_address_str_name\u003c/th\u003e\n      \u003cth\u003ecity\u003c/th\u003e\n      \u003cth\u003e...\u003c/th\u003e\n      \u003cth\u003eclean_up_cost\u003c/th\u003e\n      \u003cth\u003ejudgment_amount\u003c/th\u003e\n      \u003cth\u003epayment_amount\u003c/th\u003e\n      \u003cth\u003ebalance_due\u003c/th\u003e\n      \u003cth\u003epayment_date\u003c/th\u003e\n      \u003cth\u003epayment_status\u003c/th\u003e\n      \u003cth\u003ecollection_status\u003c/th\u003e\n      \u003cth\u003egrafitti_status\u003c/th\u003e\n      \u003cth\u003ecompliance_detail\u003c/th\u003e\n      \u003cth\u003ecompliance\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e22056\u003c/td\u003e\n      \u003ctd\u003eBuildings, Safety Engineering \u0026amp; Env Department\u003c/td\u003e\n      \u003ctd\u003eSims, Martinzie\u003c/td\u003e\n      \u003ctd\u003eINVESTMENT INC., MIDWEST MORTGAGE\u003c/td\u003e\n      \u003ctd\u003e2900\u003c/td\u003e\n      \u003ctd\u003eTYLER\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e3.0\u003c/td\u003e\n      \u003ctd\u003eS. WICKER\u003c/td\u003e\n      \u003ctd\u003eCHICAGO\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e305.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e305.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNO PAYMENT APPLIED\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003enon-compliant by no payment\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e27586\u003c/td\u003e\n      \u003ctd\u003eBuildings, Safety Engineering \u0026amp; Env Department\u003c/td\u003e\n      \u003ctd\u003eWilliams, Darrin\u003c/td\u003e\n      \u003ctd\u003eMichigan, Covenant House\u003c/td\u003e\n      \u003ctd\u003e4311\u003c/td\u003e\n      \u003ctd\u003eCENTRAL\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e2959.0\u003c/td\u003e\n      \u003ctd\u003eMartin Luther King\u003c/td\u003e\n      \u003ctd\u003eDetroit\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e855.0\u003c/td\u003e\n      \u003ctd\u003e780.0\u003c/td\u003e\n      \u003ctd\u003e75.0\u003c/td\u003e\n      \u003ctd\u003e2005-06-02 00:00:00\u003c/td\u003e\n      \u003ctd\u003ePAID IN FULL\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003ecompliant by late payment within 1 month\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e22062\u003c/td\u003e\n      \u003ctd\u003eBuildings, Safety Engineering \u0026amp; Env Department\u003c/td\u003e\n      \u003ctd\u003eSims, Martinzie\u003c/td\u003e\n      \u003ctd\u003eSANDERS, DERRON\u003c/td\u003e\n      \u003ctd\u003e1449\u003c/td\u003e\n      \u003ctd\u003eLONGFELLOW\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e23658.0\u003c/td\u003e\n      \u003ctd\u003eP.O. BOX\u003c/td\u003e\n      \u003ctd\u003eDETROIT\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNO PAYMENT APPLIED\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003enot responsible by disposition\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e3\u003c/th\u003e\n      \u003ctd\u003e22084\u003c/td\u003e\n      \u003ctd\u003eBuildings, Safety Engineering \u0026amp; Env Department\u003c/td\u003e\n      \u003ctd\u003eSims, Martinzie\u003c/td\u003e\n      \u003ctd\u003eMOROSI, MIKE\u003c/td\u003e\n      \u003ctd\u003e1441\u003c/td\u003e\n      \u003ctd\u003eLONGFELLOW\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e5.0\u003c/td\u003e\n      \u003ctd\u003eST. CLAIR\u003c/td\u003e\n      \u003ctd\u003eDETROIT\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNO PAYMENT APPLIED\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003enot responsible by disposition\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e4\u003c/th\u003e\n      \u003ctd\u003e22093\u003c/td\u003e\n      \u003ctd\u003eBuildings, Safety Engineering \u0026amp; Env Department\u003c/td\u003e\n      \u003ctd\u003eSims, Martinzie\u003c/td\u003e\n      \u003ctd\u003eNATHANIEL, NEAL\u003c/td\u003e\n      \u003ctd\u003e2449\u003c/td\u003e\n      \u003ctd\u003eCHURCHILL\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e7449.0\u003c/td\u003e\n      \u003ctd\u003eCHURCHILL\u003c/td\u003e\n      \u003ctd\u003eDETROIT\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNO PAYMENT APPLIED\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003enot responsible by disposition\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003cp\u003e5 rows × 34 columns\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672437349362_1205424698",
+      "id": "paragraph_1672437349362_1205424698",
+      "dateCreated": "2022-12-30 21:55:49.363",
+      "dateStarted": "2022-12-30 21:57:04.837",
+      "dateFinished": "2022-12-30 21:58:10.592",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nvis_data \u003d data.balance_due.dropna()\ndef outliers_iqr(ys):\n    quartile_1, quartile_3 \u003d np.percentile(ys, [25, 75])\n    iqr \u003d quartile_3 - quartile_1\n    lower_bound \u003d quartile_1 - (iqr * 1.5)\n    upper_bound \u003d quartile_3 + (iqr * 1.5)\n    return np.where((ys \u003e upper_bound) | (ys \u003c lower_bound))[0]",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 22:01:06.097",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672437382418_773863242",
+      "id": "paragraph_1672437382418_773863242",
+      "dateCreated": "2022-12-30 21:56:22.419",
+      "dateStarted": "2022-12-30 22:01:06.112",
+      "dateFinished": "2022-12-30 22:01:06.258",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\no \u003d outliers_iqr(vis_data)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 22:04:59.680",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672437582039_1192322141",
+      "id": "paragraph_1672437582039_1192322141",
+      "dateCreated": "2022-12-30 21:59:42.040",
+      "dateStarted": "2022-12-30 22:04:59.692",
+      "dateFinished": "2022-12-30 22:04:59.808",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nlen(o)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 22:05:14.095",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "9833"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672437883497_78453260",
+      "id": "paragraph_1672437883497_78453260",
+      "dateCreated": "2022-12-30 22:04:43.498",
+      "dateStarted": "2022-12-30 22:05:14.103",
+      "dateFinished": "2022-12-30 22:05:14.173",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\no",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 22:05:34.823",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "array([     6,      9,     12, ..., 250259, 250274, 250287])"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672437914098_2135990024",
+      "id": "paragraph_1672437914098_2135990024",
+      "dateCreated": "2022-12-30 22:05:14.098",
+      "dateStarted": "2022-12-30 22:05:34.834",
+      "dateFinished": "2022-12-30 22:05:34.901",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nvis_data",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 22:06:59.505",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0         305.0\n1          75.0\n2           0.0\n3           0.0\n4           0.0\n          ...  \n250301      0.0\n250302      0.0\n250303      0.0\n250304      0.0\n250305      0.0\nName: balance_due, Length: 250306, dtype: float64"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672437926903_1339722755",
+      "id": "paragraph_1672437926903_1339722755",
+      "dateCreated": "2022-12-30 22:05:26.903",
+      "dateStarted": "2022-12-30 22:06:59.515",
+      "dateFinished": "2022-12-30 22:06:59.587",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nlen(vis_data)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 22:08:46.907",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "250306"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672438019507_698661596",
+      "id": "paragraph_1672438019507_698661596",
+      "dateCreated": "2022-12-30 22:06:59.507",
+      "dateStarted": "2022-12-30 22:08:46.925",
+      "dateFinished": "2022-12-30 22:08:47.014",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ncln_arr\u003dnp.delete(vis_data.values, o)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 22:11:12.916",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672438032817_1226541000",
+      "id": "paragraph_1672438032817_1226541000",
+      "dateCreated": "2022-12-30 22:07:12.817",
+      "dateStarted": "2022-12-30 22:11:12.920",
+      "dateFinished": "2022-12-30 22:11:12.980",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nlen(cln_arr)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 22:11:27.181",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "240473"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672438158499_1554710197",
+      "id": "paragraph_1672438158499_1554710197",
+      "dateCreated": "2022-12-30 22:09:18.499",
+      "dateStarted": "2022-12-30 22:11:27.195",
+      "dateFinished": "2022-12-30 22:11:27.277",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nmax_v\u003dnp.max(cln_arr)\nmin_v\u003dnp.min(cln_arr)\nprint(max_v, min_v, max_v-min_v)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 22:12:53.447",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "753.3 -448.0 1201.3\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672438287184_192054809",
+      "id": "paragraph_1672438287184_192054809",
+      "dateCreated": "2022-12-30 22:11:27.185",
+      "dateStarted": "2022-12-30 22:12:53.456",
+      "dateFinished": "2022-12-30 22:12:53.523",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 22:12:53.450",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672438373450_225703967",
+      "id": "paragraph_1672438373450_225703967",
+      "dateCreated": "2022-12-30 22:12:53.450",
+      "status": "READY"
+    }
+  ],
+  "name": "Train_cleanup",
+  "id": "2HRE3DD6P",
+  "defaultInterpreterGroup": "jupyter",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

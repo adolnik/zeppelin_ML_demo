@@ -1,0 +1,539 @@
+{
+  "paragraphs": [
+    {
+      "text": "%python\nimport pandas as pd\nimport numpy as np\n\n#data \u003d pd.read_csv(\u0027https://docs.google.com/spreadsheets/d/11lq3pXPUWSU6y_OXu5aUP8cDt3m23aZwne4ODOAHqgU/export?format\u003dcsv\u0027)\ndata \u003d pd.read_csv(\u0027https://s229vla.storage.yandex.net/rdisk/ed61238e862229acb99e2521f45dc13d60f2179b6044d0627d3ee4458e23ddb8/63cd2cfa/NH80BVQ3pf79cy2exr04ySIx0dW_FmCTd7KOA_wZiUdB4YAly7lso10gemNm9tfR40AFqdxyXA8ggGiSW4thqQ\u003d\u003d?uid\u003d0\u0026filename\u003dtrain.csv\u0026disposition\u003dattachment\u0026hash\u003dbF8Gijphw66OBPeoa%2Bt1pCwXbQUzofROTvzBeFDlWS2gJNtCrkBUCcn3hTg7BQTmW5aDQ4kMZEXE%2BwNjbq78ug%3D%3D\u0026limit\u003d0\u0026content_type\u003dapplication%2Fvnd.ms-excel\u0026owner_uid\u003d1130000062772792\u0026fsize\u003d97391029\u0026hid\u003de659a587003f0a8d5eefea34b91c419c\u0026media_type\u003dspreadsheet\u0026tknv\u003dv2\u0026rtoken\u003dTQ51uGC6X30Y\u0026force_default\u003dno\u0026ycrid\u003dna-6b4a015d53b41156b214c388c99d7c04-downloader8e\u0026ts\u003d5f2d97b89b280\u0026s\u003d65a080c79517baf2cdf8d6dbb31b39340e1e01a42aacf610d470529d475f3388\u0026pb\u003dU2FsdGVkX1_sH-eq-dES__l2wzVumf2lyORZ3Pph_NEXEtAaFi9eDPHzv4ycF5biO918TEddMUDLxsJDaDbQiPYiS_8k5UgwAHgAXmmb740\u0027)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-22 08:34:48.650",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n\u001b[0;31mUnicodeDecodeError\u001b[0m                        Traceback (most recent call last)\n\u001b[0;32m/tmp/ipykernel_241/2090992910.py\u001b[0m in \u001b[0;36m\u003cmodule\u003e\u001b[0;34m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0;31m#data \u003d pd.read_csv(\u0027https://docs.google.com/spreadsheets/d/11lq3pXPUWSU6y_OXu5aUP8cDt3m23aZwne4ODOAHqgU/export?format\u003dcsv\u0027)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----\u003e 5\u001b[0;31m \u001b[0mdata\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_csv\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\u0027https://s229vla.storage.yandex.net/rdisk/ed61238e862229acb99e2521f45dc13d60f2179b6044d0627d3ee4458e23ddb8/63cd2cfa/NH80BVQ3pf79cy2exr04ySIx0dW_FmCTd7KOA_wZiUdB4YAly7lso10gemNm9tfR40AFqdxyXA8ggGiSW4thqQ\u003d\u003d?uid\u003d0\u0026filename\u003dtrain.csv\u0026disposition\u003dattachment\u0026hash\u003dbF8Gijphw66OBPeoa%2Bt1pCwXbQUzofROTvzBeFDlWS2gJNtCrkBUCcn3hTg7BQTmW5aDQ4kMZEXE%2BwNjbq78ug%3D%3D\u0026limit\u003d0\u0026content_type\u003dapplication%2Fvnd.ms-excel\u0026owner_uid\u003d1130000062772792\u0026fsize\u003d97391029\u0026hid\u003de659a587003f0a8d5eefea34b91c419c\u0026media_type\u003dspreadsheet\u0026tknv\u003dv2\u0026rtoken\u003dTQ51uGC6X30Y\u0026force_default\u003dno\u0026ycrid\u003dna-6b4a015d53b41156b214c388c99d7c04-downloader8e\u0026ts\u003d5f2d97b89b280\u0026s\u003d65a080c79517baf2cdf8d6dbb31b39340e1e01a42aacf610d470529d475f3388\u0026pb\u003dU2FsdGVkX1_sH-eq-dES__l2wzVumf2lyORZ3Pph_NEXEtAaFi9eDPHzv4ycF5biO918TEddMUDLxsJDaDbQiPYiS_8k5UgwAHgAXmmb740\u0027\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\n\u001b[0;32m/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/pandas/util/_decorators.py\u001b[0m in \u001b[0;36mwrapper\u001b[0;34m(*args, **kwargs)\u001b[0m\n\u001b[1;32m    309\u001b[0m                     \u001b[0mstacklevel\u001b[0m\u001b[0;34m\u003d\u001b[0m\u001b[0mstacklevel\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    310\u001b[0m                 )\n\u001b[0;32m--\u003e 311\u001b[0;31m             \u001b[0;32mreturn\u001b[0m \u001b[0mfunc\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0margs\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwargs\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    312\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    313\u001b[0m         \u001b[0;32mreturn\u001b[0m \u001b[0mwrapper\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/pandas/io/parsers/readers.py\u001b[0m in \u001b[0;36mread_csv\u001b[0;34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)\u001b[0m\n\u001b[1;32m    584\u001b[0m     \u001b[0mkwds\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mupdate\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mkwds_defaults\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    585\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 586\u001b[0;31m     \u001b[0;32mreturn\u001b[0m \u001b[0m_read\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfilepath_or_buffer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mkwds\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    587\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    588\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/pandas/io/parsers/readers.py\u001b[0m in \u001b[0;36m_read\u001b[0;34m(filepath_or_buffer, kwds)\u001b[0m\n\u001b[1;32m    486\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    487\u001b[0m     \u001b[0;32mwith\u001b[0m \u001b[0mparser\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 488\u001b[0;31m         \u001b[0;32mreturn\u001b[0m \u001b[0mparser\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mnrows\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    489\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    490\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/pandas/io/parsers/readers.py\u001b[0m in \u001b[0;36mread\u001b[0;34m(self, nrows)\u001b[0m\n\u001b[1;32m   1045\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mread\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mnrows\u001b[0m\u001b[0;34m\u003d\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1046\u001b[0m         \u001b[0mnrows\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mvalidate_integer\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"nrows\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mnrows\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-\u003e 1047\u001b[0;31m         \u001b[0mindex\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcolumns\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcol_dict\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_engine\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mnrows\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1048\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1049\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0mindex\u001b[0m \u001b[0;32mis\u001b[0m \u001b[0;32mNone\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/pandas/io/parsers/c_parser_wrapper.py\u001b[0m in \u001b[0;36mread\u001b[0;34m(self, nrows)\u001b[0m\n\u001b[1;32m    222\u001b[0m         \u001b[0;32mtry\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    223\u001b[0m             \u001b[0;32mif\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mlow_memory\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 224\u001b[0;31m                 \u001b[0mchunks\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_reader\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_low_memory\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mnrows\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    225\u001b[0m                 \u001b[0;31m# destructive to chunks\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    226\u001b[0m                 \u001b[0mdata\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0m_concatenate_chunks\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mchunks\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/pandas/_libs/parsers.pyx\u001b[0m in \u001b[0;36mpandas._libs.parsers.TextReader.read_low_memory\u001b[0;34m()\u001b[0m\n\n\u001b[0;32m/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/pandas/_libs/parsers.pyx\u001b[0m in \u001b[0;36mpandas._libs.parsers.TextReader._read_rows\u001b[0;34m()\u001b[0m\n\n\u001b[0;32m/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/pandas/_libs/parsers.pyx\u001b[0m in \u001b[0;36mpandas._libs.parsers.TextReader._tokenize_rows\u001b[0;34m()\u001b[0m\n\n\u001b[0;32m/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/pandas/_libs/parsers.pyx\u001b[0m in \u001b[0;36mpandas._libs.parsers.raise_parser_error\u001b[0;34m()\u001b[0m\n\n\u001b[0;31mUnicodeDecodeError\u001b[0m: \u0027utf-8\u0027 codec can\u0027t decode byte 0x92 in position 31024: invalid start byte"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672345757488_1997852653",
+      "id": "paragraph_1672345757488_1997852653",
+      "dateCreated": "2022-12-29 20:29:17.488",
+      "dateStarted": "2023-01-22 08:34:48.700",
+      "dateFinished": "2023-01-22 08:45:25.417",
+      "status": "ERROR"
+    },
+    {
+      "text": "%python\n\ndatetime_vals \u003d pd.to_datetime(data.ticket_issued_date.dropna())\ndatetime_vals[datetime_vals.dt.weekday \u003e 4].count()",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 04:09:31.958",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "1620"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672372593735_1061425177",
+      "id": "paragraph_1672372593735_1061425177",
+      "dateCreated": "2022-12-30 03:56:33.736",
+      "dateStarted": "2022-12-30 04:09:31.964",
+      "dateFinished": "2022-12-30 04:09:32.279",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ndata.head()",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 20:33:52.826",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003eticket_id\u003c/th\u003e\n      \u003cth\u003eagency_name\u003c/th\u003e\n      \u003cth\u003einspector_name\u003c/th\u003e\n      \u003cth\u003eviolator_name\u003c/th\u003e\n      \u003cth\u003eviolation_street_number\u003c/th\u003e\n      \u003cth\u003eviolation_street_name\u003c/th\u003e\n      \u003cth\u003eviolation_zip_code\u003c/th\u003e\n      \u003cth\u003emailing_address_str_number\u003c/th\u003e\n      \u003cth\u003emailing_address_str_name\u003c/th\u003e\n      \u003cth\u003ecity\u003c/th\u003e\n      \u003cth\u003e...\u003c/th\u003e\n      \u003cth\u003eclean_up_cost\u003c/th\u003e\n      \u003cth\u003ejudgment_amount\u003c/th\u003e\n      \u003cth\u003epayment_amount\u003c/th\u003e\n      \u003cth\u003ebalance_due\u003c/th\u003e\n      \u003cth\u003epayment_date\u003c/th\u003e\n      \u003cth\u003epayment_status\u003c/th\u003e\n      \u003cth\u003ecollection_status\u003c/th\u003e\n      \u003cth\u003egrafitti_status\u003c/th\u003e\n      \u003cth\u003ecompliance_detail\u003c/th\u003e\n      \u003cth\u003ecompliance\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e22056\u003c/td\u003e\n      \u003ctd\u003eBuildings, Safety Engineering \u0026amp; Env Department\u003c/td\u003e\n      \u003ctd\u003eSims, Martinzie\u003c/td\u003e\n      \u003ctd\u003eINVESTMENT INC., MIDWEST MORTGAGE\u003c/td\u003e\n      \u003ctd\u003e2900\u003c/td\u003e\n      \u003ctd\u003eTYLER\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e3.0\u003c/td\u003e\n      \u003ctd\u003eS. WICKER\u003c/td\u003e\n      \u003ctd\u003eCHICAGO\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e305.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e305.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNO PAYMENT APPLIED\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003enon-compliant by no payment\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e27586\u003c/td\u003e\n      \u003ctd\u003eBuildings, Safety Engineering \u0026amp; Env Department\u003c/td\u003e\n      \u003ctd\u003eWilliams, Darrin\u003c/td\u003e\n      \u003ctd\u003eMichigan, Covenant House\u003c/td\u003e\n      \u003ctd\u003e4311\u003c/td\u003e\n      \u003ctd\u003eCENTRAL\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e2959.0\u003c/td\u003e\n      \u003ctd\u003eMartin Luther King\u003c/td\u003e\n      \u003ctd\u003eDetroit\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e855.0\u003c/td\u003e\n      \u003ctd\u003e780.0\u003c/td\u003e\n      \u003ctd\u003e75.0\u003c/td\u003e\n      \u003ctd\u003e2005-06-02 00:00:00\u003c/td\u003e\n      \u003ctd\u003ePAID IN FULL\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003ecompliant by late payment within 1 month\u003c/td\u003e\n      \u003ctd\u003e1.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e22062\u003c/td\u003e\n      \u003ctd\u003eBuildings, Safety Engineering \u0026amp; Env Department\u003c/td\u003e\n      \u003ctd\u003eSims, Martinzie\u003c/td\u003e\n      \u003ctd\u003eSANDERS, DERRON\u003c/td\u003e\n      \u003ctd\u003e1449\u003c/td\u003e\n      \u003ctd\u003eLONGFELLOW\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e23658.0\u003c/td\u003e\n      \u003ctd\u003eP.O. BOX\u003c/td\u003e\n      \u003ctd\u003eDETROIT\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNO PAYMENT APPLIED\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003enot responsible by disposition\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e3\u003c/th\u003e\n      \u003ctd\u003e22084\u003c/td\u003e\n      \u003ctd\u003eBuildings, Safety Engineering \u0026amp; Env Department\u003c/td\u003e\n      \u003ctd\u003eSims, Martinzie\u003c/td\u003e\n      \u003ctd\u003eMOROSI, MIKE\u003c/td\u003e\n      \u003ctd\u003e1441\u003c/td\u003e\n      \u003ctd\u003eLONGFELLOW\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e5.0\u003c/td\u003e\n      \u003ctd\u003eST. CLAIR\u003c/td\u003e\n      \u003ctd\u003eDETROIT\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNO PAYMENT APPLIED\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003enot responsible by disposition\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e4\u003c/th\u003e\n      \u003ctd\u003e22093\u003c/td\u003e\n      \u003ctd\u003eBuildings, Safety Engineering \u0026amp; Env Department\u003c/td\u003e\n      \u003ctd\u003eSims, Martinzie\u003c/td\u003e\n      \u003ctd\u003eNATHANIEL, NEAL\u003c/td\u003e\n      \u003ctd\u003e2449\u003c/td\u003e\n      \u003ctd\u003eCHURCHILL\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003e7449.0\u003c/td\u003e\n      \u003ctd\u003eCHURCHILL\u003c/td\u003e\n      \u003ctd\u003eDETROIT\u003c/td\u003e\n      \u003ctd\u003e...\u003c/td\u003e\n      \u003ctd\u003e0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNO PAYMENT APPLIED\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n      \u003ctd\u003enot responsible by disposition\u003c/td\u003e\n      \u003ctd\u003eNaN\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003cp\u003e5 rows × 34 columns\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672345915207_1180709026",
+      "id": "paragraph_1672345915207_1180709026",
+      "dateCreated": "2022-12-29 20:31:55.208",
+      "dateStarted": "2022-12-29 20:33:52.834",
+      "dateFinished": "2022-12-29 20:33:53.035",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nimport numpy as np\nfrom sklearn.preprocessing import StandardScaler\nscaler \u003d StandardScaler()\ntest_data\u003ddata[\u0027balance_due\u0027]\ntest_data.head()\ndf \u003d pd.DataFrame(data\u003dtest_data)\nres \u003d scaler.fit_transform(df)\nres.min()\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 21:14:07.118",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "-13.147334652567258"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672346032831_421681402",
+      "id": "paragraph_1672346032831_421681402",
+      "dateCreated": "2022-12-29 20:33:52.831",
+      "dateStarted": "2022-12-29 21:14:07.131",
+      "dateFinished": "2022-12-29 21:14:07.210",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nbal_sqrt \u003d np.sqrt(data.balance_due[data.balance_due \u003e 0])\nmed \u003d np.median(bal_sqrt)\navg \u003d np.average(bal_sqrt)\nprint(med-avg)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 22:53:32.951",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0.45259606090997195\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672354237897_968010585",
+      "id": "paragraph_1672354237897_968010585",
+      "dateCreated": "2022-12-29 22:50:37.897",
+      "dateStarted": "2022-12-29 22:53:32.961",
+      "dateFinished": "2022-12-29 22:53:33.030",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%sh\npip install sklearn",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 20:36:40.242",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Collecting sklearn\n  Downloading sklearn-0.0.post1.tar.gz (3.6 kB)\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status \u0027done\u0027\nBuilding wheels for collected packages: sklearn\n  Building wheel for sklearn (setup.py): started\n  Building wheel for sklearn (setup.py): finished with status \u0027done\u0027\n  Created wheel for sklearn: filename\u003dsklearn-0.0.post1-py3-none-any.whl size\u003d2344 sha256\u003d14276e1238f66fc16793ea712f73f3e25f68c405809cb5ad2bedaae35f89b9d9\n  Stored in directory: /opt/zeppelin/.cache/pip/wheels/42/56/cc/4a8bf86613aafd5b7f1b310477667c1fca5c51c3ae4124a003\nSuccessfully built sklearn\nInstalling collected packages: sklearn\nSuccessfully installed sklearn-0.0.post1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672346177909_1681522260",
+      "id": "paragraph_1672346177909_1681522260",
+      "dateCreated": "2022-12-29 20:36:17.910",
+      "dateStarted": "2022-12-29 20:36:40.256",
+      "dateFinished": "2022-12-29 20:36:49.792",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nimport pip\npip.main([\u0027install\u0027, \u0027scikit-learn\u0027])\n#import sklearn",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 20:41:53.034",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "WARNING: pip is being invoked by an old script wrapper. This will fail in a future version of pip.\nPlease see https://github.com/pypa/pip/issues/5599 for advice on fixing the underlying issue.\nTo avoid this problem you can invoke Python with \u0027-m pip\u0027 instead of running pip directly.\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003eCollecting scikit-learn\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003e  Downloading scikit_learn-1.0.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (24.8 MB)\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003e/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/pip/_vendor/rich/live.py:221: \nUserWarning: install \"ipywidgets\" for Jupyter support\n  warnings.warn(\u0027install \"ipywidgets\" for Jupyter support\u0027)\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003e\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003e\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003eRequirement already satisfied: scipy\u0026gt;\u003d1.1.0 in /opt/conda/envs/python_3_with_R/lib/python3.7/site-packages (from scikit-learn) (1.7.3)\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003eCollecting threadpoolctl\u0026gt;\u003d2.0.0\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003e  Downloading threadpoolctl-3.1.0-py3-none-any.whl (14 kB)\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003eCollecting joblib\u0026gt;\u003d0.11\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003e  Downloading joblib-1.2.0-py3-none-any.whl (297 kB)\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003e\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003e\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003eRequirement already satisfied: numpy\u0026gt;\u003d1.14.6 in /opt/conda/envs/python_3_with_R/lib/python3.7/site-packages (from scikit-learn) (1.19.5)\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003eInstalling collected packages: threadpoolctl, joblib, scikit-learn\n\u003c/pre\u003e\n\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cpre style\u003d\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,\u0027DejaVu Sans Mono\u0027,consolas,\u0027Courier New\u0027,monospace\"\u003eSuccessfully installed joblib-1.2.0 scikit-learn-1.0.2 threadpoolctl-3.1.0\n\u003c/pre\u003e\n0"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672346200252_1652908124",
+      "id": "paragraph_1672346200252_1652908124",
+      "dateCreated": "2022-12-29 20:36:40.252",
+      "dateStarted": "2022-12-29 20:41:53.043",
+      "dateFinished": "2022-12-29 20:42:07.928",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nimport sklearn",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-29 20:42:19.010",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672346355937_561272944",
+      "id": "paragraph_1672346355937_561272944",
+      "dateCreated": "2022-12-29 20:39:15.937",
+      "dateStarted": "2022-12-29 20:42:19.022",
+      "dateFinished": "2022-12-29 20:42:20.057",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nnew_data\u003dpd.DataFrame(data, columns\u003d[\u0027balance_due\u0027,\u0027payment_amount\u0027])\nnew_data.head()",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 01:14:22.598",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003ebalance_due\u003c/th\u003e\n      \u003cth\u003epayment_amount\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e305.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e75.0\u003c/td\u003e\n      \u003ctd\u003e780.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e2\u003c/th\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e3\u003c/th\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e4\u003c/th\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n      \u003ctd\u003e0.0\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672346539018_427171788",
+      "id": "paragraph_1672346539018_427171788",
+      "dateCreated": "2022-12-29 20:42:19.018",
+      "dateStarted": "2022-12-30 01:14:22.610",
+      "dateFinished": "2022-12-30 01:14:22.686",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nfrom sklearn.preprocessing import PolynomialFeatures\npf \u003d PolynomialFeatures(3)\npoly_features \u003d pf.fit_transform(data[[\u0027balance_due\u0027, \u0027payment_amount\u0027]])\npoly_features\n#poly_features.shape\ndft\u003dpd.DataFrame(poly_features)\nlen(dft.columns)\n#poly_features.shape",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 01:38:35.718",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "10"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672362728913_1992772182",
+      "id": "paragraph_1672362728913_1992772182",
+      "dateCreated": "2022-12-30 01:12:08.915",
+      "dateStarted": "2022-12-30 01:38:35.732",
+      "dateFinished": "2022-12-30 01:38:35.795",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n\n#print(len(poly_features[0:]))\nfor i in range(0,10):\n    print(i)\n    res\u003dnp.average(dft[i])\n    print(res)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 01:39:24.355",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0\n1.0\n1\n222.44905795306545\n2\n48.898986440596715\n3\n417195.80993348145\n4\n667.0275840371386\n5\n51862.64835988749\n6\n2042000980.3445697\n7\n8597853.345918901\n8\n-3509170.0511937765\n9\n177998080.32312167\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672362739898_1434323614",
+      "id": "paragraph_1672362739898_1434323614",
+      "dateCreated": "2022-12-30 01:12:19.899",
+      "dateStarted": "2022-12-30 01:39:24.368",
+      "dateFinished": "2022-12-30 01:39:24.443",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 01:16:33.164",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672362993164_1356204360",
+      "id": "paragraph_1672362993164_1356204360",
+      "dateCreated": "2022-12-30 01:16:33.164",
+      "status": "READY"
+    }
+  ],
+  "name": "Train",
+  "id": "2HQ3JY7FA",
+  "defaultInterpreterGroup": "jupyter",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

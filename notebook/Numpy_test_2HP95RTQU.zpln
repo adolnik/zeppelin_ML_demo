@@ -1,0 +1,269 @@
+{
+  "paragraphs": [
+    {
+      "text": "%python\r\nimport numpy as np\r\napartment \u003d np.array([59.50, 31.40, 19, 22, 60550, 2])",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 00:44:42.469",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672361063146_846414508",
+      "id": "paragraph_1672361063146_846414508",
+      "dateCreated": "2022-12-30 00:44:23.147",
+      "dateStarted": "2022-12-30 00:44:42.485",
+      "dateFinished": "2022-12-30 00:44:42.920",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# вычислим долю жилой площади в квартире\nshare_living_space \u003d apartment[1]/apartment[0]",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 00:45:07.229",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672361077949_377551217",
+      "id": "paragraph_1672361077949_377551217",
+      "dateCreated": "2022-12-30 00:44:37.951",
+      "dateStarted": "2022-12-30 00:45:07.236",
+      "dateFinished": "2022-12-30 00:45:07.310",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nshare_living_space",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 00:45:29.500",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0.5277310924369748"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672361107233_1911391836",
+      "id": "paragraph_1672361107233_1911391836",
+      "dateCreated": "2022-12-30 00:45:07.233",
+      "dateStarted": "2022-12-30 00:45:29.508",
+      "dateFinished": "2022-12-30 00:45:29.594",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\napartment \u003d np.delete(apartment, [0, 1])\napartment \u003d np.append(apartment, share_living_space)\nlen(apartment)",
+      "user": "anonymous",
+      "dateUpdated": "2022-12-30 00:46:49.892",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "5"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672361129504_2018800513",
+      "id": "paragraph_1672361129504_2018800513",
+      "dateCreated": "2022-12-30 00:45:29.504",
+      "dateStarted": "2022-12-30 00:46:49.915",
+      "dateFinished": "2022-12-30 00:46:50.028",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nfrom datetime import datetime, timedelta\n(datetime.now() + timedelta(hours\u003d-1)).strftime(\u0027%Y-%m-%d_%H_%M\u0027);\ndatetime2loadBefore \u003d (datetime.now() + timedelta(hours\u003d-1))\ndatetime2loadAfter \u003d (datetime2loadBefore + timedelta(hours\u003d-1))\nprint(datetime2loadBefore.year, datetime2loadBefore.month, datetime2loadBefore.day,datetime2loadAfter.hour)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-10 01:06:11.869",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "2023 1 10 23\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672361209901_1379469683",
+      "id": "paragraph_1672361209901_1379469683",
+      "dateCreated": "2022-12-30 00:46:49.903",
+      "dateStarted": "2023-01-10 01:06:11.880",
+      "dateFinished": "2023-01-10 01:06:11.956",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nprint(str(1).zfill(2))\n\nfrom datetime import datetime\nprint(datetime.today().replace(tzinfo\u003dNone).strftime(\u0027%F %T.%f\u0027)[:-5])\nprint(datetime.today().replace(tzinfo\u003dNone))",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-20 11:32:57.728",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "01\n2023-01-20 11:32:57.7\n2023-01-20 11:32:57.793669\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1673309193133_288810224",
+      "id": "paragraph_1673309193133_288810224",
+      "dateCreated": "2023-01-10 00:06:33.142",
+      "dateStarted": "2023-01-20 11:32:57.745",
+      "dateFinished": "2023-01-20 11:32:57.850",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-19 22:14:01.104",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674166441081_936552175",
+      "id": "paragraph_1674166441081_936552175",
+      "dateCreated": "2023-01-19 22:14:01.101",
+      "status": "READY"
+    }
+  ],
+  "name": "Numpy_test",
+  "id": "2HP95RTQU",
+  "defaultInterpreterGroup": "jupyter",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

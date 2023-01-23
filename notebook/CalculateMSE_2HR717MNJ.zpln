@@ -1,0 +1,286 @@
+{
+  "paragraphs": [
+    {
+      "text": "%python\nfrom sklearn import metrics  # подгружаем метрики\nfrom sklearn.metrics import r2_score\n\ny_pred \u003d [1,3,2,5] # предсказанные значения\ny_test \u003d [2,3,-1,4] # истинные значения из тестовой выборки",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-09 04:33:23.814",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672755667135_1176791928",
+      "id": "paragraph_1672755667135_1176791928",
+      "dateCreated": "2023-01-03 14:21:07.135",
+      "dateStarted": "2023-01-09 04:31:08.925",
+      "dateFinished": "2023-01-09 04:31:09.052",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nMSE \u003d metrics.mean_squared_error(y_test, y_pred)\nprint(\u0027MSE score : %.2f\u0027 % MSE)\nprint(\u0027R^2 Score : %.2f\u0027 % r2_score(y_test,y_pred))\nvar\u003dnp.var(y_test)\nprint(var)\nprint(1-2.75/3.5)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-09 04:34:57.595",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "MSE score : 2.75\nR^2 Score : 0.21\n3.5\n0.2142857142857143\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672756176873_1369676809",
+      "id": "paragraph_1672756176873_1369676809",
+      "dateCreated": "2023-01-03 14:29:36.873",
+      "dateStarted": "2023-01-09 04:34:57.610",
+      "dateFinished": "2023-01-09 04:34:57.684",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ntes \u003d \"\"\" as \nasa \"\"\"\nprint(tes)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-05 18:37:58.692",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": " as \nasa \n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672756235487_1101543938",
+      "id": "paragraph_1672756235487_1101543938",
+      "dateCreated": "2023-01-03 14:30:35.487",
+      "dateStarted": "2023-01-05 18:37:58.786",
+      "dateFinished": "2023-01-05 18:38:00.553",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nrt \u003d tes if tes is None else tes.replace(\"\\n\",\"\").replace(\"\\r\",\"\")\nprint(rt)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-05 18:38:51.946",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": " as asa \n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672943878739_716718478",
+      "id": "paragraph_1672943878739_716718478",
+      "dateCreated": "2023-01-05 18:37:58.762",
+      "dateStarted": "2023-01-05 18:38:51.963",
+      "dateFinished": "2023-01-05 18:38:52.088",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ntes \u003d None\nrt \u003d tes if tes is None else tes.replace(\"\\n\",\"\").replace(\"\\r\",\"\")\nprint(rt)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-05 18:39:15.024",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "None\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672943931953_1371934624",
+      "id": "paragraph_1672943931953_1371934624",
+      "dateCreated": "2023-01-05 18:38:51.953",
+      "dateStarted": "2023-01-05 18:39:15.049",
+      "dateFinished": "2023-01-05 18:39:15.158",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nimport numpy as np\n\ny_orig \u003d np.array([2,3,-1,4])\ny_pred2\u003dnp.array([1,3,2,5])\nvar\u003dnp.var(y_orig)\nprint(var)\nss_res\u003dy_pred2-y_orig\nprint(ss_res)\nprint(np.square(ss_res))\nprint(np.sum(np.square(ss_res)))\nprint(1-np.sum(np.square(ss_res))/(4*var*var))",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-09 02:46:03.132",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "3.5\n[-1  0  3  1]\n[1 0 9 1]\n11\n0.7755102040816326\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1672943955031_401886969",
+      "id": "paragraph_1672943955031_401886969",
+      "dateCreated": "2023-01-05 18:39:15.031",
+      "dateStarted": "2023-01-09 02:46:03.143",
+      "dateFinished": "2023-01-09 02:46:03.219",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nfrom sklearn.metrics import r2_score\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-09 04:30:35.125",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1673230920258_875388064",
+      "id": "paragraph_1673230920258_875388064",
+      "dateCreated": "2023-01-09 02:22:00.263",
+      "status": "READY"
+    }
+  ],
+  "name": "CalculateMSE",
+  "id": "2HR717MNJ",
+  "defaultInterpreterGroup": "jupyter",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

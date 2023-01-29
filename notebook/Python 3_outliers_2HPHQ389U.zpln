@@ -35,13 +35,22 @@
       "status": "READY"
     },
     {
-      "text": "%python\nimport numpy as np\nimport pandas as pd\nfrom math import radians, sin, cos, asin, sqrt\n%matplotlib inline\n\nvis_data \u003d pd.read_csv(\"./data/train.csv\", \n                       encoding \u003d \u0027ISO-8859-1\u0027, \n                       low_memory \u003d False)\nvis_data \u003d vis_data.drop([\u0027violation_zip_code\u0027, \u0027clean_up_cost\u0027], axis\u003d1)\nlatlons \u003d pd.read_csv(\"./data/latlons.csv\")\nvis_data \u003d pd.concat([vis_data, latlons], axis\u003d1)\n\ndef haversine(lon1, lat1, lon2, lat2):\n    lon1, lat1, lon2, lat2 \u003d map(radians, [lon1, lat1, lon2, lat2])\n    dlon \u003d lon2 - lon1\n    dlat \u003d lat2 - lat1\n    a \u003d sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2) ** 2\n    c \u003d 2 * asin(sqrt(a))\n    earth_radius \u003d 6371 \n    return c * earth_radius\n\nvis_data[\u0027distance\u0027] \u003d vis_data.apply(lambda row: \n                                      haversine(lon1 \u003d -83.045753, \n                                                lat1 \u003d 42.331429,\n                                                lon2 \u003d row[\u0027lon\u0027], \n                                                lat2 \u003d row[\u0027lat\u0027]), \n                                      axis\u003d1)",
+      "text": "%python\nimport numpy as np\nimport pandas as pd\nfrom math import radians, sin, cos, asin, sqrt\n%matplotlib inline\n\nvis_data \u003d pd.read_csv(\"/tmp/data/train.csv\", \n                       encoding \u003d \u0027ISO-8859-1\u0027, \n                       low_memory \u003d False)\nvis_data \u003d vis_data.drop([\u0027violation_zip_code\u0027, \u0027clean_up_cost\u0027], axis\u003d1)\nlatlons \u003d pd.read_csv(\"/tmp/data/latlons.csv\")\nvis_data \u003d pd.concat([vis_data, latlons], axis\u003d1)\n\ndef haversine(lon1, lat1, lon2, lat2):\n    lon1, lat1, lon2, lat2 \u003d map(radians, [lon1, lat1, lon2, lat2])\n    dlon \u003d lon2 - lon1\n    dlat \u003d lat2 - lat1\n    a \u003d sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2) ** 2\n    c \u003d 2 * asin(sqrt(a))\n    earth_radius \u003d 6371 \n    return c * earth_radius\n\nvis_data[\u0027distance\u0027] \u003d vis_data.apply(lambda row: \n                                      haversine(lon1 \u003d -83.045753, \n                                                lat1 \u003d 42.331429,\n                                                lon2 \u003d row[\u0027lon\u0027], \n                                                lat2 \u003d row[\u0027lat\u0027]), \n                                      axis\u003d1)",
       "user": "anonymous",
-      "dateUpdated": "2022-12-30 22:02:12.354",
+      "dateUpdated": "2023-01-24 13:11:43.281",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/python",
-        "editorHide": false
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        }
       },
       "settings": {
         "params": {},
@@ -57,12 +66,14 @@
       "jobName": "paragraph_1672437732354_984871396",
       "id": "20221230-220212_1209118232",
       "dateCreated": "2022-12-30 22:02:12.354",
-      "status": "READY"
+      "dateStarted": "2023-01-24 13:11:43.304",
+      "dateFinished": "2023-01-24 13:12:01.875",
+      "status": "FINISHED"
     },
     {
       "text": "%md\n## Поиск и удаление по порогу\n\nЧасто оказывается так, что при погружении в предметную область вы начинаете понимать, какие значения данные признаки могут принимать, а какие - не могут. Например, если нужно заплатить штраф, полезно будет проверить, нет ли в выборке значений штрафов, меньших, чем `0`:",
       "user": "anonymous",
-      "dateUpdated": "2022-12-30 22:02:12.354",
+      "dateUpdated": "2023-01-24 13:12:06.468",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/markdown",
@@ -70,7 +81,12 @@
         "editorSetting": {
           "language": "markdown",
           "editOnDblClick": true
-        }
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -81,7 +97,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eПоиск и удаление по порогу\u003c/h2\u003e\n\u003cp\u003eЧасто оказывается так, что при погружении в предметную область вы начинаете понимать, какие значения данные признаки могут принимать, а какие - не могут. Например, если нужно заплатить штраф, полезно будет проверить, нет ли в выборке значений штрафов, меньших, чем \u003ccode\u003e0\u003c/code\u003e:\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eПоиск и удаление по порогу\u003c/h2\u003e\n\u003cp\u003eЧасто оказывается так, что при погружении в предметную область вы начинаете понимать, какие значения данные признаки могут принимать, а какие - не могут. Например, если нужно заплатить штраф, полезно будет проверить, нет ли в выборке значений штрафов, меньших, чем \u003ccode\u003e0\u003c/code\u003e:\u003c/p\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -91,16 +107,27 @@
       "jobName": "paragraph_1672437732354_1847303533",
       "id": "20221230-220212_641014660",
       "dateCreated": "2022-12-30 22:02:12.354",
-      "status": "READY"
+      "dateStarted": "2023-01-24 13:12:06.462",
+      "dateFinished": "2023-01-24 13:12:10.686",
+      "status": "FINISHED"
     },
     {
       "text": "%python\nnp.sum(vis_data.fine_amount \u003c 0)",
       "user": "anonymous",
-      "dateUpdated": "2022-12-30 22:02:12.354",
+      "dateUpdated": "2023-01-24 13:12:13.104",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/python",
-        "editorHide": false
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        }
       },
       "settings": {
         "params": {},
@@ -121,12 +148,14 @@
       "jobName": "paragraph_1672437732354_362264513",
       "id": "20221230-220212_2094404791",
       "dateCreated": "2022-12-30 22:02:12.354",
-      "status": "READY"
+      "dateStarted": "2023-01-24 13:12:13.128",
+      "dateFinished": "2023-01-24 13:12:13.214",
+      "status": "FINISHED"
     },
     {
       "text": "%md\nКроме этого, интересно посмотреть максимальное значение штрафа:",
       "user": "anonymous",
-      "dateUpdated": "2022-12-30 22:02:12.354",
+      "dateUpdated": "2023-01-24 13:12:17.797",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/markdown",
@@ -134,7 +163,12 @@
         "editorSetting": {
           "language": "markdown",
           "editOnDblClick": true
-        }
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -145,7 +179,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eКроме этого, интересно посмотреть максимальное значение штрафа:\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eКроме этого, интересно посмотреть максимальное значение штрафа:\u003c/p\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -155,16 +189,27 @@
       "jobName": "paragraph_1672437732354_1263570227",
       "id": "20221230-220212_2007900185",
       "dateCreated": "2022-12-30 22:02:12.354",
-      "status": "READY"
+      "dateStarted": "2023-01-24 13:12:17.800",
+      "dateFinished": "2023-01-24 13:12:17.817",
+      "status": "FINISHED"
     },
     {
       "text": "%python\nmax_fine \u003d np.max(vis_data.fine_amount)\nmax_fine",
       "user": "anonymous",
-      "dateUpdated": "2022-12-30 22:02:12.354",
+      "dateUpdated": "2023-01-24 13:12:20.605",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/python",
-        "editorHide": false
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        }
       },
       "settings": {
         "params": {},
@@ -185,7 +230,9 @@
       "jobName": "paragraph_1672437732354_1423642395",
       "id": "20221230-220212_839528858",
       "dateCreated": "2022-12-30 22:02:12.354",
-      "status": "READY"
+      "dateStarted": "2023-01-24 13:12:20.632",
+      "dateFinished": "2023-01-24 13:12:20.706",
+      "status": "FINISHED"
     },
     {
       "text": "%md\nИ сколько раз и как часто такой штраф встречается в данных:",
@@ -224,11 +271,20 @@
     {
       "text": "%python\nmax_fine_count \u003d np.sum(vis_data.fine_amount \u003d\u003d max_fine)\nmax_fine_count, max_fine_count/vis_data.shape[0]",
       "user": "anonymous",
-      "dateUpdated": "2022-12-30 22:02:12.355",
+      "dateUpdated": "2023-01-24 13:12:26.850",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/python",
-        "editorHide": false
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        }
       },
       "settings": {
         "params": {},
@@ -249,16 +305,27 @@
       "jobName": "paragraph_1672437732355_1799047718",
       "id": "20221230-220212_1884437986",
       "dateCreated": "2022-12-30 22:02:12.355",
-      "status": "READY"
+      "dateStarted": "2023-01-24 13:12:26.873",
+      "dateFinished": "2023-01-24 13:12:26.998",
+      "status": "FINISHED"
     },
     {
       "text": "%python\nvis_data.fine_amount.hist();",
       "user": "anonymous",
-      "dateUpdated": "2022-12-30 22:02:12.355",
+      "dateUpdated": "2023-01-24 13:12:28.447",
       "progress": 0,
       "config": {
         "editorMode": "ace/mode/python",
-        "editorHide": false
+        "editorHide": false,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        }
       },
       "settings": {
         "params": {},
@@ -268,8 +335,8 @@
         "code": "SUCCESS",
         "msg": [
           {
-            "type": "HTML",
-            "data": "\u003cdiv style\u003d\u0027width:auto;height:auto\u0027\u003e\u003cimg src\u003ddata:image/png;base64,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 style\u003d\u0027width\u003dauto;height:auto\u0027/\u003e\u003c/div\u003e"
+            "type": "IMG",
+            "data": "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\u003d\n"
           }
         ]
       },
@@ -279,7 +346,9 @@
       "jobName": "paragraph_1672437732355_274225581",
       "id": "20221230-220212_1987732761",
       "dateCreated": "2022-12-30 22:02:12.355",
-      "status": "READY"
+      "dateStarted": "2023-01-24 13:12:28.477",
+      "dateFinished": "2023-01-24 13:12:30.086",
+      "status": "FINISHED"
     },
     {
       "text": "%md\nОчень большое количество данных сосредоточено около 0. Посмотрим, сколько значений штрафов в выборке равно 0:",

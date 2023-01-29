@@ -31,9 +31,9 @@
       "status": "READY"
     },
     {
-      "text": "%python\ndata \u003d pd.read_csv(\u0027https://docs.google.com/spreadsheets/d/1J4lUpCAztLpO378ZUTriIplYENUqY4oBDByauF39Dp4/export?format\u003dcsv\u0027, sep \u003d\u0027;\u0027)\ndata.head()",
+      "text": "%python\ndata \u003d pd.read_csv(\u0027/tmp/data/data_flats.csv\u0027,sep\u003d\";\")\ndata.head()",
       "user": "anonymous",
-      "dateUpdated": "2023-01-09 06:26:52.663",
+      "dateUpdated": "2023-01-24 13:14:58.783",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -67,8 +67,8 @@
       "jobName": "paragraph_1673243420956_136875653",
       "id": "paragraph_1673243420956_136875653",
       "dateCreated": "2023-01-09 05:50:20.957",
-      "dateStarted": "2023-01-09 06:26:52.684",
-      "dateFinished": "2023-01-09 06:27:05.478",
+      "dateStarted": "2023-01-24 13:14:58.854",
+      "dateFinished": "2023-01-24 13:14:59.685",
       "status": "FINISHED"
     },
     {

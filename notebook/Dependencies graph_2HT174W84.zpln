@@ -1,0 +1,1646 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n## Files descriptions\n+ /var/data/zeppelin/all_wfs.txt - list of all workflows\n+ /var/data/zeppelin/links.txt\n+ /var/data/zeppelin/sqoopRelations.txt\n+ /var/data/zeppelin/trg_sources.txt\n\n## How to build a dependency graph\n\nBefore run this scenario (notebook) the following files need to be collected:\n* /var/data/zeppelin/all_wfs.txt - list of all workflows\n* /var/data/zeppelin/links.txt - pair links between workflows\n* /var/data/zeppelin/sqoopRelations.txt - list of the sqoop operations at the schedule\n* /var/data/zeppelin/trg_sources.txt - list of available triggers at the workflows\n\nTo do this follow the instruction:\n* Run script \u0027prepare_data_server.sh\u0027 to upload current workflow definitions from server\n* Update workflow folder at the \"data\" location using the archive from the previous step \n* Execute [Generate Files](#/notebook/2E98672XG) notebook to parse workflows and create the list of files mentioned above\n\n\n* Select \"all\" to show full graph or \u003cname_of_workflow\u003e you are interested in below (workflow field)\n* Press \"Run this paragraph\" or \"Enter\" button\n\nSometimes you need to run workflow twice to get the picture with the better resolution ",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-25 16:28:46.063",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eFiles descriptions\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003e/var/data/zeppelin/all_wfs.txt - list of all workflows\u003c/li\u003e\n  \u003cli\u003e/var/data/zeppelin/links.txt\u003c/li\u003e\n  \u003cli\u003e/var/data/zeppelin/sqoopRelations.txt\u003c/li\u003e\n  \u003cli\u003e/var/data/zeppelin/trg_sources.txt\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eHow to build a dependency graph\u003c/h2\u003e\n\u003cp\u003eBefore run this scenario (notebook) the following files need to be collected:\u003cbr/\u003e* /var/data/zeppelin/all_wfs.txt - list of all workflows\u003cbr/\u003e* /var/data/zeppelin/links.txt - pair links between workflows\u003cbr/\u003e* /var/data/zeppelin/sqoopRelations.txt - list of the sqoop operations at the schedule\u003cbr/\u003e* /var/data/zeppelin/trg_sources.txt - list of available triggers at the workflows\u003c/p\u003e\n\u003cp\u003eTo do this follow the instruction:\u003cbr/\u003e* Run script \u0026lsquo;prepare_data_server.sh\u0026rsquo; to upload current workflow definitions from server\u003cbr/\u003e* Update workflow folder at the \u0026ldquo;data\u0026rdquo; location using the archive from the previous step\u003cbr/\u003e* Execute \u003ca href\u003d\"#/notebook/2E98672XG\"\u003eGenerate Files\u003c/a\u003e notebook to parse workflows and create the list of files mentioned above\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003eSelect \u0026ldquo;all\u0026rdquo; to show full graph or \u003cname_of_workflow\u003e you are interested in below (workflow field)\u003c/li\u003e\n  \u003cli\u003ePress \u0026ldquo;Run this paragraph\u0026rdquo; or \u0026ldquo;Enter\u0026rdquo; button\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eSometimes you need to run workflow twice to get the picture with the better resolution\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674664126063_546023296",
+      "id": "20191204-030152_791426298",
+      "dateCreated": "2023-01-25 16:28:46.063",
+      "status": "READY"
+    },
+    {
+      "title": "Show predecessors",
+      "text": "%pyspark\nimport re\nimport csv\nimport os \nimport io\nimport sys\nimport itertools\n\nimport pygraphviz as pgv\nimport matplotlib.pyplot as plt\nimport matplotlib.image as mpimg\nfrom PIL import Image\nimport numpy as np\n\nvar_home_folder \u003d \"/var/data/zeppelin/\"\nsys.path.append(os.path.abspath(var_home_folder))\n\nfrom python_scripts import common\n\ndef rchop(string, ending):\n  if string.endswith(ending):\n    return string[:-len(ending)].replace(\u0027-\u0027,\u0027_\u0027)\n  return string.replace(\u0027-\u0027,\u0027_\u0027)\n\ndef extractWfName(string):\n  search \u003d re.search(\u0027\\.\\./data/workflow/(wf_){0,1}([^/]*)\u0027, string, re.IGNORECASE)\n  if search \u003d\u003d None:\n    return \"Unknown\"   \n  return search.group(2).lower()  \n\ndef parseWorflowTitle(string):\n  if \u0027.log.\u0027 in string:\n    string \u003d \u0027weblogshourly\u0027  \n  return rchop(rchop(string,\u0027.trg\u0027),\u0027\u003d\u0027)\n\ndef getFileName(string):\n  return  os.path.abspath(os.path.join(os.sep, var_home_folder,string))\n\nwfs_prop \u003d []\ndef getNodeDescription(string):\n  prop_res \u003d \"\"\n  for (node, prop) in wfs_prop:\n      if node.strip() \u003d\u003d string.strip():\n        prop_res \u003d prop.strip()\n        break\n  res \u003d \"[fillcolor\u003dyellow label\u003d\\\"\" + string + \",\\n \"+prop_res+\"\\\"]\"\n  return res  \n\nos.chdir(var_home_folder)\n  \n#read list of all workflows\nall_wfs_list \u003d [(\"all\", \"all\")]\nall_wf \u003d []\nwith open(\u0027all_wfs.txt\u0027,\u0027r\u0027) as all_wfs_file:\n  file \u003d csv.reader(all_wfs_file, delimiter\u003d\u0027|\u0027)\n  for row in file:\n    nodes, _, time_prop \u003d row\n    wfs_prop.append((nodes.strip(), time_prop.strip()))\n    all_wfs_list.append((nodes.strip(), nodes.strip()))\n    all_wf.append(nodes.strip().lower())\n\nlst \u003d [z.select(\"workflow\",all_wfs_list).strip().lower()]\nif lst[0] \u003d\u003d \u0027all\u0027:\n  lst \u003d all_wf\n\nafile \u003d os.path.abspath(os.path.join(os.sep, var_home_folder,\"links.txt\"))\n\ndict_inLinks \u003d {}\nwith open(afile, \u0027r\u0027) as file_links:\n  reader \u003d csv.reader(file_links)\n  for row in reader:\n    v, k, _ \u003d row\n    key \u003d k.strip().lower() \n    if key in dict_inLinks.keys():\n      dict_inLinks[key].append(v.strip().lower())\n    else:\n      dict_inLinks[key] \u003d [v.strip().lower()]    \n\nwith open(getFileName(\"trg_sources.txt\"), \u0027r\u0027) as link_file:\n  lines_trg \u003d link_file.read().splitlines()\n\ndict_outLinks \u003d {}\nfor row in lines_trg:\n  st \u003d row.split(\u0027,\u0027)\n  val \u003d st[0].strip().lower()\n  key \u003d st[1].strip().lower() \n  if key in dict_outLinks.keys():\n    dict_outLinks[key].append(val)\n  else:\n    dict_outLinks[key] \u003d [val]    \n\ndef getInputTriggersListByWorkflowName(workflow_name):\n  res \u003d []    \n  for elem in dict_inLinks:\n    if workflow_name in dict_inLinks[elem]:\n      res.append(elem)\n  return res\n\ndef getOutputTriggersListByWorkflowName(workflow_name):\n  res \u003d []    \n  for elem in dict_outLinks:\n    if workflow_name in dict_outLinks[elem]:\n      res.append(elem)\n  return res\n\n# Python code t get difference of two lists \n# Using set() \ndef diffLists(li1, li2): \n  return (list(set(li1) - set(li2)))\n\ndef getDependedChildWorkflowList(workflow_name):\n  res \u003d []\n  dt \u003d getOutputTriggersListByWorkflowName(workflow_name)\n  for e in dt:\n    if e in dict_inLinks.keys():  \n      res.append(dict_inLinks[e])\n    #else:\n    #  print(\u0027Not found: \u0027 + e)\n  flat_list \u003d list(dict.fromkeys(list(itertools.chain(*res))))\n  return flat_list\n\ndef getParentWorkflowList(workflow_name):\n  res \u003d []\n  dt \u003d getInputTriggersListByWorkflowName(workflow_name)\n  #print(dt)\n  for e in dt:\n    if e in dict_outLinks.keys():  \n      res.append(dict_outLinks[e])\n    #else:\n    #  print(\u0027Not found: \u0027 + e)\n  flat_list \u003d list(dict.fromkeys(list(itertools.chain(*res))))\n  return flat_list\n\n#print(dict_inLinks)\n#print(getParentWorkflowList(\u0027nrt_dimension\u0027))\n\ndlst \u003d lst\ncont \u003d True\nparnt_lst \u003d []\nwhile cont:\n  idx \u003d len(dlst)\n  for i in range(idx):\n    parnt_lst \u003d parnt_lst + getParentWorkflowList(dlst[i])\n  parnt_lst \u003d list(dict.fromkeys(parnt_lst))\n  dlst \u003d diffLists(parnt_lst, lst)\n  lst \u003d lst + dlst      \n  if len(dlst) \u003d\u003d 0:\n    cont \u003d False\n    \nheader \u003d \"\"\"\n// This file documents the job dependency graph\n// You need the graphviz tools to generate a graph from this, e.g.\n// dot \u003cfilename\u003e -Tpdf \u003e job_dependencies.pdf\n\n// Please keep it up to date when we add or remove dependencies\n\ndigraph dependency\n{\nrankdir\u003dLR;\nnode [shape\u003drectangle style\u003drounded];\n\n\"\"\"\nfooter \u003d \"\"\"\n}\n\"\"\"\n\noutS \u003d header\n\n#List of nodes\nif lst[0] \u003d\u003d \u0027all\u0027 :\n  for row in all_wfs_list:\n    nodes, _ \u003d row\n    outS \u003d outS + parseWorflowTitle(nodes) + getNodeDescription(parseWorflowTitle(nodes)) +\";\\n\"\nelse:\n  for row in lst:\n    nodes \u003d row\n    if row !\u003d \u0027all\u0027:\n      outS \u003d outS + parseWorflowTitle(nodes) + getNodeDescription(parseWorflowTitle(nodes)) +\";\\n\"\n    \n\n#Sqoop elements\nwith open(getFileName(\u0027sqoopRelations.txt\u0027),\u0027r\u0027) as openfileobject:\n   for line in openfileobject:\n        sqoopProcess \u003d rchop(extractWfName(line),\u0027_completed\u0027)\n        if sqoopProcess in lst:\n            outS \u003d outS + \"drop_sqoop_tables -\u003e\" + sqoopProcess + \"[style\u003ddotted];\\n\"\n\n#print(lst)\ndup \u003d []\nfor wf_name in lst:\n  parent_lst \u003d getParentWorkflowList(wf_name)\n  for parent in parent_lst:\n    var \u003d  parent + \"-\u003e\" + wf_name\n    if wf_name in lst and var not in dup:\n      dup.append(var)    \n    outS \u003d outS + var +\";\\n\"\n\noutS \u003d outS + footer\n\nwith open(getFileName(\"job_dep.dot\"), \"w\") as text_file:\n  text_file.write(outS)\n\nG\u003dpgv.AGraph(getFileName(\"job_dep.dot\"))  \nG.draw(getFileName(\"job_dep.png\"),prog\u003d\"dot\")\nplt.axis(\"off\")\n# plot the image\n\n#img \u003d Image.open(getFileName(\"job_dep.png\"))\n#imgplot \u003d plt.imshow(img, aspect\u003d\u0027equal\u0027,alpha\u003d0.5, origin\u003d\u0027upper\u0027, zorder\u003d-1) # aspect\u003d\u0027auto\u0027 || aspect\u003d\u0027equal\u0027\n#from pylab import rcParams\n#rcParams[\u0027figure.figsize\u0027] \u003d 50, 50\n\n#plt.axes().set_aspect(\u0027equal\u0027)\n#plt.figure(figsize\u003d(200,200))\n#plt.show(block\u003dFalse)\n\ndef show(p):\n    img \u003d io.StringIO()\n    p.savefig(img, format\u003d\u0027svg\u0027)\n    img.seek(0)\n    print(\"%html \u003cdiv style\u003d\u0027width:1800px;height:100%\u0027\u003e\" + img.getvalue() + \"\u003c/div\u003e\")\n    \nplt.imshow(mpimg.imread(\u0027job_dep.png\u0027))\nshow(plt)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-25 17:35:18.560",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "runOnSelectionChange": true,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 93.0,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "workflow": "potential_acv"
+        },
+        "forms": {
+          "workflow": {
+            "type": "Select",
+            "options": [
+              {
+                "value": "all",
+                "displayName": "all"
+              },
+              {
+                "value": "aa_ab_collision_detection",
+                "displayName": "aa_ab_collision_detection"
+              },
+              {
+                "value": "aa_ab_collision_extraction",
+                "displayName": "aa_ab_collision_extraction"
+              },
+              {
+                "value": "aa_ab_testing_events_ad_hoc",
+                "displayName": "aa_ab_testing_events_ad_hoc"
+              },
+              {
+                "value": "aa_ab_testing_events",
+                "displayName": "aa_ab_testing_events"
+              },
+              {
+                "value": "aa_ad_assisted_contact_events",
+                "displayName": "aa_ad_assisted_contact_events"
+              },
+              {
+                "value": "aa_ad_revenue_edw_data_source",
+                "displayName": "aa_ad_revenue_edw_data_source"
+              },
+              {
+                "value": "aa_avvo_util",
+                "displayName": "aa_avvo_util"
+              },
+              {
+                "value": "aa_bi_datamart_ad_hoc",
+                "displayName": "aa_bi_datamart_ad_hoc"
+              },
+              {
+                "value": "aa_bi_datamart_prod_ad_hoc",
+                "displayName": "aa_bi_datamart_prod_ad_hoc"
+              },
+              {
+                "value": "aa_bi_datamart_prod",
+                "displayName": "aa_bi_datamart_prod"
+              },
+              {
+                "value": "aa_churn_by_cohort",
+                "displayName": "aa_churn_by_cohort"
+              },
+              {
+                "value": "aa_dui_lead_gen",
+                "displayName": "aa_dui_lead_gen"
+              },
+              {
+                "value": "aa_dummy",
+                "displayName": "aa_dummy"
+              },
+              {
+                "value": "aa_impala_job_bkk",
+                "displayName": "aa_impala_job_bkk"
+              },
+              {
+                "value": "aa_impala_job",
+                "displayName": "aa_impala_job"
+              },
+              {
+                "value": "aa_impala_python_job",
+                "displayName": "aa_impala_python_job"
+              },
+              {
+                "value": "aa_kw_ad_hoc",
+                "displayName": "aa_kw_ad_hoc"
+              },
+              {
+                "value": "aa_kw_channel_table_adhoc",
+                "displayName": "aa_kw_channel_table_adhoc"
+              },
+              {
+                "value": "aa_kw_channel_table_ad_hoc",
+                "displayName": "aa_kw_channel_table_ad_hoc"
+              },
+              {
+                "value": "aa_kw_channel_table",
+                "displayName": "aa_kw_channel_table"
+              },
+              {
+                "value": "aa_kw_location_table",
+                "displayName": "aa_kw_location_table"
+              },
+              {
+                "value": "aa_kw_outlier_alert_test",
+                "displayName": "aa_kw_outlier_alert_test"
+              },
+              {
+                "value": "aa_kw_outlier_alert",
+                "displayName": "aa_kw_outlier_alert"
+              },
+              {
+                "value": "aa_market_intelligence_detail",
+                "displayName": "aa_market_intelligence_detail"
+              },
+              {
+                "value": "aa_market_intelligence_overview",
+                "displayName": "aa_market_intelligence_overview"
+              },
+              {
+                "value": "aa_market_intelligence_snapshot",
+                "displayName": "aa_market_intelligence_snapshot"
+              },
+              {
+                "value": "aa_menu",
+                "displayName": "aa_menu"
+              },
+              {
+                "value": "aa_north_star_index_test",
+                "displayName": "aa_north_star_index_test"
+              },
+              {
+                "value": "aa_north_star_index",
+                "displayName": "aa_north_star_index"
+              },
+              {
+                "value": "aa_optimizely_experiment_metrics",
+                "displayName": "aa_optimizely_experiment_metrics"
+              },
+              {
+                "value": "aa_optimizely_x_ga",
+                "displayName": "aa_optimizely_x_ga"
+              },
+              {
+                "value": "aa_sem_ad_clicks_for_test_markets",
+                "displayName": "aa_sem_ad_clicks_for_test_markets"
+              },
+              {
+                "value": "aa_serp_organic_landings",
+                "displayName": "aa_serp_organic_landings"
+              },
+              {
+                "value": "aa_session_channel",
+                "displayName": "aa_session_channel"
+              },
+              {
+                "value": "aa_training_table",
+                "displayName": "aa_training_table"
+              },
+              {
+                "value": "aa_weekly_traffic_slt",
+                "displayName": "aa_weekly_traffic_slt"
+              },
+              {
+                "value": "account_g1",
+                "displayName": "account_g1"
+              },
+              {
+                "value": "account_g2",
+                "displayName": "account_g2"
+              },
+              {
+                "value": "acct_barr_dimension",
+                "displayName": "acct_barr_dimension"
+              },
+              {
+                "value": "acct_dimension",
+                "displayName": "acct_dimension"
+              },
+              {
+                "value": "acct_nrt_dimension",
+                "displayName": "acct_nrt_dimension"
+              },
+              {
+                "value": "ad_events",
+                "displayName": "ad_events"
+              },
+              {
+                "value": "ad_performance_dashboard",
+                "displayName": "ad_performance_dashboard"
+              },
+              {
+                "value": "ad_weights_metric",
+                "displayName": "ad_weights_metric"
+              },
+              {
+                "value": "adwords",
+                "displayName": "adwords"
+              },
+              {
+                "value": "amm_dashboard",
+                "displayName": "amm_dashboard"
+              },
+              {
+                "value": "amm_v2",
+                "displayName": "amm_v2"
+              },
+              {
+                "value": "attorneychat",
+                "displayName": "attorneychat"
+              },
+              {
+                "value": "attorney_response",
+                "displayName": "attorney_response"
+              },
+              {
+                "value": "banana_stand_g1",
+                "displayName": "banana_stand_g1"
+              },
+              {
+                "value": "barr_dimension",
+                "displayName": "barr_dimension"
+              },
+              {
+                "value": "barr_gno_dimension",
+                "displayName": "barr_gno_dimension"
+              },
+              {
+                "value": "barrister_g1",
+                "displayName": "barrister_g1"
+              },
+              {
+                "value": "barrister_g2",
+                "displayName": "barrister_g2"
+              },
+              {
+                "value": "barrister_g3",
+                "displayName": "barrister_g3"
+              },
+              {
+                "value": "barrister_g4",
+                "displayName": "barrister_g4"
+              },
+              {
+                "value": "barrister_g5",
+                "displayName": "barrister_g5"
+              },
+              {
+                "value": "best_bets",
+                "displayName": "best_bets"
+              },
+              {
+                "value": "billing_report",
+                "displayName": "billing_report"
+              },
+              {
+                "value": "bing_ad_performance",
+                "displayName": "bing_ad_performance"
+              },
+              {
+                "value": "block_release_monthly",
+                "displayName": "block_release_monthly"
+              },
+              {
+                "value": "chase_payment_reconciliation",
+                "displayName": "chase_payment_reconciliation"
+              },
+              {
+                "value": "churnupsell_interim",
+                "displayName": "churnupsell_interim"
+              },
+              {
+                "value": "churnupsellspark",
+                "displayName": "churnupsellspark"
+              },
+              {
+                "value": "cleanup_trigger_files",
+                "displayName": "cleanup_trigger_files"
+              },
+              {
+                "value": "cms_content_extract",
+                "displayName": "cms_content_extract"
+              },
+              {
+                "value": "combined_sem_report",
+                "displayName": "combined_sem_report"
+              },
+              {
+                "value": "contact_activity_metrics_monthly",
+                "displayName": "contact_activity_metrics_monthly"
+              },
+              {
+                "value": "contact_activity",
+                "displayName": "contact_activity"
+              },
+              {
+                "value": "contact_event_metrics_daily",
+                "displayName": "contact_event_metrics_daily"
+              },
+              {
+                "value": "cont_dimension",
+                "displayName": "cont_dimension"
+              },
+              {
+                "value": "content_g1",
+                "displayName": "content_g1"
+              },
+              {
+                "value": "content_g2",
+                "displayName": "content_g2"
+              },
+              {
+                "value": "cost_per_lead",
+                "displayName": "cost_per_lead"
+              },
+              {
+                "value": "csv_ingestion",
+                "displayName": "csv_ingestion"
+              },
+              {
+                "value": "customer_billing_report",
+                "displayName": "customer_billing_report"
+              },
+              {
+                "value": "customer_performance_report",
+                "displayName": "customer_performance_report"
+              },
+              {
+                "value": "deferred_revenue",
+                "displayName": "deferred_revenue"
+              },
+              {
+                "value": "dogfood",
+                "displayName": "dogfood"
+              },
+              {
+                "value": "drop_sqoop_tables",
+                "displayName": "drop_sqoop_tables"
+              },
+              {
+                "value": "enhance_twilio_calls",
+                "displayName": "enhance_twilio_calls"
+              },
+              {
+                "value": "exact_target_claimed_professional",
+                "displayName": "exact_target_claimed_professional"
+              },
+              {
+                "value": "exacttarget_download",
+                "displayName": "exacttarget_download"
+              },
+              {
+                "value": "exacttarget",
+                "displayName": "exacttarget"
+              },
+              {
+                "value": "fb_clicks",
+                "displayName": "fb_clicks"
+              },
+              {
+                "value": "first_pageview_per_session",
+                "displayName": "first_pageview_per_session"
+              },
+              {
+                "value": "git_business_product",
+                "displayName": "git_business_product"
+              },
+              {
+                "value": "github_business_product",
+                "displayName": "github_business_product"
+              },
+              {
+                "value": "gno_dimension",
+                "displayName": "gno_dimension"
+              },
+              {
+                "value": "gnomon_g1",
+                "displayName": "gnomon_g1"
+              },
+              {
+                "value": "grants_g1",
+                "displayName": "grants_g1"
+              },
+              {
+                "value": "kenshoo",
+                "displayName": "kenshoo"
+              },
+              {
+                "value": "kpi_daily_dashboard",
+                "displayName": "kpi_daily_dashboard"
+              },
+              {
+                "value": "kpi_monthly_dashboard",
+                "displayName": "kpi_monthly_dashboard"
+              },
+              {
+                "value": "kpi_weekly_dashboard",
+                "displayName": "kpi_weekly_dashboard"
+              },
+              {
+                "value": "kw_daily_sessions",
+                "displayName": "kw_daily_sessions"
+              },
+              {
+                "value": "lead_score_sf",
+                "displayName": "lead_score_sf"
+              },
+              {
+                "value": "lead_score",
+                "displayName": "lead_score"
+              },
+              {
+                "value": "legal_sf_staging",
+                "displayName": "legal_sf_staging"
+              },
+              {
+                "value": "market_dashboard",
+                "displayName": "market_dashboard"
+              },
+              {
+                "value": "market_intelligence",
+                "displayName": "market_intelligence"
+              },
+              {
+                "value": "market_level_data",
+                "displayName": "market_level_data"
+              },
+              {
+                "value": "market_trading",
+                "displayName": "market_trading"
+              },
+              {
+                "value": "mh_g1",
+                "displayName": "mh_g1"
+              },
+              {
+                "value": "mh_salesforce_download",
+                "displayName": "mh_salesforce_download"
+              },
+              {
+                "value": "mrr_all_products_daily_report",
+                "displayName": "mrr_all_products_daily_report"
+              },
+              {
+                "value": "mrr_all_products_report",
+                "displayName": "mrr_all_products_report"
+              },
+              {
+                "value": "mrr_report",
+                "displayName": "mrr_report"
+              },
+              {
+                "value": "mrr_sales",
+                "displayName": "mrr_sales"
+              },
+              {
+                "value": "mrr_subs_cust_prof_status_report",
+                "displayName": "mrr_subs_cust_prof_status_report"
+              },
+              {
+                "value": "northstar_report",
+                "displayName": "northstar_report"
+              },
+              {
+                "value": "nrt_dimension",
+                "displayName": "nrt_dimension"
+              },
+              {
+                "value": "nrt_g1",
+                "displayName": "nrt_g1"
+              },
+              {
+                "value": "nrt_g2",
+                "displayName": "nrt_g2"
+              },
+              {
+                "value": "nrt_g3",
+                "displayName": "nrt_g3"
+              },
+              {
+                "value": "order_line_billings_fact",
+                "displayName": "order_line_billings_fact"
+              },
+              {
+                "value": "order_line_fact",
+                "displayName": "order_line_fact"
+              },
+              {
+                "value": "page_ad_weights_test",
+                "displayName": "page_ad_weights_test"
+              },
+              {
+                "value": "page_ad_weights",
+                "displayName": "page_ad_weights"
+              },
+              {
+                "value": "phone_attribution",
+                "displayName": "phone_attribution"
+              },
+              {
+                "value": "pls_dimension",
+                "displayName": "pls_dimension"
+              },
+              {
+                "value": "pls_fact",
+                "displayName": "pls_fact"
+              },
+              {
+                "value": "pls_g1",
+                "displayName": "pls_g1"
+              },
+              {
+                "value": "pls_g2",
+                "displayName": "pls_g2"
+              },
+              {
+                "value": "pls_g3",
+                "displayName": "pls_g3"
+              },
+              {
+                "value": "postgres_g1",
+                "displayName": "postgres_g1"
+              },
+              {
+                "value": "potential_acv",
+                "displayName": "potential_acv"
+              },
+              {
+                "value": "processimpressions",
+                "displayName": "processimpressions"
+              },
+              {
+                "value": "product_line_items",
+                "displayName": "product_line_items"
+              },
+              {
+                "value": "professional_ad_impression",
+                "displayName": "professional_ad_impression"
+              },
+              {
+                "value": "professional_event",
+                "displayName": "professional_event"
+              },
+              {
+                "value": "professional_score",
+                "displayName": "professional_score"
+              },
+              {
+                "value": "professional_skills",
+                "displayName": "professional_skills"
+              },
+              {
+                "value": "promotion_market",
+                "displayName": "promotion_market"
+              },
+              {
+                "value": "pws_g1",
+                "displayName": "pws_g1"
+              },
+              {
+                "value": "quasi_g1",
+                "displayName": "quasi_g1"
+              },
+              {
+                "value": "question_answer_review_metrics_daily",
+                "displayName": "question_answer_review_metrics_daily"
+              },
+              {
+                "value": "rd_ad_events_full_join_test",
+                "displayName": "rd_ad_events_full_join_test"
+              },
+              {
+                "value": "rd_ad_events_full_join",
+                "displayName": "rd_ad_events_full_join"
+              },
+              {
+                "value": "rd_messages_submitted_full_join_test",
+                "displayName": "rd_messages_submitted_full_join_test"
+              },
+              {
+                "value": "rd_messages_submitted_full_join",
+                "displayName": "rd_messages_submitted_full_join"
+              },
+              {
+                "value": "rd_north_star_proxy_tertiary_test",
+                "displayName": "rd_north_star_proxy_tertiary_test"
+              },
+              {
+                "value": "rd_north_star_proxy_tertiary",
+                "displayName": "rd_north_star_proxy_tertiary"
+              },
+              {
+                "value": "rd_questions_asked_full_join_test",
+                "displayName": "rd_questions_asked_full_join_test"
+              },
+              {
+                "value": "rd_questions_asked_full_join",
+                "displayName": "rd_questions_asked_full_join"
+              },
+              {
+                "value": "rd_reviews_submitted_full_join_test",
+                "displayName": "rd_reviews_submitted_full_join_test"
+              },
+              {
+                "value": "rd_reviews_submitted_full_join",
+                "displayName": "rd_reviews_submitted_full_join"
+              },
+              {
+                "value": "rd_service_transaction_full_join_test",
+                "displayName": "rd_service_transaction_full_join_test"
+              },
+              {
+                "value": "rd_service_transaction_full_join",
+                "displayName": "rd_service_transaction_full_join"
+              },
+              {
+                "value": "reference_tables",
+                "displayName": "reference_tables"
+              },
+              {
+                "value": "referral_commission",
+                "displayName": "referral_commission"
+              },
+              {
+                "value": "revenue_per_session",
+                "displayName": "revenue_per_session"
+              },
+              {
+                "value": "salesenablement_daily_impressions",
+                "displayName": "salesenablement_daily_impressions"
+              },
+              {
+                "value": "salesenablement_daily_impressions",
+                "displayName": "salesenablement_daily_impressions"
+              },
+              {
+                "value": "salesforce_download_ib1",
+                "displayName": "salesforce_download_ib1"
+              },
+              {
+                "value": "salesforce_download",
+                "displayName": "salesforce_download"
+              },
+              {
+                "value": "salesforce_ib",
+                "displayName": "salesforce_ib"
+              },
+              {
+                "value": "salesforce_reuploader",
+                "displayName": "salesforce_reuploader"
+              },
+              {
+                "value": "salesforce",
+                "displayName": "salesforce"
+              },
+              {
+                "value": "scoop_geo_ip_city",
+                "displayName": "scoop_geo_ip_city"
+              },
+              {
+                "value": "scooter_g1",
+                "displayName": "scooter_g1"
+              },
+              {
+                "value": "sem_campaign",
+                "displayName": "sem_campaign"
+              },
+              {
+                "value": "sem_daily_bot_feed",
+                "displayName": "sem_daily_bot_feed"
+              },
+              {
+                "value": "sem_google_search_ads",
+                "displayName": "sem_google_search_ads"
+              },
+              {
+                "value": "sem_impressions",
+                "displayName": "sem_impressions"
+              },
+              {
+                "value": "sem_report",
+                "displayName": "sem_report"
+              },
+              {
+                "value": "seoclarity",
+                "displayName": "seoclarity"
+              },
+              {
+                "value": "services_metrics",
+                "displayName": "services_metrics"
+              },
+              {
+                "value": "sf_professional_dnc",
+                "displayName": "sf_professional_dnc"
+              },
+              {
+                "value": "test",
+                "displayName": "test"
+              },
+              {
+                "value": "total_impressions",
+                "displayName": "total_impressions"
+              },
+              {
+                "value": "traffic",
+                "displayName": "traffic"
+              },
+              {
+                "value": "twilio_calls",
+                "displayName": "twilio_calls"
+              },
+              {
+                "value": "unclaimed_professionals_summaries",
+                "displayName": "unclaimed_professionals_summaries"
+              },
+              {
+                "value": "waitinglist_report",
+                "displayName": "waitinglist_report"
+              },
+              {
+                "value": "webanalytics",
+                "displayName": "webanalytics"
+              },
+              {
+                "value": "weblogshourly",
+                "displayName": "weblogshourly"
+              },
+              {
+                "value": "weblogs",
+                "displayName": "weblogs"
+              }
+            ],
+            "name": "workflow",
+            "displayName": "workflow",
+            "defaultValue": "",
+            "hidden": false
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv style\u003d\u0027width:1800px;height:100%\u0027\u003e\u003c?xml version\u003d\"1.0\" encoding\u003d\"utf-8\" standalone\u003d\"no\"?\u003e\n\u003c!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n  \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\"\u003e\n\u003c!-- Created with matplotlib (https://matplotlib.org/) --\u003e\n\u003csvg height\u003d\"400pt\" version\u003d\"1.1\" viewBox\u003d\"0 0 600 400\" width\u003d\"600pt\" xmlns\u003d\"http://www.w3.org/2000/svg\" xmlns:xlink\u003d\"http://www.w3.org/1999/xlink\"\u003e\n \u003cdefs\u003e\n  \u003cstyle type\u003d\"text/css\"\u003e\n*{stroke-linecap:butt;stroke-linejoin:round;}\n  \u003c/style\u003e\n \u003c/defs\u003e\n \u003cg id\u003d\"figure_1\"\u003e\n  \u003cg id\u003d\"patch_1\"\u003e\n   \u003cpath d\u003d\"M 0 400 \nL 600 400 \nL 600 0 \nL 0 0 \nz\n\" style\u003d\"fill:#ffffff;\"/\u003e\n  \u003c/g\u003e\n  \u003cg id\u003d\"axes_1\"\u003e\n   \u003cg clip-path\u003d\"url(#p9233ebf5fd)\"\u003e\n    \u003cimage height\u003d\"214\" id\u003d\"image0ac0dfaf66\" transform\u003d\"scale(1 -1)translate(0 -214)\" width\u003d\"465\" x\u003d\"75\" xlink:href\u003d\"data:image/png;base64,\n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Th1zfOihh0pmDBQovQYNGpjjPXv2pPTz8/LyJF955ZUp/exM16pVK3M8evRoySNHjjS1mjVrpqRNZQF3ogAABKITBQAgUIV6nAsgWl999VW6m4CI1KhRwxx36tRJ8mOPPWZqw4cPT0mbygLuRAEACEQnCgBAIDpRAAACVegx0f3790vWu7Y451xhYaHkWrVqmVrDhg0l+692H3JIYv9fopccdM6OKTRt2tTU9NQc/9XxO++8U3KlSpVift7q1avN8e9//3vJ1atXN7U//elPkrt162Zq27Ztkzxw4EBTe/311yUXFxebmp5uoJdidM654447TvLixYtNrW/fvpI3btxoarfddpvkP/7xj6b22muvSb7llltMTe/e4/+c/n0WFBSYWqLX7KijjjK1++67T/KSJUtM7Zxzzvmf53DOucsuu0xy//79TW3WrFmSW7ZsaWrjxo2T7E8xueGGGyS3a9fO1PT1HD9+vKktXLhQsl7uzTnn7r//fsllaVpJKq7ZjBkzJPv//d19992SFyxYYGpFRUWSr7nmGlPT/30ceeSRLhn0dBT9e3bOuWOOOSahc+i//87ZvxNDhw4tRevKN+5EAQAIRCcKAECgCv04Vz9SGTJkiKmdeuqpMX9u0KBBkv3NvJ955pmYPzdlyhTJd9xxh6npR6GXXnppzHP4r47rR016tRaf/wq6norw3nvvmdqOHTsk60efzjnXoUMHye+++66p6cdSV199tan9/PPPknv37m1qc+bMkZyTk2NqHTt2lOxvqj527FjJdevWNbUePXpIfuqpp0zt/fffl6wfczlnH8mFXrPWrVubmv5d+49z9TCCfnzrnHMrVqyQPHXqVFNr27atZP33yjnn/vvf/0qeOHGiqe3evVvyqFGjTK1evXoxa/rRnf/7K0uPcFN9zfTv3f+34NVXX5Xs/73u2rWr5M8//9zUevXqJTk/P9/UqlRJ7J9s3WbnnHvkkUck+0NO/pBGLI0bNzbHbdq0kdyvX7+EzpGJuBMFACAQnSgAAIHoRAEACFShx0SrVasmOd4YqO/ee++VfOyxx5qafq2+SZMmpjZixAjJF1xwganFGwfV/GkleteMG2+80dQuueQSyd98842p6WkY/pQFTU8Vcc6Og15//fWmpqcQxNO+fXtzrMenxowZY2rxXvFPdHxIj/U559xhhx0mOd60oNBr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\" y\u003d\"-94.635338\"/\u003e\n   \u003c/g\u003e\n  \u003c/g\u003e\n \u003c/g\u003e\n \u003cdefs\u003e\n  \u003cclipPath id\u003d\"p9233ebf5fd\"\u003e\n   \u003crect height\u003d\"213.270677\" width\u003d\"465\" x\u003d\"75\" y\u003d\"95.364662\"/\u003e\n  \u003c/clipPath\u003e\n \u003c/defs\u003e\n\u003c/svg\u003e\n\u003c/div\u003e\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cdiv style\u003d\u0027width:auto;height:auto\u0027\u003e\u003cimg src\u003ddata:image/png;base64,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msypOXEHCwAgmIAFABDM5y5rbNSoUdm4ZcuWqT7uuONqPR3+v/IRAH379s161afR8wXX7AsrrrhiY08BlsrGG2+cjffbb79UX3PNNVnPEuGX5w4WAEAwAQsAIJiABQAQzB6sGhs3blw2Lq95t2vXrtbTyTzzzDOp/sMf/pD1yvO+6667st4JJ5yQ6smTJ2e9jTbaKNWXX3551ttxxx3rNa8xY8Zk4/vuuy/Vbdq0yXrTp09P9bbbbpv1Bg8eXOefK7+/Z599NuuVj9Y4+uijs16XLl1Sfeqpp2a98gko1f0MTz31VKqfeOKJrLfaaqul+sorr8x65T0T1UdZlH9mt956a9Z7+umnU/2jH/0o640fPz7V1Ue7jB49us5eQ1yzd955J9V//OMfs952222X6h122KGoy9tvv52NBw0alOpvfOMbWe/VV19N9axZs7Je+YiFtdZaq87v1xw09jW7/fbbU33bbbdlvdatW6f60UcfzXpHHnlkqqu/Z/fff3+qDzzwwKxXnveZZ56Z9YYNG1bnPO++++5Ul48iKYqiOOWUU1J99tln1/kay7LyPqvq+yv/jnTo0KFmc2rK3MECAAgmYAEABHOSew188sknqW7fvn3Wu/7661P9gx/8oFZTWqzy8l71yIjnnnsu1SeddFLW69OnT6rfe++9rHfMMcek+uOPP856L774YqrXW2+9rPfLX/4y1dXlrvLJ4OXlg6IoinfffTfV3bt3z3rl73HvvfdmvRYtWqS6V69eWe+f//xnql9++eWivoYPH77Y710URXHYYYel+vPPP896W265Zaqr13PGjBmpnj17dtY79NBDU/33v/8965144ompLi/pFkVRzJ8/P9XVZdvyMsHNN99c1GVpr9mDDz6YjQcOHJjq6nJzeam4uuRTtssuu2Tj8nJGecmzauutt87GW2yxRap///vf1/nnysvSRVEUm2++eaqbyknutb5m1d4dd9yR6htvvDHrrbDCf+8DnHfeeVmvvLxXXr4riqLYddddU33JJZdkvfLS9NixY7NedWmsbMGCBYt9/aLIty6U/3vSlMybNy/Vq6++etYr/8wOPvjgms2pKXMHCwAgmIAFABBMwAIACOaYhhr417/+lerPPvss633rW9+q9XTqtNNOO6W6+jH4559/PtUXXnhh1qvugyor71morttfffXVqS7vESqK/EiF8tf9r+9X/mj4GWeckfWOOOKIVFf3eZT3Ly2tN954IxtfdtlldfbKyo9LKoqiOOigg1J9zjnnZL0JEyakuno9y8cYVPdglT82vqSPz5dfoyiK4vHHH6/zayP06NEjG5d/7nvuuWfI99hqq63q9XXlvVNFURTTpk0L+f5NUUNcs/IRHNV9nFOnTk11ec9VVfUohvLvZ3WfY1l1T2l5L1f1SJol7cG68847U/39738/6zXVfVdlK6+8cqrLx6kURX7Uiz1Y9eMOFgBAMAELACCYJcIaePPNN+vsde7cuYYzqb/qslWrVv/9VVnSEl1V+Xb7iiuumPXKt5wffvjhrPfRRx+lemmv0b777ltnr3pMQ8QS4UMPPZSNy8vBxx577FK95lFHHZWNV1pppTq/tvozKyv//JakU6dO2bh8lEYtlJcollb5GI+q6lEh5eWh6inhy9MJNrW4Zg888ECqFy5cmPW++c1v1mue66yzTjauHuFSl1VWWSUb//CHP0x19WkJ5VPe11577axXfrrAr371q3p976aq+t+CJf07xuK5gwUAEEzAAgAIJmABAASzB6sGyvuJqqp7A5qb8n6tr3/961mvfITDv//97zpfo/q4mPqq7p8o7+9Z0rEJS6t8HEdR5D/ba6+9Nvz7sXjVRw+VjxUpHwdQFEUxYMCAVFePJqnuC2zOanHNyo9Pqh5XU967VYvjDsqP8Cofp1IU+REuhx9+eNYr73NcY401GmZyy4hVV101G8+dO7eRZtJ0uYMFABBMwAIACGaJsAaW9NHl5nD6b33Nnz8/G5dPCl7Sx7Rfeuml8LlUTymOUD1i4PXXX19sXRT/9yPQ9VU+Dbv6kfXlWflj/z179sx65ZPrb7nlljpfY3lbxq31NWvfvn2qP/nkk6z3zDPPpLpbt271fs2yTz/9NBu3adOmzq/t2rVrqstPsCiKohgxYkSqq8eiHHLIIUs1t6ao+m/T8nRsSRR3sAAAgglYAADBBCwAgGD2YNGgZs6cmeq33nor6x144IGp3mijjbJeu3btUj1+/Pis99Of/rRe3/s///lPNp43b16qe/fuXeefW2GF/P876vvx5C222CIbl/cs/OxnP8t65ceNLMmMGTOycfkj5EOHDq3Xa9TC0l6zKOVHtvztb3/Letddd129XmNJRwc0R7W+Zt/+9rfr7A0ePDjVY8aMyXrV362yxx9/PNXlR28Vxf89YqEu5SMbiiJ/bNaoUaOy3uTJk+v1mlAU7mABAIQTsAAAglkipF7KH4Gu3oqvLo2VnXvuuanu169f1ttxxx3r/HPnn39+qk866aSsd/fdd6d6t912q/M1Lr/88mxcvvW/66671vnnqifOz5o1K9XlJYmiyJfCevTokfW22267VN90001Zr/wx9f333z/rzZ49O9Vjx47NeqNHj65z3h9++GGdvfKp+Uvy9ttvZ+OPP/441dXln/LHuJf2mpWv0eK+f12vWbWk405uuOGGVG+//fZZrzy38lEB1blMmzYt63Xo0CHVS7ruS3qKQ2Or9TUrbwP43ve+l/XGjRuX6t133z3rlbcSVJ/48Oyzz6a6+nelvg466KBsfPLJJ6d6jz32yHpLWq4sO+GEE7Jx+Vpcf/31Wa+6PYLmwx0sAIBgAhYAQDABCwAgWItFzf2zyMuA8qMmDj744Ky3rF7+o48+OhuX92RU91LNmTMn1auvvnrW69y5c6oHDRqU9eq7n6F6TMNVV12V6k022STrrbnmmqkuP5qjKIriJz/5SaqXtP+kundkn332SXX1cTjlPWbVvRzvvfdeqsv7OoqiKO66665UV38HyvtTynvRiiLf6zRp0qSs179//1S//PLLWa+8J+Sss87KeuWP6B977LFZr7yHqPrnyj/P6dOnZ736XrO1114765199tmpvvfee7NeeS9Q+TWKIt+3c/zxx2e98pEY1cewDBs2LNXVR60cdthhqd55552zXvl6XnjhhVlv4sSJqd52222z3i9+8YtUV/chNaZaXLPy3qPq379TTz011X/5y1+yXnn/4AEHHJD1yn8/VltttSLCkCFDUl3dS/W1r32tXq9R/v0vivx34rTTTst6w4cP/7JTrIm+ffvW2VvS45P4L3ewAACCCVgAAMEsEdZAc1giLJ8gXv7oPgBLVj4B/qGHHsp61ac8LCssEX517mABAAQTsAAAgglYAADBPCoHoBF06tQpG1ePPGhoo0aNSvWydGREc1A+uqYoimLChAmprh5XQ/PlDhYAQDABCwAgmCVCFqt8CnlRFMX8+fNTPXfu3Ky36qqr1mRO0Jy8/vrrjT0FGkj1aRDnnHNOqtu2bVvr6dBI3MECAAgmYAEABBOwAACC2YNFMnDgwFTfeeedWW/hwoWpPvnkk7PekUcemervfOc7DTQ7gKahR48ejT0FlgHuYAEABBOwAACCWSIkOf/88xdbAwBfjjtYAADBBCwAgGACFgBAMAELACCYgAUAEEzAAgAI5pgGaGQvvfRSNu7QoUOqV1lllVpPB4AA7mABAAQTsAAAgglYAADB7MGiWfnggw9SffHFF2e9zz//PNVRjwKaM2dOqjt37pz1Pvzww3q9xtZbb52Np06d+tUntpTK168o8mtYvn5FUfvHKd1zzz2p7tevX9Z74403ajqX+qr+bK+88spU9+jRo9bTWSreAywdd7AAAIIJWAAAwSwR0qTdcsst2XjMmDGp/tOf/pT1BgwYEP79f/e736X6wAMPzHobbrhhvV5jzz33DJ3Tl1W+huXrVxT5NWyI67ckc+fOzcb9+/dP9aJFi2o6l6pp06alunysRnW8wgr5/8O2a9cu1bNnz856kyZNSnWfPn1C5rkk3sMXGvs90Hy5gwUAEEzAAgAIJmABAASzB4smrW/fvtl47733TnV1D1aE6lEFf/7zn1N91113Zb1WrZrGX6/yNSxfv6JomGtYX0OGDMnGm222WaqfeOKJWk8nM3r06FRfe+21dfa23377rLfuuuumevfdd896b731Vqp79+6d9Vq0aLH0k62D9/CFxn4PNF/uYAEABBOwAACCNY01DKinNm3aNOjr33rrrdn4qaeeSnX5GIGiKIo99tgj1dWlhvbt2zfA7L66hr5+/8u9996b6urH7lu2bJnqxl4iPO+881J99NFHZ73ysuo777yT9crHelxxxRVZb9ttt011LZaivIcvNPZ7oPlyBwsAIJiABQAQTMACAAhmDxZ8CeXHaBRFUXz00UepHjVqVNYrjzt27Jj1RowYkerGflROYypfv6Ioit/85jepvvnmm7Pez3/+85rMqT7efvvtVI8bNy7rPffcc6neYIMNsl758T833nhj1lu4cGGqu3fvHjHNJfIevtDY74Hmyx0sAIBgAhYAQDBLhPAlXHXVVdm4/BHv8pENRVEUv/71r1NdXT7s06dPqp988sms16VLl688z6Zi0KBB2Xjw4MGpLh/LsKwpz3PGjBlZb/z48ak+4ogjsl75tPFLLrkk6/Xs2TPV7777btZbYYX4/xf2Hr7Q2O+B5stvCwBAMAELACCYgAUAEMweLPgKWrX671+h8iM2iqIoRo4cmepevXplvYMOOijV5X0kRVEUt9xyS+QUlzn33Xdfqtdaa62st8UWW9R6OkulvBdvSXvFpkyZko3Lj/gZNmxY1hs6dGiqa7HXx3v4QmO/B5ovvz0AAMEELACAYJYIa6Bt27Z19j799NNUt2nTphbToREccMABdY6rxzQ0N9XT2i+//PJUjx49utbTCVHfIyT69euXjTfeeOM6v7Z169ZfaU5flveweLV+D8uqjz/+OBuvueaajTSTpssdLACAYAIWAEAwAQsAIJg9WDVQ/Sh62axZs1LdsWPHWkyHZcBOO+2U6kcffbQRZ9Lwqo/D2XfffVP9zDPP1Pt1Zs6cmerPPvss65UfU7TSSitlvU022aTe3yPaBRdc0GjfO4r3sHwq/9tUFEWx0UYbNdJMmi53sAAAgglYAADBLBHWwKabblpn7+mnn061JcLlU5cuXRp7Cg3q4YcfzsaXXXZZ+PfYeuutF1sXRVFMnTo1/PtBc7Ro0aJUV5fvDz/88BrPpulzBwsAIJiABQAQTMACAAhmD1YNlI9pqH5kfNKkSanee++9azYnGtf999+f6ua+t2HKlCkhrzNw4MBUX3/99VnvzTffDPkesDx77LHHUj179uys171791pPp8lzBwsAIJiABQAQzBJhjZVPsS6Korj11ltTPXz48KzXokWLmsypOZk3b16dvc8//3ypXnPy5MmpPv3007PeUUcdlep+/fplvTZt2qR67NixWW/VVVdN9SGHHLJU82oIDXH9gKZhzJgxqV5//fWz3pZbblnr6TR57mABAAQTsAAAgglYAADB7MGqsSOPPDIbX3rppam+4447sl7Pnj1rMqembOLEidl41KhR9fraa6+9NuuV98att956Wa9z586pXmWVVbJeeU/WVVddlfX22muvVG+//fZZ74YbbqhznrVWvi71vX5FkV/D6t7C6jUElj3VPZcjR45M9Yknnljr6TQ77mABAAQTsAAAgrVYVH58NjXXu3fvVL/88stZb+rUqalu1cpqLgBxhgwZko0vv/zyVD///PNZb911163JnJoTd7AAAIIJWAAAwQQsAIBg9mA1shkzZqR68803z3oXXXRRqgcMGFCzOQHQPL366qup7tq1a9YbNmxYqk855ZSazam5cgcLACCYgAUAEMwS4TJk4MCB2fjqq69O9ZQpU7LepptuWpM5AdB0ffbZZ9l47733TvUbb7yR9aZNm5bq1q1bN+zElgPuYAEABBOwAACCCVgAAMHswVqGfPLJJ9l41113TfVbb72V9R555JFUr7POOg07MQCapOOPPz4b33jjjal+4IEHst5WW21VkzktL9zBAgAIJmABAASzRLgMmzlzZqp32GGHrNepU6dU//Wvf8167du3b9iJAbDMKp/IPnTo0Kw3fvz4VPfq1atmc1oeuYMFABBMwAIACCZgAQAEsweriZg+fXo23mOPPVK91lprZb0JEyakeoMNNmjQeQFQe+VH4Jx44olZb8SIEam+4oorsl712AYajjtYAADBBCwAgGCWCJuo1157LdW9e/fOeuUnpI8cOTLr9ezZs2EnBkC4V155JRv3798/1Y8++mjWu+mmm1LtKIbG4w4WAEAwAQsAIJiABQAQzB6sZmDu3LnZ+Jhjjkn1zTffnPX23XffVF966aVZb+ONN26A2QFQH/PmzcvGw4cPT/XFF1+c9dZff/1Ujx49OutttdVWDTA7vix3sAAAgglYAADBLBE2c/fee282Pvnkk1P97LPPZr0+ffqk+tBDD816u+++e6pXXnnlwBkCNG/lf2Yfe+yxrDdmzJhUV4/VmT9/fqqHDBmS9U466aRUt27dOmSexHIHCwAgmIAFABBMwAIACGYP1nJmwYIFqa5+tPeaa65J9UMPPZT1WrZsmeouXbpkvY4dO6a6ffv2IfMEaEo++eSTVL/zzjtZ75lnnkn17Nmzs175uIUjjjgi6x1//PGpXnfddUPmSe24gwUAEEzAAgAIZomQxXr77bezcfm4h6eeeqrOr50zZ06DzgtgWdS2bdtUr7HGGllvs802S3X37t2z3pZbbtmwE6PRuIMFABBMwAIACCZgAQAEswcLACCYO1gAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACCCVgAAMEELACAYAIWAEAwAQsAIJiABQAQTMACAAgmYAEABBOwAACC/T9aULpxOK+RBQAAAABJRU5ErkJggg\u003d\u003d style\u003d\u0027width\u003dauto;height:auto\u0027\u003e\u003cdiv\u003e\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674664126063_1425551542",
+      "id": "20191204-030203_7913533",
+      "dateCreated": "2023-01-25 16:28:46.064",
+      "status": "READY"
+    },
+    {
+      "title": "Show descenders",
+      "text": "%pyspark\nimport re\nimport csv\nimport os \nimport sys\nimport itertools\n\nimport pygraphviz as pgv\nimport matplotlib.pyplot as plt\nimport matplotlib.image as mpimg\nfrom PIL import Image\nimport numpy as np\n\nvar_home_folder \u003d \"/var/data/zeppelin/\"\nsys.path.append(os.path.abspath(var_home_folder))\n\nfrom python_scripts import common\n\ndef rchop(string, ending):\n  if string.endswith(ending):\n    return string[:-len(ending)].replace(\u0027-\u0027,\u0027_\u0027)\n  return string.replace(\u0027-\u0027,\u0027_\u0027)\n\ndef extractWfName(string):\n  search \u003d re.search(\u0027\\.\\./data/workflow/(wf_){0,1}([^/]*)\u0027, string, re.IGNORECASE)\n  if search \u003d\u003d None:\n    return \"Unknown\"   \n  return search.group(2).lower()  \n\ndef parseWorflowTitle(string):\n  if \u0027.log.\u0027 in string:\n    string \u003d \u0027weblogshourly\u0027  \n  return rchop(rchop(string,\u0027.trg\u0027),\u0027\u003d\u0027)\n\ndef getFileName(string):\n  return  os.path.abspath(os.path.join(os.sep, var_home_folder,string))\n\n\nwfs_prop \u003d []\n\ndef getNodeDescription(string):\n  prop_res \u003d \"\"\n  for (node, prop) in wfs_prop:\n      if node.strip() \u003d\u003d string.strip():\n        prop_res \u003d prop.strip()\n        break\n  res \u003d \"[fillcolor\u003dyellow label\u003d\\\"\" + string + \",\\n \"+prop_res+\"\\\"]\"\n  return res  \n\nos.chdir(var_home_folder)\n  \n#read list of all workflows\nall_wfs_list \u003d [(\"all\", \"all\")]\nwith open(\u0027all_wfs.txt\u0027,\u0027r\u0027) as all_wfs_file:\n  file \u003d csv.reader(all_wfs_file, delimiter\u003d\u0027|\u0027)\n  for row in file:\n    nodes, _, time_prop \u003d row\n    wfs_prop.append((nodes.strip(), time_prop.strip()))\n    all_wfs_list.append((nodes.strip(), nodes.strip()))\n\nlst \u003d [z.select(\"workflow\",all_wfs_list).strip().lower()]\nsize \u003d len(lst)\n\nafile \u003d os.path.abspath(os.path.join(os.sep, var_home_folder,\"links.txt\"))\n\ndict_inLinks \u003d {}\nwith open(afile, \u0027r\u0027) as file_links:\n  reader \u003d csv.reader(file_links)\n  for row in reader:\n    v, k, _ \u003d row\n    key \u003d k.strip().lower() \n    if key in dict_inLinks.keys():\n      dict_inLinks[key].append(v.strip().lower())\n    else:\n      dict_inLinks[key] \u003d [v.strip().lower()]    \n\nwith open(getFileName(\"trg_sources.txt\"), \u0027r\u0027) as link_file:\n  lines_trg \u003d link_file.read().splitlines()\n\ndict_outLinks \u003d {}\nfor row in lines_trg:\n  st \u003d row.split(\u0027,\u0027)\n  val \u003d st[0].strip().lower()\n  key \u003d st[1].strip().lower() \n  if key in dict_outLinks.keys():\n    dict_outLinks[key].append(val)\n  else:\n    dict_outLinks[key] \u003d [val]    \n\ndef getInputTriggersListByWorkflowName(workflow_name):\n  res \u003d []    \n  for elem in dict_inLinks:\n    if workflow_name in dict_inLinks[elem]:\n      res.append(elem)\n  return res\n\ndef getOutputTriggersListByWorkflowName(workflow_name):\n  res \u003d []    \n  for elem in dict_outLinks:\n    if workflow_name in dict_outLinks[elem]:\n      res.append(elem)\n  return res\n\n# Python code t get difference of two lists \n# Using set() \ndef diffLists(li1, li2): \n  return (list(set(li1) - set(li2)))\n\ndef getDependedChildWorkflowList(workflow_name):\n  res \u003d []\n  dt \u003d getOutputTriggersListByWorkflowName(workflow_name)\n  for e in dt:\n    if e in dict_inLinks.keys():  \n      res.append(dict_inLinks[e])\n    #else:\n    #  print(\u0027Not found: \u0027 + e)\n  flat_list \u003d list(dict.fromkeys(list(itertools.chain(*res))))\n  return flat_list\n\ndef getParentWorkflowList(workflow_name):\n  res \u003d []\n  dt \u003d getInputTriggersListByWorkflowName(workflow_name)\n  #print(dt)\n  for e in dt:\n    if e in dict_outLinks.keys():  \n      res.append(dict_outLinks[e])\n    #else:\n    # print(\u0027Not found: \u0027 + e)\n  flat_list \u003d list(dict.fromkeys(list(itertools.chain(*res))))\n  return flat_list\n\n#print(dict_inLinks)\n#print(getParentWorkflowList(\u0027webanalytics\u0027))\n\ndlst \u003d lst\ncont \u003d True\nchl_lst \u003d []\nwhile cont:\n  idx \u003d len(dlst)\n  for i in range(idx):\n    chl_lst \u003d chl_lst + getDependedChildWorkflowList(dlst[i]);\n  chl_lst \u003d list(dict.fromkeys(chl_lst))\n  dlst \u003d diffLists(chl_lst, lst)\n  lst \u003d lst + dlst      \n  if len(dlst) \u003d\u003d 0:\n    cont \u003d False\n\n#print(lst)\n\nheader \u003d \"\"\"\n// This file documents the job dependency graph\n// You need the graphviz tools to generate a graph from this, e.g.\n// dot \u003cfilename\u003e -Tpdf \u003e job_dependencies.pdf\n\n// Please keep it up to date when we add or remove dependencies\n\ndigraph dependency\n{\nrankdir\u003dLR;\nnode [shape\u003drectangle style\u003drounded];\n\n\"\"\"\nfooter \u003d \"\"\"\n}\n\"\"\"\n\noutS \u003d header\n\n#List of nodes\nif lst[0] \u003d\u003d \u0027all\u0027 :\n  for row in all_wfs_list:\n    nodes, _ \u003d row\n    outS \u003d outS + parseWorflowTitle(nodes) + getNodeDescription(parseWorflowTitle(nodes)) +\";\\n\"\nelse:\n  for row in lst:\n    nodes \u003d row\n    if row !\u003d \u0027all\u0027:\n      outS \u003d outS + parseWorflowTitle(nodes) + getNodeDescription(parseWorflowTitle(nodes)) +\";\\n\"\n\ndup \u003d []\nfor wf_name in lst:\n  child_lst \u003d getDependedChildWorkflowList(wf_name)\n  for child in child_lst:\n    var \u003d wf_name  + \"-\u003e\" + child\n    if wf_name in lst and var not in dup:\n      dup.append(var)    \n    outS \u003d outS + var +\";\\n\"\n\noutS \u003d outS + footer\n\nwith open(getFileName(\"job_dep_back.dot\"), \"w\") as text_file:\n  text_file.write(outS)\n\nG\u003dpgv.AGraph(getFileName(\"job_dep_back.dot\"))  \nG.draw(getFileName(\"job_dep_back.png\"),prog\u003d\"dot\")\n\n#plt.axis(\"off\")\n#plt.rcParams[\"figure.figsize\"] \u003d [50,len(lst)+3]\n\n#img \u003d Image.open(getFileName(\"job_dep_back.png\"))\n\n#basewidth \u003d 1500\n#wpercent \u003d (basewidth/float(img.size[0]))\n#hsize \u003d int((float(img.size[1])*float(wpercent)))\n#img \u003d img.resize((basewidth,hsize), Image.ANTIALIAS)\n#plt.imshow(np.asarray(img), aspect\u003d\u0027equal\u0027, alpha\u003d0.5, origin\u003d\u0027upper\u0027, zorder\u003d-1)\n\ndef show(p):\n    img \u003d io.StringIO()\n    p.savefig(img, format\u003d\u0027svg\u0027)\n    img.seek(0)\n    print(\"%html \u003cdiv style\u003d\u0027width:100%;height:100%\u0027\u003e\" + img.getvalue() + \"\u003c/div\u003e\")\n    \nplt.imshow(mpimg.imread(\u0027job_dep_back.png\u0027))\nshow(plt)\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-25 16:28:46.071",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "runOnSelectionChange": true,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "workflow": "potential_acv"
+        },
+        "forms": {
+          "workflow": {
+            "type": "Select",
+            "options": [
+              {
+                "value": "all",
+                "displayName": "all"
+              },
+              {
+                "value": "aa_ab_collision_detection",
+                "displayName": "aa_ab_collision_detection"
+              },
+              {
+                "value": "aa_ab_collision_extraction",
+                "displayName": "aa_ab_collision_extraction"
+              },
+              {
+                "value": "aa_ab_testing_events_ad_hoc",
+                "displayName": "aa_ab_testing_events_ad_hoc"
+              },
+              {
+                "value": "aa_ab_testing_events",
+                "displayName": "aa_ab_testing_events"
+              },
+              {
+                "value": "aa_ad_assisted_contact_events",
+                "displayName": "aa_ad_assisted_contact_events"
+              },
+              {
+                "value": "aa_ad_revenue_edw_data_source",
+                "displayName": "aa_ad_revenue_edw_data_source"
+              },
+              {
+                "value": "aa_avvo_util",
+                "displayName": "aa_avvo_util"
+              },
+              {
+                "value": "aa_bi_datamart_ad_hoc",
+                "displayName": "aa_bi_datamart_ad_hoc"
+              },
+              {
+                "value": "aa_bi_datamart_prod_ad_hoc",
+                "displayName": "aa_bi_datamart_prod_ad_hoc"
+              },
+              {
+                "value": "aa_bi_datamart_prod",
+                "displayName": "aa_bi_datamart_prod"
+              },
+              {
+                "value": "aa_churn_by_cohort",
+                "displayName": "aa_churn_by_cohort"
+              },
+              {
+                "value": "aa_dui_lead_gen",
+                "displayName": "aa_dui_lead_gen"
+              },
+              {
+                "value": "aa_dummy",
+                "displayName": "aa_dummy"
+              },
+              {
+                "value": "aa_impala_job_bkk",
+                "displayName": "aa_impala_job_bkk"
+              },
+              {
+                "value": "aa_impala_job",
+                "displayName": "aa_impala_job"
+              },
+              {
+                "value": "aa_impala_python_job",
+                "displayName": "aa_impala_python_job"
+              },
+              {
+                "value": "aa_kw_ad_hoc",
+                "displayName": "aa_kw_ad_hoc"
+              },
+              {
+                "value": "aa_kw_channel_table_adhoc",
+                "displayName": "aa_kw_channel_table_adhoc"
+              },
+              {
+                "value": "aa_kw_channel_table_ad_hoc",
+                "displayName": "aa_kw_channel_table_ad_hoc"
+              },
+              {
+                "value": "aa_kw_channel_table",
+                "displayName": "aa_kw_channel_table"
+              },
+              {
+                "value": "aa_kw_location_table",
+                "displayName": "aa_kw_location_table"
+              },
+              {
+                "value": "aa_kw_outlier_alert_test",
+                "displayName": "aa_kw_outlier_alert_test"
+              },
+              {
+                "value": "aa_kw_outlier_alert",
+                "displayName": "aa_kw_outlier_alert"
+              },
+              {
+                "value": "aa_market_intelligence_detail",
+                "displayName": "aa_market_intelligence_detail"
+              },
+              {
+                "value": "aa_market_intelligence_overview",
+                "displayName": "aa_market_intelligence_overview"
+              },
+              {
+                "value": "aa_market_intelligence_snapshot",
+                "displayName": "aa_market_intelligence_snapshot"
+              },
+              {
+                "value": "aa_menu",
+                "displayName": "aa_menu"
+              },
+              {
+                "value": "aa_north_star_index_test",
+                "displayName": "aa_north_star_index_test"
+              },
+              {
+                "value": "aa_north_star_index",
+                "displayName": "aa_north_star_index"
+              },
+              {
+                "value": "aa_optimizely_experiment_metrics",
+                "displayName": "aa_optimizely_experiment_metrics"
+              },
+              {
+                "value": "aa_optimizely_x_ga",
+                "displayName": "aa_optimizely_x_ga"
+              },
+              {
+                "value": "aa_sem_ad_clicks_for_test_markets",
+                "displayName": "aa_sem_ad_clicks_for_test_markets"
+              },
+              {
+                "value": "aa_serp_organic_landings",
+                "displayName": "aa_serp_organic_landings"
+              },
+              {
+                "value": "aa_session_channel",
+                "displayName": "aa_session_channel"
+              },
+              {
+                "value": "aa_training_table",
+                "displayName": "aa_training_table"
+              },
+              {
+                "value": "aa_weekly_traffic_slt",
+                "displayName": "aa_weekly_traffic_slt"
+              },
+              {
+                "value": "account_g1",
+                "displayName": "account_g1"
+              },
+              {
+                "value": "account_g2",
+                "displayName": "account_g2"
+              },
+              {
+                "value": "acct_barr_dimension",
+                "displayName": "acct_barr_dimension"
+              },
+              {
+                "value": "acct_dimension",
+                "displayName": "acct_dimension"
+              },
+              {
+                "value": "acct_nrt_dimension",
+                "displayName": "acct_nrt_dimension"
+              },
+              {
+                "value": "ad_events",
+                "displayName": "ad_events"
+              },
+              {
+                "value": "ad_performance_dashboard",
+                "displayName": "ad_performance_dashboard"
+              },
+              {
+                "value": "ad_weights_metric",
+                "displayName": "ad_weights_metric"
+              },
+              {
+                "value": "adwords",
+                "displayName": "adwords"
+              },
+              {
+                "value": "amm_dashboard",
+                "displayName": "amm_dashboard"
+              },
+              {
+                "value": "amm_v2",
+                "displayName": "amm_v2"
+              },
+              {
+                "value": "attorneychat",
+                "displayName": "attorneychat"
+              },
+              {
+                "value": "attorney_response",
+                "displayName": "attorney_response"
+              },
+              {
+                "value": "banana_stand_g1",
+                "displayName": "banana_stand_g1"
+              },
+              {
+                "value": "barr_dimension",
+                "displayName": "barr_dimension"
+              },
+              {
+                "value": "barr_gno_dimension",
+                "displayName": "barr_gno_dimension"
+              },
+              {
+                "value": "barrister_g1",
+                "displayName": "barrister_g1"
+              },
+              {
+                "value": "barrister_g2",
+                "displayName": "barrister_g2"
+              },
+              {
+                "value": "barrister_g3",
+                "displayName": "barrister_g3"
+              },
+              {
+                "value": "barrister_g4",
+                "displayName": "barrister_g4"
+              },
+              {
+                "value": "barrister_g5",
+                "displayName": "barrister_g5"
+              },
+              {
+                "value": "best_bets",
+                "displayName": "best_bets"
+              },
+              {
+                "value": "billing_report",
+                "displayName": "billing_report"
+              },
+              {
+                "value": "bing_ad_performance",
+                "displayName": "bing_ad_performance"
+              },
+              {
+                "value": "block_release_monthly",
+                "displayName": "block_release_monthly"
+              },
+              {
+                "value": "chase_payment_reconciliation",
+                "displayName": "chase_payment_reconciliation"
+              },
+              {
+                "value": "churnupsell_interim",
+                "displayName": "churnupsell_interim"
+              },
+              {
+                "value": "churnupsellspark",
+                "displayName": "churnupsellspark"
+              },
+              {
+                "value": "cleanup_trigger_files",
+                "displayName": "cleanup_trigger_files"
+              },
+              {
+                "value": "cms_content_extract",
+                "displayName": "cms_content_extract"
+              },
+              {
+                "value": "combined_sem_report",
+                "displayName": "combined_sem_report"
+              },
+              {
+                "value": "contact_activity_metrics_monthly",
+                "displayName": "contact_activity_metrics_monthly"
+              },
+              {
+                "value": "contact_activity",
+                "displayName": "contact_activity"
+              },
+              {
+                "value": "contact_event_metrics_daily",
+                "displayName": "contact_event_metrics_daily"
+              },
+              {
+                "value": "cont_dimension",
+                "displayName": "cont_dimension"
+              },
+              {
+                "value": "content_g1",
+                "displayName": "content_g1"
+              },
+              {
+                "value": "content_g2",
+                "displayName": "content_g2"
+              },
+              {
+                "value": "cost_per_lead",
+                "displayName": "cost_per_lead"
+              },
+              {
+                "value": "csv_ingestion",
+                "displayName": "csv_ingestion"
+              },
+              {
+                "value": "customer_billing_report",
+                "displayName": "customer_billing_report"
+              },
+              {
+                "value": "customer_performance_report",
+                "displayName": "customer_performance_report"
+              },
+              {
+                "value": "deferred_revenue",
+                "displayName": "deferred_revenue"
+              },
+              {
+                "value": "dogfood",
+                "displayName": "dogfood"
+              },
+              {
+                "value": "drop_sqoop_tables",
+                "displayName": "drop_sqoop_tables"
+              },
+              {
+                "value": "enhance_twilio_calls",
+                "displayName": "enhance_twilio_calls"
+              },
+              {
+                "value": "exact_target_claimed_professional",
+                "displayName": "exact_target_claimed_professional"
+              },
+              {
+                "value": "exacttarget_download",
+                "displayName": "exacttarget_download"
+              },
+              {
+                "value": "exacttarget",
+                "displayName": "exacttarget"
+              },
+              {
+                "value": "fb_clicks",
+                "displayName": "fb_clicks"
+              },
+              {
+                "value": "first_pageview_per_session",
+                "displayName": "first_pageview_per_session"
+              },
+              {
+                "value": "git_business_product",
+                "displayName": "git_business_product"
+              },
+              {
+                "value": "github_business_product",
+                "displayName": "github_business_product"
+              },
+              {
+                "value": "gno_dimension",
+                "displayName": "gno_dimension"
+              },
+              {
+                "value": "gnomon_g1",
+                "displayName": "gnomon_g1"
+              },
+              {
+                "value": "grants_g1",
+                "displayName": "grants_g1"
+              },
+              {
+                "value": "kenshoo",
+                "displayName": "kenshoo"
+              },
+              {
+                "value": "kpi_daily_dashboard",
+                "displayName": "kpi_daily_dashboard"
+              },
+              {
+                "value": "kpi_monthly_dashboard",
+                "displayName": "kpi_monthly_dashboard"
+              },
+              {
+                "value": "kpi_weekly_dashboard",
+                "displayName": "kpi_weekly_dashboard"
+              },
+              {
+                "value": "kw_daily_sessions",
+                "displayName": "kw_daily_sessions"
+              },
+              {
+                "value": "lead_score_sf",
+                "displayName": "lead_score_sf"
+              },
+              {
+                "value": "lead_score",
+                "displayName": "lead_score"
+              },
+              {
+                "value": "legal_sf_staging",
+                "displayName": "legal_sf_staging"
+              },
+              {
+                "value": "market_dashboard",
+                "displayName": "market_dashboard"
+              },
+              {
+                "value": "market_intelligence",
+                "displayName": "market_intelligence"
+              },
+              {
+                "value": "market_level_data",
+                "displayName": "market_level_data"
+              },
+              {
+                "value": "market_trading",
+                "displayName": "market_trading"
+              },
+              {
+                "value": "mh_g1",
+                "displayName": "mh_g1"
+              },
+              {
+                "value": "mh_salesforce_download",
+                "displayName": "mh_salesforce_download"
+              },
+              {
+                "value": "mrr_all_products_daily_report",
+                "displayName": "mrr_all_products_daily_report"
+              },
+              {
+                "value": "mrr_all_products_report",
+                "displayName": "mrr_all_products_report"
+              },
+              {
+                "value": "mrr_report",
+                "displayName": "mrr_report"
+              },
+              {
+                "value": "mrr_sales",
+                "displayName": "mrr_sales"
+              },
+              {
+                "value": "mrr_subs_cust_prof_status_report",
+                "displayName": "mrr_subs_cust_prof_status_report"
+              },
+              {
+                "value": "northstar_report",
+                "displayName": "northstar_report"
+              },
+              {
+                "value": "nrt_dimension",
+                "displayName": "nrt_dimension"
+              },
+              {
+                "value": "nrt_g1",
+                "displayName": "nrt_g1"
+              },
+              {
+                "value": "nrt_g2",
+                "displayName": "nrt_g2"
+              },
+              {
+                "value": "nrt_g3",
+                "displayName": "nrt_g3"
+              },
+              {
+                "value": "order_line_billings_fact",
+                "displayName": "order_line_billings_fact"
+              },
+              {
+                "value": "order_line_fact",
+                "displayName": "order_line_fact"
+              },
+              {
+                "value": "page_ad_weights_test",
+                "displayName": "page_ad_weights_test"
+              },
+              {
+                "value": "page_ad_weights",
+                "displayName": "page_ad_weights"
+              },
+              {
+                "value": "phone_attribution",
+                "displayName": "phone_attribution"
+              },
+              {
+                "value": "pls_dimension",
+                "displayName": "pls_dimension"
+              },
+              {
+                "value": "pls_fact",
+                "displayName": "pls_fact"
+              },
+              {
+                "value": "pls_g1",
+                "displayName": "pls_g1"
+              },
+              {
+                "value": "pls_g2",
+                "displayName": "pls_g2"
+              },
+              {
+                "value": "pls_g3",
+                "displayName": "pls_g3"
+              },
+              {
+                "value": "postgres_g1",
+                "displayName": "postgres_g1"
+              },
+              {
+                "value": "potential_acv",
+                "displayName": "potential_acv"
+              },
+              {
+                "value": "processimpressions",
+                "displayName": "processimpressions"
+              },
+              {
+                "value": "product_line_items",
+                "displayName": "product_line_items"
+              },
+              {
+                "value": "professional_ad_impression",
+                "displayName": "professional_ad_impression"
+              },
+              {
+                "value": "professional_event",
+                "displayName": "professional_event"
+              },
+              {
+                "value": "professional_score",
+                "displayName": "professional_score"
+              },
+              {
+                "value": "professional_skills",
+                "displayName": "professional_skills"
+              },
+              {
+                "value": "promotion_market",
+                "displayName": "promotion_market"
+              },
+              {
+                "value": "pws_g1",
+                "displayName": "pws_g1"
+              },
+              {
+                "value": "quasi_g1",
+                "displayName": "quasi_g1"
+              },
+              {
+                "value": "question_answer_review_metrics_daily",
+                "displayName": "question_answer_review_metrics_daily"
+              },
+              {
+                "value": "rd_ad_events_full_join_test",
+                "displayName": "rd_ad_events_full_join_test"
+              },
+              {
+                "value": "rd_ad_events_full_join",
+                "displayName": "rd_ad_events_full_join"
+              },
+              {
+                "value": "rd_messages_submitted_full_join_test",
+                "displayName": "rd_messages_submitted_full_join_test"
+              },
+              {
+                "value": "rd_messages_submitted_full_join",
+                "displayName": "rd_messages_submitted_full_join"
+              },
+              {
+                "value": "rd_north_star_proxy_tertiary_test",
+                "displayName": "rd_north_star_proxy_tertiary_test"
+              },
+              {
+                "value": "rd_north_star_proxy_tertiary",
+                "displayName": "rd_north_star_proxy_tertiary"
+              },
+              {
+                "value": "rd_questions_asked_full_join_test",
+                "displayName": "rd_questions_asked_full_join_test"
+              },
+              {
+                "value": "rd_questions_asked_full_join",
+                "displayName": "rd_questions_asked_full_join"
+              },
+              {
+                "value": "rd_reviews_submitted_full_join_test",
+                "displayName": "rd_reviews_submitted_full_join_test"
+              },
+              {
+                "value": "rd_reviews_submitted_full_join",
+                "displayName": "rd_reviews_submitted_full_join"
+              },
+              {
+                "value": "rd_service_transaction_full_join_test",
+                "displayName": "rd_service_transaction_full_join_test"
+              },
+              {
+                "value": "rd_service_transaction_full_join",
+                "displayName": "rd_service_transaction_full_join"
+              },
+              {
+                "value": "reference_tables",
+                "displayName": "reference_tables"
+              },
+              {
+                "value": "referral_commission",
+                "displayName": "referral_commission"
+              },
+              {
+                "value": "revenue_per_session",
+                "displayName": "revenue_per_session"
+              },
+              {
+                "value": "salesenablement_daily_impressions",
+                "displayName": "salesenablement_daily_impressions"
+              },
+              {
+                "value": "salesenablement_daily_impressions",
+                "displayName": "salesenablement_daily_impressions"
+              },
+              {
+                "value": "salesforce_download_ib1",
+                "displayName": "salesforce_download_ib1"
+              },
+              {
+                "value": "salesforce_download",
+                "displayName": "salesforce_download"
+              },
+              {
+                "value": "salesforce_ib",
+                "displayName": "salesforce_ib"
+              },
+              {
+                "value": "salesforce_reuploader",
+                "displayName": "salesforce_reuploader"
+              },
+              {
+                "value": "salesforce",
+                "displayName": "salesforce"
+              },
+              {
+                "value": "scoop_geo_ip_city",
+                "displayName": "scoop_geo_ip_city"
+              },
+              {
+                "value": "scooter_g1",
+                "displayName": "scooter_g1"
+              },
+              {
+                "value": "sem_campaign",
+                "displayName": "sem_campaign"
+              },
+              {
+                "value": "sem_daily_bot_feed",
+                "displayName": "sem_daily_bot_feed"
+              },
+              {
+                "value": "sem_google_search_ads",
+                "displayName": "sem_google_search_ads"
+              },
+              {
+                "value": "sem_impressions",
+                "displayName": "sem_impressions"
+              },
+              {
+                "value": "sem_report",
+                "displayName": "sem_report"
+              },
+              {
+                "value": "seoclarity",
+                "displayName": "seoclarity"
+              },
+              {
+                "value": "services_metrics",
+                "displayName": "services_metrics"
+              },
+              {
+                "value": "sf_professional_dnc",
+                "displayName": "sf_professional_dnc"
+              },
+              {
+                "value": "test",
+                "displayName": "test"
+              },
+              {
+                "value": "total_impressions",
+                "displayName": "total_impressions"
+              },
+              {
+                "value": "traffic",
+                "displayName": "traffic"
+              },
+              {
+                "value": "twilio_calls",
+                "displayName": "twilio_calls"
+              },
+              {
+                "value": "unclaimed_professionals_summaries",
+                "displayName": "unclaimed_professionals_summaries"
+              },
+              {
+                "value": "waitinglist_report",
+                "displayName": "waitinglist_report"
+              },
+              {
+                "value": "webanalytics",
+                "displayName": "webanalytics"
+              },
+              {
+                "value": "weblogshourly",
+                "displayName": "weblogshourly"
+              },
+              {
+                "value": "weblogs",
+                "displayName": "weblogs"
+              }
+            ],
+            "name": "workflow",
+            "displayName": "workflow",
+            "defaultValue": "",
+            "hidden": false
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv style\u003d\u0027width:100%;height:100%\u0027\u003e\u003c?xml version\u003d\"1.0\" encoding\u003d\"utf-8\" standalone\u003d\"no\"?\u003e\n\u003c!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n  \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\"\u003e\n\u003c!-- Created with matplotlib (https://matplotlib.org/) --\u003e\n\u003csvg height\u003d\"400pt\" version\u003d\"1.1\" viewBox\u003d\"0 0 600 400\" width\u003d\"600pt\" xmlns\u003d\"http://www.w3.org/2000/svg\" xmlns:xlink\u003d\"http://www.w3.org/1999/xlink\"\u003e\n \u003cdefs\u003e\n  \u003cstyle type\u003d\"text/css\"\u003e\n*{stroke-linecap:butt;stroke-linejoin:round;}\n  \u003c/style\u003e\n \u003c/defs\u003e\n \u003cg id\u003d\"figure_1\"\u003e\n  \u003cg id\u003d\"patch_1\"\u003e\n   \u003cpath d\u003d\"M 0 400 \nL 600 400 \nL 600 0 \nL 0 0 \nz\n\" style\u003d\"fill:#ffffff;\"/\u003e\n  \u003c/g\u003e\n  \u003cg id\u003d\"axes_1\"\u003e\n   \u003cg id\u003d\"patch_2\"\u003e\n    \u003cpath d\u003d\"M 75 308.635338 \nL 540 308.635338 \nL 540 95.364662 \nL 75 95.364662 \nz\n\" style\u003d\"fill:#ffffff;\"/\u003e\n   \u003c/g\u003e\n   \u003cg clip-path\u003d\"url(#p2a1337ff5b)\"\u003e\n    \u003cimage height\u003d\"214\" id\u003d\"image5122f4f046\" transform\u003d\"scale(1 -1)translate(0 -214)\" width\u003d\"465\" x\u003d\"75\" xlink:href\u003d\"data:image/png;base64,\n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Th1zfOihh0pmDBQovQYNGpjjPXv2pPTz8/LyJF955ZUp/exM16pVK3M8evRoySNHjjS1mjVrpqRNZQF3ogAABKITBQAgUIV6nAsgWl999VW6m4CI1KhRwxx36tRJ8mOPPWZqw4cPT0mbygLuRAEACEQnCgBAIDpRAAACVegx0f3790vWu7Y451xhYaHkWrVqmVrDhg0l+692H3JIYv9fopccdM6OKTRt2tTU9NQc/9XxO++8U3KlSpVift7q1avN8e9//3vJ1atXN7U//elPkrt162Zq27Ztkzxw4EBTe/311yUXFxebmp5uoJdidM654447TvLixYtNrW/fvpI3btxoarfddpvkP/7xj6b22muvSb7llltMTe/e4/+c/n0WFBSYWqLX7KijjjK1++67T/KSJUtM7Zxzzvmf53DOucsuu0xy//79TW3WrFmSW7ZsaWrjxo2T7E8xueGGGyS3a9fO1PT1HD9+vKktXLhQsl7uzTnn7r//fsllaVpJKq7ZjBkzJPv//d19992SFyxYYGpFRUWSr7nmGlPT/30ceeSRLhn0dBT9e3bOuWOOOSahc+i//87ZvxNDhw4tRevKN+5EAQAIRCcKAECgCv04Vz9SGTJkiKmdeuqpMX9u0KBBkv3NvJ955pmYPzdlyhTJd9xxh6npR6GXXnppzHP4r47rR016tRaf/wq6norw3nvvmdqOHTsk60efzjnXoUMHye+++66p6cdSV199tan9/PPPknv37m1qc+bMkZyTk2NqHTt2lOxvqj527FjJdevWNbUePXpIfuqpp0zt/fffl6wfczlnH8mFXrPWrVubmv5d+49z9TCCfnzrnHMrVqyQPHXqVFNr27atZP33yjnn/vvf/0qeOHGiqe3evVvyqFGjTK1evXoxa/rRnf/7K0uPcFN9zfTv3f+34NVXX5Xs/73u2rWr5M8//9zUevXqJTk/P9/UqlRJ7J9s3WbnnHvkkUck+0NO/pBGLI0bNzbHbdq0kdyvX7+EzpGJuBMFACAQnSgAAIHoRAEACFShx0SrVasmOd4YqO/ee++VfOyxx5qafq2+SZMmpjZixAjJF1xwganFGwfV/GkleteMG2+80dQuueQSyd98842p6WkY/pQFTU8Vcc6Og15//fWmpqcQxNO+fXtzrMenxowZY2rxXvFPdHxIj/U559xhhx0mOd60oNBr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\" y\u003d\"-94.635338\"/\u003e\n   \u003c/g\u003e\n   \u003cg id\u003d\"matplotlib.axis_1\"\u003e\n    \u003cg id\u003d\"xtick_1\"\u003e\n     \u003cg id\u003d\"line2d_1\"\u003e\n      \u003cdefs\u003e\n       \u003cpath d\u003d\"M 0 0 \nL 0 3.5 \n\" id\u003d\"m0293567883\" style\u003d\"stroke:#000000;stroke-width:0.8;\"/\u003e\n      \u003c/defs\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"76.74812\" xlink:href\u003d\"#m0293567883\" y\u003d\"308.635338\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_1\"\u003e\n      \u003c!-- 0 --\u003e\n      \u003cdefs\u003e\n       \u003cpath d\u003d\"M 31.78125 66.40625 \nQ 24.171875 66.40625 20.328125 58.90625 \nQ 16.5 51.421875 16.5 36.375 \nQ 16.5 21.390625 20.328125 13.890625 \nQ 24.171875 6.390625 31.78125 6.390625 \nQ 39.453125 6.390625 43.28125 13.890625 \nQ 47.125 21.390625 47.125 36.375 \nQ 47.125 51.421875 43.28125 58.90625 \nQ 39.453125 66.40625 31.78125 66.40625 \nz\nM 31.78125 74.21875 \nQ 44.046875 74.21875 50.515625 64.515625 \nQ 56.984375 54.828125 56.984375 36.375 \nQ 56.984375 17.96875 50.515625 8.265625 \nQ 44.046875 -1.421875 31.78125 -1.421875 \nQ 19.53125 -1.421875 13.0625 8.265625 \nQ 6.59375 17.96875 6.59375 36.375 \nQ 6.59375 54.828125 13.0625 64.515625 \nQ 19.53125 74.21875 31.78125 74.21875 \nz\n\" id\u003d\"DejaVuSans-48\"/\u003e\n      \u003c/defs\u003e\n      \u003cg transform\u003d\"translate(73.56687 323.233776)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"xtick_2\"\u003e\n     \u003cg id\u003d\"line2d_2\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"146.672932\" xlink:href\u003d\"#m0293567883\" y\u003d\"308.635338\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_2\"\u003e\n      \u003c!-- 20 --\u003e\n      \u003cdefs\u003e\n       \u003cpath d\u003d\"M 19.1875 8.296875 \nL 53.609375 8.296875 \nL 53.609375 0 \nL 7.328125 0 \nL 7.328125 8.296875 \nQ 12.9375 14.109375 22.625 23.890625 \nQ 32.328125 33.6875 34.8125 36.53125 \nQ 39.546875 41.84375 41.421875 45.53125 \nQ 43.3125 49.21875 43.3125 52.78125 \nQ 43.3125 58.59375 39.234375 62.25 \nQ 35.15625 65.921875 28.609375 65.921875 \nQ 23.96875 65.921875 18.8125 64.3125 \nQ 13.671875 62.703125 7.8125 59.421875 \nL 7.8125 69.390625 \nQ 13.765625 71.78125 18.9375 73 \nQ 24.125 74.21875 28.421875 74.21875 \nQ 39.75 74.21875 46.484375 68.546875 \nQ 53.21875 62.890625 53.21875 53.421875 \nQ 53.21875 48.921875 51.53125 44.890625 \nQ 49.859375 40.875 45.40625 35.40625 \nQ 44.1875 33.984375 37.640625 27.21875 \nQ 31.109375 20.453125 19.1875 8.296875 \nz\n\" id\u003d\"DejaVuSans-50\"/\u003e\n      \u003c/defs\u003e\n      \u003cg transform\u003d\"translate(140.310432 323.233776)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-50\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"xtick_3\"\u003e\n     \u003cg id\u003d\"line2d_3\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"216.597744\" xlink:href\u003d\"#m0293567883\" y\u003d\"308.635338\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_3\"\u003e\n      \u003c!-- 40 --\u003e\n      \u003cdefs\u003e\n       \u003cpath d\u003d\"M 37.796875 64.3125 \nL 12.890625 25.390625 \nL 37.796875 25.390625 \nz\nM 35.203125 72.90625 \nL 47.609375 72.90625 \nL 47.609375 25.390625 \nL 58.015625 25.390625 \nL 58.015625 17.1875 \nL 47.609375 17.1875 \nL 47.609375 0 \nL 37.796875 0 \nL 37.796875 17.1875 \nL 4.890625 17.1875 \nL 4.890625 26.703125 \nz\n\" id\u003d\"DejaVuSans-52\"/\u003e\n      \u003c/defs\u003e\n      \u003cg transform\u003d\"translate(210.235244 323.233776)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-52\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"xtick_4\"\u003e\n     \u003cg id\u003d\"line2d_4\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"286.522556\" xlink:href\u003d\"#m0293567883\" y\u003d\"308.635338\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_4\"\u003e\n      \u003c!-- 60 --\u003e\n      \u003cdefs\u003e\n       \u003cpath d\u003d\"M 33.015625 40.375 \nQ 26.375 40.375 22.484375 35.828125 \nQ 18.609375 31.296875 18.609375 23.390625 \nQ 18.609375 15.53125 22.484375 10.953125 \nQ 26.375 6.390625 33.015625 6.390625 \nQ 39.65625 6.390625 43.53125 10.953125 \nQ 47.40625 15.53125 47.40625 23.390625 \nQ 47.40625 31.296875 43.53125 35.828125 \nQ 39.65625 40.375 33.015625 40.375 \nz\nM 52.59375 71.296875 \nL 52.59375 62.3125 \nQ 48.875 64.0625 45.09375 64.984375 \nQ 41.3125 65.921875 37.59375 65.921875 \nQ 27.828125 65.921875 22.671875 59.328125 \nQ 17.53125 52.734375 16.796875 39.40625 \nQ 19.671875 43.65625 24.015625 45.921875 \nQ 28.375 48.1875 33.59375 48.1875 \nQ 44.578125 48.1875 50.953125 41.515625 \nQ 57.328125 34.859375 57.328125 23.390625 \nQ 57.328125 12.15625 50.6875 5.359375 \nQ 44.046875 -1.421875 33.015625 -1.421875 \nQ 20.359375 -1.421875 13.671875 8.265625 \nQ 6.984375 17.96875 6.984375 36.375 \nQ 6.984375 53.65625 15.1875 63.9375 \nQ 23.390625 74.21875 37.203125 74.21875 \nQ 40.921875 74.21875 44.703125 73.484375 \nQ 48.484375 72.75 52.59375 71.296875 \nz\n\" id\u003d\"DejaVuSans-54\"/\u003e\n      \u003c/defs\u003e\n      \u003cg transform\u003d\"translate(280.160056 323.233776)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-54\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"xtick_5\"\u003e\n     \u003cg id\u003d\"line2d_5\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"356.447368\" xlink:href\u003d\"#m0293567883\" y\u003d\"308.635338\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_5\"\u003e\n      \u003c!-- 80 --\u003e\n      \u003cdefs\u003e\n       \u003cpath d\u003d\"M 31.78125 34.625 \nQ 24.75 34.625 20.71875 30.859375 \nQ 16.703125 27.09375 16.703125 20.515625 \nQ 16.703125 13.921875 20.71875 10.15625 \nQ 24.75 6.390625 31.78125 6.390625 \nQ 38.8125 6.390625 42.859375 10.171875 \nQ 46.921875 13.96875 46.921875 20.515625 \nQ 46.921875 27.09375 42.890625 30.859375 \nQ 38.875 34.625 31.78125 34.625 \nz\nM 21.921875 38.8125 \nQ 15.578125 40.375 12.03125 44.71875 \nQ 8.5 49.078125 8.5 55.328125 \nQ 8.5 64.0625 14.71875 69.140625 \nQ 20.953125 74.21875 31.78125 74.21875 \nQ 42.671875 74.21875 48.875 69.140625 \nQ 55.078125 64.0625 55.078125 55.328125 \nQ 55.078125 49.078125 51.53125 44.71875 \nQ 48 40.375 41.703125 38.8125 \nQ 48.828125 37.15625 52.796875 32.3125 \nQ 56.78125 27.484375 56.78125 20.515625 \nQ 56.78125 9.90625 50.3125 4.234375 \nQ 43.84375 -1.421875 31.78125 -1.421875 \nQ 19.734375 -1.421875 13.25 4.234375 \nQ 6.78125 9.90625 6.78125 20.515625 \nQ 6.78125 27.484375 10.78125 32.3125 \nQ 14.796875 37.15625 21.921875 38.8125 \nz\nM 18.3125 54.390625 \nQ 18.3125 48.734375 21.84375 45.5625 \nQ 25.390625 42.390625 31.78125 42.390625 \nQ 38.140625 42.390625 41.71875 45.5625 \nQ 45.3125 48.734375 45.3125 54.390625 \nQ 45.3125 60.0625 41.71875 63.234375 \nQ 38.140625 66.40625 31.78125 66.40625 \nQ 25.390625 66.40625 21.84375 63.234375 \nQ 18.3125 60.0625 18.3125 54.390625 \nz\n\" id\u003d\"DejaVuSans-56\"/\u003e\n      \u003c/defs\u003e\n      \u003cg transform\u003d\"translate(350.084868 323.233776)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-56\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"xtick_6\"\u003e\n     \u003cg id\u003d\"line2d_6\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"426.37218\" xlink:href\u003d\"#m0293567883\" y\u003d\"308.635338\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_6\"\u003e\n      \u003c!-- 100 --\u003e\n      \u003cdefs\u003e\n       \u003cpath d\u003d\"M 12.40625 8.296875 \nL 28.515625 8.296875 \nL 28.515625 63.921875 \nL 10.984375 60.40625 \nL 10.984375 69.390625 \nL 28.421875 72.90625 \nL 38.28125 72.90625 \nL 38.28125 8.296875 \nL 54.390625 8.296875 \nL 54.390625 0 \nL 12.40625 0 \nz\n\" id\u003d\"DejaVuSans-49\"/\u003e\n      \u003c/defs\u003e\n      \u003cg transform\u003d\"translate(416.82843 323.233776)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-49\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n       \u003cuse x\u003d\"127.246094\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"xtick_7\"\u003e\n     \u003cg id\u003d\"line2d_7\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"496.296992\" xlink:href\u003d\"#m0293567883\" y\u003d\"308.635338\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_7\"\u003e\n      \u003c!-- 120 --\u003e\n      \u003cg transform\u003d\"translate(486.753242 323.233776)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-49\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-50\"/\u003e\n       \u003cuse x\u003d\"127.246094\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n   \u003c/g\u003e\n   \u003cg id\u003d\"matplotlib.axis_2\"\u003e\n    \u003cg id\u003d\"ytick_1\"\u003e\n     \u003cg id\u003d\"line2d_8\"\u003e\n      \u003cdefs\u003e\n       \u003cpath d\u003d\"M 0 0 \nL -3.5 0 \n\" id\u003d\"m4ca59942ac\" style\u003d\"stroke:#000000;stroke-width:0.8;\"/\u003e\n      \u003c/defs\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"75\" xlink:href\u003d\"#m4ca59942ac\" y\u003d\"97.112782\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_8\"\u003e\n      \u003c!-- 0 --\u003e\n      \u003cg transform\u003d\"translate(61.6375 100.912001)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"ytick_2\"\u003e\n     \u003cg id\u003d\"line2d_9\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"75\" xlink:href\u003d\"#m4ca59942ac\" y\u003d\"132.075188\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_9\"\u003e\n      \u003c!-- 10 --\u003e\n      \u003cg transform\u003d\"translate(55.275 135.874407)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-49\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"ytick_3\"\u003e\n     \u003cg id\u003d\"line2d_10\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"75\" xlink:href\u003d\"#m4ca59942ac\" y\u003d\"167.037594\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_10\"\u003e\n      \u003c!-- 20 --\u003e\n      \u003cg transform\u003d\"translate(55.275 170.836813)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-50\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"ytick_4\"\u003e\n     \u003cg id\u003d\"line2d_11\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"75\" xlink:href\u003d\"#m4ca59942ac\" y\u003d\"202\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_11\"\u003e\n      \u003c!-- 30 --\u003e\n      \u003cdefs\u003e\n       \u003cpath d\u003d\"M 40.578125 39.3125 \nQ 47.65625 37.796875 51.625 33 \nQ 55.609375 28.21875 55.609375 21.1875 \nQ 55.609375 10.40625 48.1875 4.484375 \nQ 40.765625 -1.421875 27.09375 -1.421875 \nQ 22.515625 -1.421875 17.65625 -0.515625 \nQ 12.796875 0.390625 7.625 2.203125 \nL 7.625 11.71875 \nQ 11.71875 9.328125 16.59375 8.109375 \nQ 21.484375 6.890625 26.8125 6.890625 \nQ 36.078125 6.890625 40.9375 10.546875 \nQ 45.796875 14.203125 45.796875 21.1875 \nQ 45.796875 27.640625 41.28125 31.265625 \nQ 36.765625 34.90625 28.71875 34.90625 \nL 20.21875 34.90625 \nL 20.21875 43.015625 \nL 29.109375 43.015625 \nQ 36.375 43.015625 40.234375 45.921875 \nQ 44.09375 48.828125 44.09375 54.296875 \nQ 44.09375 59.90625 40.109375 62.90625 \nQ 36.140625 65.921875 28.71875 65.921875 \nQ 24.65625 65.921875 20.015625 65.03125 \nQ 15.375 64.15625 9.8125 62.3125 \nL 9.8125 71.09375 \nQ 15.4375 72.65625 20.34375 73.4375 \nQ 25.25 74.21875 29.59375 74.21875 \nQ 40.828125 74.21875 47.359375 69.109375 \nQ 53.90625 64.015625 53.90625 55.328125 \nQ 53.90625 49.265625 50.4375 45.09375 \nQ 46.96875 40.921875 40.578125 39.3125 \nz\n\" id\u003d\"DejaVuSans-51\"/\u003e\n      \u003c/defs\u003e\n      \u003cg transform\u003d\"translate(55.275 205.799219)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-51\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"ytick_5\"\u003e\n     \u003cg id\u003d\"line2d_12\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"75\" xlink:href\u003d\"#m4ca59942ac\" y\u003d\"236.962406\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_12\"\u003e\n      \u003c!-- 40 --\u003e\n      \u003cg transform\u003d\"translate(55.275 240.761625)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-52\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"ytick_6\"\u003e\n     \u003cg id\u003d\"line2d_13\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"75\" xlink:href\u003d\"#m4ca59942ac\" y\u003d\"271.924812\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_13\"\u003e\n      \u003c!-- 50 --\u003e\n      \u003cdefs\u003e\n       \u003cpath d\u003d\"M 10.796875 72.90625 \nL 49.515625 72.90625 \nL 49.515625 64.59375 \nL 19.828125 64.59375 \nL 19.828125 46.734375 \nQ 21.96875 47.46875 24.109375 47.828125 \nQ 26.265625 48.1875 28.421875 48.1875 \nQ 40.625 48.1875 47.75 41.5 \nQ 54.890625 34.8125 54.890625 23.390625 \nQ 54.890625 11.625 47.5625 5.09375 \nQ 40.234375 -1.421875 26.90625 -1.421875 \nQ 22.3125 -1.421875 17.546875 -0.640625 \nQ 12.796875 0.140625 7.71875 1.703125 \nL 7.71875 11.625 \nQ 12.109375 9.234375 16.796875 8.0625 \nQ 21.484375 6.890625 26.703125 6.890625 \nQ 35.15625 6.890625 40.078125 11.328125 \nQ 45.015625 15.765625 45.015625 23.390625 \nQ 45.015625 31 40.078125 35.4375 \nQ 35.15625 39.890625 26.703125 39.890625 \nQ 22.75 39.890625 18.8125 39.015625 \nQ 14.890625 38.140625 10.796875 36.28125 \nz\n\" id\u003d\"DejaVuSans-53\"/\u003e\n      \u003c/defs\u003e\n      \u003cg transform\u003d\"translate(55.275 275.724031)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-53\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n    \u003cg id\u003d\"ytick_7\"\u003e\n     \u003cg id\u003d\"line2d_14\"\u003e\n      \u003cg\u003e\n       \u003cuse style\u003d\"stroke:#000000;stroke-width:0.8;\" x\u003d\"75\" xlink:href\u003d\"#m4ca59942ac\" y\u003d\"306.887218\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n     \u003cg id\u003d\"text_14\"\u003e\n      \u003c!-- 60 --\u003e\n      \u003cg transform\u003d\"translate(55.275 310.686437)scale(0.1 -0.1)\"\u003e\n       \u003cuse xlink:href\u003d\"#DejaVuSans-54\"/\u003e\n       \u003cuse x\u003d\"63.623047\" xlink:href\u003d\"#DejaVuSans-48\"/\u003e\n      \u003c/g\u003e\n     \u003c/g\u003e\n    \u003c/g\u003e\n   \u003c/g\u003e\n   \u003cg id\u003d\"patch_3\"\u003e\n    \u003cpath d\u003d\"M 75 308.635338 \nL 75 95.364662 \n\" style\u003d\"fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;\"/\u003e\n   \u003c/g\u003e\n   \u003cg id\u003d\"patch_4\"\u003e\n    \u003cpath d\u003d\"M 540 308.635338 \nL 540 95.364662 \n\" style\u003d\"fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;\"/\u003e\n   \u003c/g\u003e\n   \u003cg id\u003d\"patch_5\"\u003e\n    \u003cpath d\u003d\"M 75 308.635338 \nL 540 308.635338 \n\" style\u003d\"fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;\"/\u003e\n   \u003c/g\u003e\n   \u003cg id\u003d\"patch_6\"\u003e\n    \u003cpath d\u003d\"M 75 95.364662 \nL 540 95.364662 \n\" style\u003d\"fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;\"/\u003e\n   \u003c/g\u003e\n  \u003c/g\u003e\n \u003c/g\u003e\n \u003cdefs\u003e\n  \u003cclipPath id\u003d\"p2a1337ff5b\"\u003e\n   \u003crect height\u003d\"213.270677\" width\u003d\"465\" x\u003d\"75\" y\u003d\"95.364662\"/\u003e\n  \u003c/clipPath\u003e\n \u003c/defs\u003e\n\u003c/svg\u003e\n\u003c/div\u003e\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cdiv style\u003d\u0027width:auto;height:auto\u0027\u003e\u003cimg src\u003ddata:image/png;base64,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Wb58ufh8Pvniiy+krKxMMjMzA/J8mThxomRlZWlfq+z8eO+99yQnJ0dycnIkPT1dpk6d6kbJflHRcUlKSpIvvvhCDh8+LB07dpRFixaJiEh2drZkZmbKl19+KVlZWfLII49IWVmZG2XjKgvV8umnn1qDBg1S44ULF1oLFy50saK6Izk52frggw+sjh07WidOnLAsy7JOnDhhdezY0eXK/O/YsWPWgAEDrG3btllDhgyxysvLrVatWlmlpaWWZV17HgWC4uJiKyIiwiovL9e+HujnS35+vhUWFmadOnXKKi0ttYYMGWJlZWUF7PmSm5trxcXFqXFl50dqaqq1evXqCr/Pi5zHxW79+vXW/fffb1nWtb+TBg0aZH366ad+qREV4wpWNR0/flzCw8PVOCwsTI4fP+5iRXVDXl6eHDhwQBISEniAtog8/vjjsmTJErnppit/tU6dOiUtWrSQ4OArW84F4nnDA9crFhoaKk888YTccccd0q5dO7n11lulZ8+eAX++XFXZ+cG/xX/z2muvyb333isiHJe6iAYLNXbu3DkZNWqUPP/889K8eXMtV9UDtL1qy5YtEhISwm3TDjf6wHWvOnPmjGzatElyc3PlxIkTcv78+Wumg3BFIJ4ff88zzzwjwcHBMn78eLdLQSVosKopNDRUjh07psb5+fkSGhrqYkXuKi0tlVGjRsn48eNl5MiRIiLVfoC2V+3evVs2b94sERERMm7cONm+fbs89thjUlxcLJcvXxaRwDxvbvSB61714Ycfyo9//GNp3bq1NGzYUEaOHCm7d+8O+PPlqsrOD/4tFnn99ddly5Yt8uabb6rGk+NS99BgVVOvXr0kJydHcnNzpaSkRDIzMyU5OdntslxhWZZMmTJFYmNj5Re/+IX6enJysmRkZIiIVPsB2l6yaNEiyc/Pl7y8PMnMzJQBAwbIm2++Kf3795d169aJSGAeF/sD10VEPXA90M+XO+64Q/bu3SsXLlwQy7LUcQn08+Wqys6P5ORkWbVqlViWJXv37pVbb71VTSUGgqysLFmyZIls3rxZbrnlFvX15ORkyczMlB9++EFyc3MlJydHevfu7WKlYJH7dXjnnXes6OhoKzIy0lqwYIHb5bhm165dlohYXbp0sbp162Z169bNeuedd6yTJ09aAwYMsKKioqzExETr1KlTbpfqmh07dlhDhgyxLMuyjh49avXq1cvq0KGDNXr0aOvSpUsuV+d/Bw4csHr27Gl16dLFGj58uHX69GnOF8uy5s6da8XExFhxcXHWhAkTrEuXLgXk+TJu3Dirbdu2VnBwsBUaGmq9+uqrlZ4f5eXl1iOPPGJFRkZanTt3tv7whz+4XH3tqei4dOjQwQoLC1P/9v785z9X379gwQIrMjLS6tixo/Xuu++6WDksy7LYyR0AAMAwpggBAAAMo8ECAAAwjAYLAADAMBosAAAAw2iwAAAADKPBAgAAMIwGCwAAwDAaLAAAAMNosAAAAAyjwQIAADCMBgsAAMAwGiwAAADDaLAAAAAMo8ECAAAwjAYLAADAMBosAAAAw2iwAAAADKPBAgAAMIwGCwAAwDAaLAAAAMNosAAAAAyjwQIAADCMBgsAAMAwGiwAAADDaLAAAAAMo8ECAAAwjAYLAADAMBosAAAAw2iwAAAADKPBAgAAMIwGCwAAwDAaLAAAAMNosAAAAAyjwQIAADCMBgsAAMAwGiwAAADDaLAAAAAMo8ECAAAwjAYLAADAMBosAAAAw2iwAAAADKPBAgAAMIwGCwAAwDAaLAAAAMNosAAAAAyjwQIAADCMBgsAAMAwGiwAAADDaLAAAAAMo8ECAAAwjAYLAADAMBosAAAAw2iwAAAADKPBAgAAMIwGCwAAwDAaLAAAAMNosAAAAAyjwQIAADCMBgsAAMAwGiwAAADDaLAAAAAMo8ECAAAwjAYLAADAMBosAAAAw2iwAAAADKPBAgAAMIwGCwAAwDAaLAAAAMNosAAAAAyjwQIAADCMBgsAAMAwGiwAAADDaLAAAAAMo8ECAAAwjAYLAADAsP8H8RCcSsf5hKcAAAAASUVORK5CYII\u003d style\u003d\u0027width\u003dauto;height:auto\u0027\u003e\u003cdiv\u003e\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674664126070_2038705287",
+      "id": "20191204-030233_1910577934",
+      "dateCreated": "2023-01-25 16:28:46.070",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-25 16:28:46.073",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674664126073_948520464",
+      "id": "20191204-030315_185149595",
+      "dateCreated": "2023-01-25 16:28:46.073",
+      "status": "READY"
+    }
+  ],
+  "name": "Dependencies graph",
+  "id": "2HT174W84",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

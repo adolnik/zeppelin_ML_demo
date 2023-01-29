@@ -1,0 +1,1710 @@
+{
+  "paragraphs": [
+    {
+      "text": "%python\nimport numpy as np\nimport pandas as pd\nfrom sklearn.datasets import load_boston\nfrom sklearn.metrics import mean_squared_error, f1_score, accuracy_score, roc_curve, roc_auc_score\nfrom sklearn.model_selection import train_test_split\n\nfrom matplotlib import pyplot as plt",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 14:51:38.432",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141055_1062461593",
+      "id": "20230126-201540_248903501",
+      "dateCreated": "2023-01-26 20:15:41.055",
+      "dateStarted": "2023-01-28 14:51:38.472",
+      "dateFinished": "2023-01-28 14:51:39.056",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## 1. Линейная регрессия. Реализация",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 21:14:43.311",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003e1. Линейная регрессия. Реализация\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141056_432882142",
+      "id": "20230126-201540_1637218724",
+      "dateCreated": "2023-01-26 20:15:41.056",
+      "dateStarted": "2023-01-26 21:14:43.306",
+      "dateFinished": "2023-01-26 21:14:46.637",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nimport numpy as np\n\na \u003d np.asarray([[2,\u0027a\u0027],[3,\u0027b\u0027],[4,\u0027c\u0027],[5,\u0027d\u0027]])\nres \u003d np.array([int(item) \u003c\u003d 2  for item in a[:,0]])\n#res \u003d np.asarray([\u0027a\u0027,\u0027c\u0027])\nprint(res)\nmask \u003d np.delete(a, res, axis\u003d0)\nprint(mask)\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 18:39:31.655",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[ True False False False]\n[[\u00273\u0027 \u0027b\u0027]\n [\u00274\u0027 \u0027c\u0027]\n [\u00275\u0027 \u0027d\u0027]]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674918512572_1434321402",
+      "id": "paragraph_1674918512572_1434321402",
+      "dateCreated": "2023-01-28 15:08:32.572",
+      "dateStarted": "2023-01-28 18:39:31.680",
+      "dateFinished": "2023-01-28 18:39:31.755",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ndata \u003d load_boston()\ndata[\u0027data\u0027].shape\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 14:51:54.168",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "/opt/conda/envs/python_3_with_R/lib/python3.7/site-packages/sklearn/utils/deprecation.py:87: FutureWarning: Function load_boston is deprecated; `load_boston` is deprecated in 1.0 and will be removed in 1.2.\n\n    The Boston housing prices dataset has an ethical problem. You can refer to\n    the documentation of this function for further details.\n\n    The scikit-learn maintainers therefore strongly discourage the use of this\n    dataset unless the purpose of the code is to study and educate about\n    ethical issues in data science and machine learning.\n\n    In this special case, you can fetch the dataset from the original\n    source::\n\n        import pandas as pd\n        import numpy as np\n\n\n        data_url \u003d \"http://lib.stat.cmu.edu/datasets/boston\"\n        raw_df \u003d pd.read_csv(data_url, sep\u003d\"\\s+\", skiprows\u003d22, header\u003dNone)\n        data \u003d np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])\n        target \u003d raw_df.values[1::2, 2]\n\n    Alternative datasets include the California housing dataset (i.e.\n    :func:`~sklearn.datasets.fetch_california_housing`) and the Ames housing\n    dataset. You can load the datasets as follows::\n\n        from sklearn.datasets import fetch_california_housing\n        housing \u003d fetch_california_housing()\n\n    for the California housing dataset and::\n\n        from sklearn.datasets import fetch_openml\n        housing \u003d fetch_openml(name\u003d\"house_prices\", as_frame\u003dTrue)\n\n    for the Ames housing dataset.\n    \n  warnings.warn(msg, category\u003dFutureWarning)\n(506, 13)"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141056_1390521529",
+      "id": "20230126-201540_2069700962",
+      "dateCreated": "2023-01-26 20:15:41.057",
+      "dateStarted": "2023-01-28 14:51:54.186",
+      "dateFinished": "2023-01-28 14:51:54.341",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nprint(data[\u0027feature_names\u0027])",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 14:56:03.951",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[\u0027CRIM\u0027 \u0027ZN\u0027 \u0027INDUS\u0027 \u0027CHAS\u0027 \u0027NOX\u0027 \u0027RM\u0027 \u0027AGE\u0027 \u0027DIS\u0027 \u0027RAD\u0027 \u0027TAX\u0027 \u0027PTRATIO\u0027\n \u0027B\u0027 \u0027LSTAT\u0027]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141057_867448873",
+      "id": "20230126-201540_720345642",
+      "dateCreated": "2023-01-26 20:15:41.057",
+      "dateStarted": "2023-01-28 14:56:03.976",
+      "dateFinished": "2023-01-28 14:56:04.050",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 15:07:01.800",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[0;36m  File \u001b[0;32m\"/tmp/ipykernel_269/1228042308.py\"\u001b[0;36m, line \u001b[0;32m7\u001b[0m\n\u001b[0;31m    fltr \u003d np.asarray(\u003e2)\u001b[0m\n\u001b[0m                      ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674918359257_13434360",
+      "id": "paragraph_1674918359257_13434360",
+      "dateCreated": "2023-01-28 15:05:59.268",
+      "dateStarted": "2023-01-28 15:06:33.772",
+      "dateFinished": "2023-01-28 15:06:33.845",
+      "status": "ERROR"
+    },
+    {
+      "text": "%python\n#print(data[\u0027data\u0027])\nprint(type(data[\u0027data\u0027]))\nprint(data[\u0027feature_names\u0027])\n#data2\u003d np.c_[data[\u0027data\u0027], data[\u0027target\u0027]]\ndata1 \u003d pd.DataFrame(data\u003ddata[\u0027data\u0027], columns\u003ddata[\u0027feature_names\u0027])\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 18:41:07.678",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cclass \u0027numpy.ndarray\u0027\u003e\n[\u0027CRIM\u0027 \u0027ZN\u0027 \u0027INDUS\u0027 \u0027CHAS\u0027 \u0027NOX\u0027 \u0027RM\u0027 \u0027AGE\u0027 \u0027DIS\u0027 \u0027RAD\u0027 \u0027TAX\u0027 \u0027PTRATIO\u0027\n \u0027B\u0027 \u0027LSTAT\u0027]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674807172859_1133455299",
+      "id": "paragraph_1674807172859_1133455299",
+      "dateCreated": "2023-01-27 08:12:52.859",
+      "dateStarted": "2023-01-28 18:41:07.702",
+      "dateFinished": "2023-01-28 18:41:07.773",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n### 1.1. Реализация линейной регрессии с использованием матричных операций",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 21:15:01.814",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e1.1. Реализация линейной регрессии с использованием матричных операций\u003c/h3\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141057_2015220151",
+      "id": "20230126-201540_489355486",
+      "dateCreated": "2023-01-26 20:15:41.057",
+      "dateStarted": "2023-01-26 21:15:01.815",
+      "dateFinished": "2023-01-26 21:15:01.835",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nЛинейная регрессия выражается следующей зависимостью:\n$$y\u003dX\\theta+\\epsilon,$$\nгде $X$ — матрица объекты-признаки, $y$ — вектор целевых значений, соответствующих $X$, $\\theta$ — параметр линейной регрессии, $\\epsilon$ — некоторый шум.",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 21:15:04.175",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eЛинейная регрессия выражается следующей зависимостью:\u003cbr /\u003e\n$$y\u003dX\\theta+\\epsilon,$$\u003cbr /\u003e\nгде $X$ — матрица объекты-признаки, $y$ — вектор целевых значений, соответствующих $X$, $\\theta$ — параметр линейной регрессии, $\\epsilon$ — некоторый шум.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141057_734948825",
+      "id": "20230126-201540_1786935784",
+      "dateCreated": "2023-01-26 20:15:41.057",
+      "dateStarted": "2023-01-26 21:15:04.176",
+      "dateFinished": "2023-01-26 21:15:04.210",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nИз данного следует выражение для $\\theta$ как:\n$$X^Ty\u003dX^TX\\theta \\rightarrow \\theta\u003d(X^TX)^{-1}X^Ty$$",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 21:15:07.191",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eИз данного следует выражение для $\\theta$ как:\u003cbr /\u003e\n$$X^Ty\u003dX^TX\\theta \\rightarrow \\theta\u003d(X^TX)^{-1}X^Ty$$\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141058_2122528741",
+      "id": "20230126-201540_1915631789",
+      "dateCreated": "2023-01-26 20:15:41.059",
+      "dateStarted": "2023-01-26 21:15:07.192",
+      "dateFinished": "2023-01-26 21:15:07.209",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nРеализуем выражение для $\\theta$ с помощью операций линейной алгебры библиотеки Numpy:",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 21:15:10.334",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eРеализуем выражение для $\\theta$ с помощью операций линейной алгебры библиотеки Numpy:\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141061_2004614007",
+      "id": "20230126-201540_194662969",
+      "dateCreated": "2023-01-26 20:15:41.061",
+      "dateStarted": "2023-01-26 21:15:10.336",
+      "dateFinished": "2023-01-26 21:15:10.353",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Python program to inverse\n# a matrix using numpy\n  \n# Import required package\nimport numpy as np\n  \n# Taking a 4 * 4 matrix\nB \u003d np.array([6, 1, 1, 3])\n\nA \u003d np.array([[6, 1, 1, 3],\n              [4, -2, 5, 1],\n              [2, 8, 7, 6],\n              [3, 1, 9, 7]])\n  \n# Calculating the inverse of the matrix\nprint(np.matmul(np.linalg.inv(A),A))\nprint(np.transpose(A))\nprint(np.matmul(np.transpose(A).dot(np.matmul(np.transpose(A),A)),B))\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 18:41:11.609",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[[ 1.00000000e+00  8.32667268e-17  1.94289029e-16  3.60822483e-16]\n [-1.11022302e-16  1.00000000e+00 -3.88578059e-16 -1.66533454e-16]\n [ 6.24500451e-17  4.85722573e-17  1.00000000e+00  2.01227923e-16]\n [-1.94289029e-16 -2.77555756e-17  3.05311332e-16  1.00000000e+00]]\n[[ 6  4  2  3]\n [ 1 -2  8  1]\n [ 1  5  7  9]\n [ 3  1  6  7]]\n[ 9676  8255 16346 13519]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674770509498_1010884579",
+      "id": "paragraph_1674770509498_1010884579",
+      "dateCreated": "2023-01-26 22:01:49.499",
+      "dateStarted": "2023-01-28 18:41:11.718",
+      "dateFinished": "2023-01-28 18:41:11.846",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# ЗАДАЧА Реализовать функцию, осуществляющую матричные операции для получения theta\ndef linreg_linear(X, y):\n    X_t \u003d np.transpose(X)\n    \n    theta \u003d np.matmul(np.matmul(np.linalg.inv(np.matmul(X_t , X)), X_t), y)\n    return theta",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 19:00:30.396",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141061_440745841",
+      "id": "20230126-201540_1678222094",
+      "dateCreated": "2023-01-26 20:15:41.061",
+      "dateStarted": "2023-01-28 19:00:30.411",
+      "dateFinished": "2023-01-28 19:00:30.476",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Подготовить данные\n\nX, y \u003d data[\u0027data\u0027], data[\u0027target\u0027]\n#print(X)\n#X \u003d np.hstack([np.ones(X.shape[0])[:, np.newaxis], X])\nX \u003d (X - X.mean(axis\u003d0)) / X.std(axis\u003d0)\nX \u003d np.hstack([np.ones(X.shape[0])[:, np.newaxis], X])\nprint(X)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 19:03:51.685",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[[ 1.         -0.41978194  0.28482986 ... -1.45900038  0.44105193\n  -1.0755623 ]\n [ 1.         -0.41733926 -0.48772236 ... -0.30309415  0.44105193\n  -0.49243937]\n [ 1.         -0.41734159 -0.48772236 ... -0.30309415  0.39642699\n  -1.2087274 ]\n ...\n [ 1.         -0.41344658 -0.48772236 ...  1.17646583  0.44105193\n  -0.98304761]\n [ 1.         -0.40776407 -0.48772236 ...  1.17646583  0.4032249\n  -0.86530163]\n [ 1.         -0.41500016 -0.48772236 ...  1.17646583  0.44105193\n  -0.66905833]]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141062_584723116",
+      "id": "20230126-201540_439019391",
+      "dateCreated": "2023-01-26 20:15:41.062",
+      "dateStarted": "2023-01-28 19:03:51.703",
+      "dateFinished": "2023-01-28 19:03:51.776",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nres \u003d np.array([int(item) \u003c 50  for item in X[:,12]])\nX \u003d np.delete(X, res, axis\u003d0)\ny \u003d np.delete(y, res, axis\u003d0)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 18:43:33.959",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674931293308_1814130832",
+      "id": "paragraph_1674931293308_1814130832",
+      "dateCreated": "2023-01-28 18:41:33.312",
+      "dateStarted": "2023-01-28 18:43:33.980",
+      "dateFinished": "2023-01-28 18:43:34.053",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Вычислить параметр theta\ntheta \u003d linreg_linear(X, y)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 19:03:59.650",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141063_826270386",
+      "id": "20230126-201540_423776199",
+      "dateCreated": "2023-01-26 20:15:41.063",
+      "dateStarted": "2023-01-28 19:03:59.658",
+      "dateFinished": "2023-01-28 19:03:59.725",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ntheta.shape",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 19:04:01.308",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(14,)"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141063_348979425",
+      "id": "20230126-201540_1083235660",
+      "dateCreated": "2023-01-26 20:15:41.063",
+      "dateStarted": "2023-01-28 19:04:01.321",
+      "dateFinished": "2023-01-28 19:04:01.390",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Сделать предсказания для тренировочной выборки\ny_pred \u003d X.dot(theta)\ny_pred",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 19:04:05.954",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "array([30.00384338, 25.02556238, 30.56759672, 28.60703649, 27.94352423,\n       25.25628446, 23.00180827, 19.53598843, 11.52363685, 18.92026211,\n       18.99949651, 21.58679568, 20.90652153, 19.55290281, 19.28348205,\n       19.29748321, 20.52750979, 16.91140135, 16.17801106, 18.40613603,\n       12.52385753, 17.67103669, 15.83288129, 13.80628535, 15.67833832,\n       13.38668561, 15.46397655, 14.70847428, 19.54737285, 20.8764282 ,\n       11.45511759, 18.05923295,  8.81105736, 14.28275814, 13.70675891,\n       23.81463526, 22.34193708, 23.10891142, 22.91502612, 31.35762569,\n       34.21510225, 28.02056414, 25.20386628, 24.60979273, 22.94149176,\n       22.09669817, 20.42320032, 18.03655088,  9.10655377, 17.20607751,\n       21.28152535, 23.97222285, 27.6558508 , 24.04901809, 15.3618477 ,\n       31.15264947, 24.85686978, 33.10919806, 21.77537987, 21.08493555,\n       17.8725804 , 18.51110208, 23.98742856, 22.55408869, 23.37308644,\n       30.36148358, 25.53056512, 21.11338564, 17.42153786, 20.78483633,\n       25.20148859, 21.7426577 , 24.55744957, 24.04295712, 25.50499716,\n       23.9669302 , 22.94545403, 23.35699818, 21.26198266, 22.42817373,\n       28.40576968, 26.99486086, 26.03576297, 25.05873482, 24.78456674,\n       27.79049195, 22.16853423, 25.89276415, 30.67461827, 30.83110623,\n       27.1190194 , 27.41266734, 28.94122762, 29.08105546, 27.03977365,\n       28.62459949, 24.72744978, 35.78159518, 35.11454587, 32.25102801,\n       24.58022019, 25.59413475, 19.79013684, 20.31167129, 21.43482591,\n       18.53994008, 17.18755992, 20.75049026, 22.64829115, 19.7720367 ,\n       20.64965864, 26.52586744, 20.77323638, 20.71548315, 25.17208881,\n       20.43025591, 23.37724626, 23.69043261, 20.33578364, 20.79180873,\n       21.91632071, 22.47107777, 20.55738556, 16.36661977, 20.56099819,\n       22.48178446, 14.61706633, 15.17876684, 18.93868592, 14.05573285,\n       20.03527399, 19.41013402, 20.06191566, 15.75807673, 13.25645238,\n       17.26277735, 15.87841883, 19.36163954, 13.81483897, 16.44881475,\n       13.57141932,  3.98885508, 14.59495478, 12.1488148 ,  8.72822362,\n       12.03585343, 15.82082058,  8.5149902 ,  9.71844139, 14.80451374,\n       20.83858153, 18.30101169, 20.12282558, 17.28601894, 22.36600228,\n       20.10375923, 13.62125891, 33.25982697, 29.03017268, 25.56752769,\n       32.70827666, 36.77467015, 40.55765844, 41.84728168, 24.78867379,\n       25.37889238, 37.20347455, 23.08748747, 26.40273955, 26.65382114,\n       22.5551466 , 24.29082812, 22.97657219, 29.07194308, 26.5219434 ,\n       30.72209056, 25.61669307, 29.13740979, 31.43571968, 32.92231568,\n       34.72440464, 27.76552111, 33.88787321, 30.99238036, 22.71820008,\n       24.7664781 , 35.88497226, 33.42476722, 32.41199147, 34.51509949,\n       30.76109485, 30.28934141, 32.91918714, 32.11260771, 31.55871004,\n       40.84555721, 36.12770079, 32.6692081 , 34.70469116, 30.09345162,\n       30.64393906, 29.28719501, 37.07148392, 42.03193124, 43.18949844,\n       22.69034796, 23.68284712, 17.85447214, 23.49428992, 17.00587718,\n       22.39251096, 17.06042754, 22.73892921, 25.21942554, 11.11916737,\n       24.51049148, 26.60334775, 28.35518713, 24.91525464, 29.68652768,\n       33.18419746, 23.77456656, 32.14051958, 29.7458199 , 38.37102453,\n       39.81461867, 37.58605755, 32.3995325 , 35.45665242, 31.23411512,\n       24.48449227, 33.28837292, 38.0481048 , 37.16328631, 31.71383523,\n       25.26705571, 30.10010745, 32.71987156, 28.42717057, 28.42940678,\n       27.29375938, 23.74262478, 24.12007891, 27.40208414, 16.3285756 ,\n       13.39891261, 20.01638775, 19.86184428, 21.2883131 , 24.0798915 ,\n       24.20633547, 25.04215821, 24.91964007, 29.94563374, 23.97228316,\n       21.69580887, 37.51109239, 43.30239043, 36.48361421, 34.98988594,\n       34.81211508, 37.16631331, 40.98928501, 34.44634089, 35.83397547,\n       28.245743  , 31.22673593, 40.8395575 , 39.31792393, 25.70817905,\n       22.30295533, 27.20340972, 28.51169472, 35.47676598, 36.10639164,\n       33.79668274, 35.61085858, 34.83993382, 30.35192656, 35.30980701,\n       38.79756966, 34.33123186, 40.33963075, 44.67308339, 31.59689086,\n       27.3565923 , 20.10174154, 27.04206674, 27.2136458 , 26.91395839,\n       33.43563311, 34.40349633, 31.8333982 , 25.81783237, 24.42982348,\n       28.45764337, 27.36266999, 19.53928758, 29.11309844, 31.91054611,\n       30.77159449, 28.94275871, 28.88191022, 32.79887232, 33.20905456,\n       30.76831792, 35.56226857, 32.70905124, 28.64244237, 23.58965827,\n       18.54266897, 26.87889843, 23.28133979, 25.54580246, 25.48120057,\n       20.53909901, 17.61572573, 18.37581686, 24.29070277, 21.32529039,\n       24.88682244, 24.86937282, 22.86952447, 19.45123791, 25.11783401,\n       24.66786913, 23.68076177, 19.34089616, 21.17418105, 24.25249073,\n       21.59260894, 19.98446605, 23.33888   , 22.14060692, 21.55509929,\n       20.61872907, 20.16097176, 19.28490387, 22.1667232 , 21.24965774,\n       21.42939305, 30.32788796, 22.04734975, 27.70647912, 28.54794117,\n       16.54501121, 14.78359641, 25.27380082, 27.54205117, 22.14837562,\n       20.45944095, 20.54605423, 16.88063827, 25.40253506, 14.32486632,\n       16.59488462, 19.63704691, 22.71806607, 22.20218887, 19.20548057,\n       22.66616105, 18.93192618, 18.22846804, 20.23150811, 37.4944739 ,\n       14.28190734, 15.54286248, 10.83162324, 23.80072902, 32.6440736 ,\n       34.60684042, 24.94331333, 25.9998091 ,  6.126325  ,  0.77779806,\n       25.30713064, 17.74061065, 20.23274414, 15.83331301, 16.83512587,\n       14.36994825, 18.47682833, 13.4276828 , 13.06177512,  3.27918116,\n        8.06022171,  6.12842196,  5.6186481 ,  6.4519857 , 14.20764735,\n       17.21225183, 17.29887265,  9.89116643, 20.22124193, 17.94181175,\n       20.30445783, 19.29559075, 16.33632779,  6.55162319, 10.89016778,\n       11.88145871, 17.81174507, 18.26126587, 12.97948781,  7.37816361,\n        8.21115861,  8.06626193, 19.98294786, 13.70756369, 19.85268454,\n       15.22308298, 16.96071981,  1.71851807, 11.80578387, -4.28131071,\n        9.58376737, 13.36660811,  6.89562363,  6.14779852, 14.60661794,\n       19.6000267 , 18.12427476, 18.52177132, 13.1752861 , 14.62617624,\n        9.92374976, 16.34590647, 14.07519426, 14.25756243, 13.04234787,\n       18.15955693, 18.69554354, 21.527283  , 17.03141861, 15.96090435,\n       13.36141611, 14.52079384,  8.81976005,  4.86751102, 13.06591313,\n       12.70609699, 17.29558059, 18.740485  , 18.05901029, 11.51474683,\n       11.97400359, 17.68344618, 18.12695239, 17.5183465 , 17.22742507,\n       16.52271631, 19.41291095, 18.58215236, 22.48944791, 15.28000133,\n       15.82089335, 12.68725581, 12.8763379 , 17.18668531, 18.51247609,\n       19.04860533, 20.17208927, 19.7740732 , 22.42940768, 20.31911854,\n       17.88616253, 14.37478523, 16.94776851, 16.98405762, 18.58838397,\n       20.16719441, 22.97718032, 22.45580726, 25.57824627, 16.39147632,\n       16.1114628 , 20.534816  , 11.54272738, 19.20496304, 21.86276391,\n       23.46878866, 27.09887315, 28.56994302, 21.08398783, 19.45516196,\n       22.22225914, 19.65591961, 21.32536104, 11.85583717,  8.22386687,\n        3.66399672, 13.75908538, 15.93118545, 20.62662054, 20.61249414,\n       16.88541964, 14.01320787, 19.10854144, 21.29805174, 18.45498841,\n       20.46870847, 23.53334055, 22.37571892, 27.6274261 , 26.12796681,\n       22.34421229])"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141064_401809696",
+      "id": "20230126-201540_433457539",
+      "dateCreated": "2023-01-26 20:15:41.064",
+      "dateStarted": "2023-01-28 19:04:05.966",
+      "dateFinished": "2023-01-28 19:04:06.086",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ndef print_regression_metrics(y_true, y_pred):\n    mse \u003d mean_squared_error(y_true, y_pred)\n    rmse \u003d np.sqrt(mse)\n    print(f\u0027MSE \u003d {mse:.2f}, RMSE \u003d {rmse:.2f}\u0027)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 19:01:49.564",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141065_2141777290",
+      "id": "20230126-201540_1409946841",
+      "dateCreated": "2023-01-26 20:15:41.065",
+      "dateStarted": "2023-01-28 19:01:49.571",
+      "dateFinished": "2023-01-28 19:01:49.635",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Посчитать значение ошибок MSE и RMSE для тренировочных данных\nprint_regression_metrics(y, y_pred)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 19:04:13.746",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "MSE \u003d 21.89, RMSE \u003d 4.68\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141065_51731738",
+      "id": "20230126-201540_1597855208",
+      "dateCreated": "2023-01-26 20:15:41.065",
+      "dateStarted": "2023-01-28 19:04:13.763",
+      "dateFinished": "2023-01-28 19:04:13.828",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nplt.hist(y);",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 18:58:03.429",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141065_1051866305",
+      "id": "20230126-201540_419535358",
+      "dateCreated": "2023-01-26 20:15:41.065",
+      "dateStarted": "2023-01-28 18:58:03.448",
+      "dateFinished": "2023-01-28 18:58:03.614",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Разбить выборку на train/valid, вычислить theta,\n# сделать предсказания и посчитать ошибки MSE и RMSE\n\nX_train, X_valid, y_train, y_valid \u003d train_test_split(X, y, test_size\u003d0.2)\ntheta \u003d linreg_linear(X_train, y_train)\ny_pred \u003d X_valid.dot(theta)\ny_train_pred \u003d X_train.dot(theta)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 18:58:14.275",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141065_103613185",
+      "id": "20230126-201540_20833825",
+      "dateCreated": "2023-01-26 20:15:41.065",
+      "dateStarted": "2023-01-28 18:58:14.284",
+      "dateFinished": "2023-01-28 18:58:14.405",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nprint_regression_metrics(y_valid, y_pred)\nprint_regression_metrics(y_train, y_train_pred)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 18:58:21.139",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "MSE \u003d 571.67, RMSE \u003d 23.91\nMSE \u003d 526.13, RMSE \u003d 22.94\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141066_1019179265",
+      "id": "20230126-201540_350638481",
+      "dateCreated": "2023-01-26 20:15:41.066",
+      "dateStarted": "2023-01-28 18:58:21.154",
+      "dateFinished": "2023-01-28 18:58:21.221",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nfrom sklearn.linear_model import LinearRegression\n\nlr \u003d LinearRegression()\nlr.fit(X,y)\ny_pred \u003d lr.predict(X)\nprint_regression_metrics(y, y_pred)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:43:34.218",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "MSE \u003d 21.89, RMSE \u003d 4.68\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141066_2040142650",
+      "id": "20230126-201540_880675376",
+      "dateCreated": "2023-01-26 20:15:41.066",
+      "dateStarted": "2023-01-27 07:43:34.241",
+      "dateFinished": "2023-01-27 07:43:34.560",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n### 1.2. Реализация линейной регрессии с использованием методов оптимизации",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:43:40.790",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e1.2. Реализация линейной регрессии с использованием методов оптимизации\u003c/h3\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141066_1990996187",
+      "id": "20230126-201540_1404679039",
+      "dateCreated": "2023-01-26 20:15:41.066",
+      "dateStarted": "2023-01-27 07:43:40.790",
+      "dateFinished": "2023-01-27 07:43:40.815",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nДля реализации линейной регрессии с помощью методов оптимизации будем использовать функцию ошибки **среднего квадратичного** ([Mean Squared Error](https://en.wikipedia.org/wiki/Mean_squared_error)), которая является выпуклой функцией в n-мерном пространстве $\\mathbb{R}^n$ и в общем виде выглядит следующим образом:\n$$MSE \u003d \\frac{1}{n} * \\sum_{i\u003d1}^{n}{(y_i - a(x_i))^2}.$$\nЗдесь $x_i$ — вектор-признак $i$-го объекта обучающей выборки, $y_i$ — истинное значение для $i$-го объекта, $a(x)$ — алгоритм, предсказывающий для данного объекта $x$ целевое значение, $n$ — кол-во объектов в выборке.",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:43:52.366",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eДля реализации линейной регрессии с помощью методов оптимизации будем использовать функцию ошибки \u003cstrong\u003eсреднего квадратичного\u003c/strong\u003e (\u003ca href\u003d\"https://en.wikipedia.org/wiki/Mean_squared_error\"\u003eMean Squared Error\u003c/a\u003e), которая является выпуклой функцией в n-мерном пространстве $\\mathbb{R}^n$ и в общем виде выглядит следующим образом:\u003cbr /\u003e\n$$MSE \u003d \\frac{1}{n} * \\sum_{i\u003d1}^{n}{(y_i - a(x_i))^2}.$$\u003cbr /\u003e\nЗдесь $x_i$ — вектор-признак $i$-го объекта обучающей выборки, $y_i$ — истинное значение для $i$-го объекта, $a(x)$ — алгоритм, предсказывающий для данного объекта $x$ целевое значение, $n$ — кол-во объектов в выборке.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141067_337365075",
+      "id": "20230126-201540_1037781959",
+      "dateCreated": "2023-01-26 20:15:41.067",
+      "dateStarted": "2023-01-27 07:43:37.906",
+      "dateFinished": "2023-01-27 07:43:38.207",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nВ случае линейной регрессии $MSE$ представляется как:\n$$MSE(X, y, \\theta) \u003d \\frac{1}{2n} * \\sum_{i\u003d1}^{n}{(y_i - \\theta^Tx_i)^2} \u003d \\frac{1}{2n} \\left\\|\\left\\|{y - X\\theta}\\right\\|\\right\\|_{2}^{2}\u003d\\frac{1}{2n} (y - X\\theta)^T(y - X\\theta),$$\nгде $\\theta$ — параметр модели линейной регрессии, $X$ — матрица объекты-признаки, $y$ - вектор истинных значений, соответствующих $X$.",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:48:58.852",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eВ случае линейной регрессии $MSE$ представляется как:\u003cbr /\u003e\n$$MSE(X, y, \\theta) \u003d \\frac{1}{2n} * \\sum_{i\u003d1}^{n}{(y_i - \\theta^Tx_i)^2} \u003d \\frac{1}{2n} \\left|\\left|{y - X\\theta}\\right|\\right|_{2}^{2}\u003d\\frac{1}{2n} (y - X\\theta)^T(y - X\\theta),$$\u003cbr /\u003e\nгде $\\theta$ — параметр модели линейной регрессии, $X$ — матрица объекты-признаки, $y$ - вектор истинных значений, соответствующих $X$.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141067_1861950203",
+      "id": "20230126-201541_48816148",
+      "dateCreated": "2023-01-26 20:15:41.067",
+      "dateStarted": "2023-01-27 07:48:58.863",
+      "dateFinished": "2023-01-27 07:48:58.892",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nВозьмем первый вариант представления функции ошибки и посчитаем ее градиент по параметру $\\theta$, предварительно переименовав $MSE$ в $L$:\n$$L\u003d\\frac{1}{2n} * \\sum_{i\u003d1}^{n}{(y_i - \\theta^Tx_i)^2}$$\n$$\\nabla L \u003d \\frac{1}{n}\\sum_{i\u003d1}^{n}{(\\theta^Tx_i - y_i) \\cdot x_i} \u003d \\frac{1}{n}X^T(X\\theta - y)$$",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:49:07.011",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eВозьмем первый вариант представления функции ошибки и посчитаем ее градиент по параметру $\\theta$, предварительно переименовав $MSE$ в $L$:\u003cbr /\u003e\n$$L\u003d\\frac{1}{2n} * \\sum_{i\u003d1}^{n}{(y_i - \\theta^Tx_i)^2}$$\u003cbr /\u003e\n$$\\nabla L \u003d \\frac{1}{n}\\sum_{i\u003d1}^{n}{(\\theta^Tx_i - y_i) \\cdot x_i} \u003d \\frac{1}{n}X^T(X\\theta - y)$$\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141067_1175279473",
+      "id": "20230126-201541_1063680652",
+      "dateCreated": "2023-01-26 20:15:41.067",
+      "dateStarted": "2023-01-27 07:49:07.013",
+      "dateFinished": "2023-01-27 07:49:07.029",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nИсходя из полученного выражения градиента, реализуем алгоритм градиентного спуска:",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:49:10.426",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "colWidth": 12.0,
+        "editorHide": true,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eИсходя из полученного выражения градиента, реализуем алгоритм градиентного спуска:\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141068_1218439952",
+      "id": "20230126-201541_2143250244",
+      "dateCreated": "2023-01-26 20:15:41.068",
+      "dateStarted": "2023-01-27 07:49:10.428",
+      "dateFinished": "2023-01-27 07:49:10.443",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Реализовать функцию вычисления градиента функции MSE\n\ndef calc_mse_gradient(X, y, theta):\n    n \u003d X.shape[0]\n    grad \u003d 1. / n * X.transpose().dot(X.dot(theta) - y)\n    \n    return grad",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:49:43.311",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141068_127955774",
+      "id": "20230126-201541_1333820053",
+      "dateCreated": "2023-01-26 20:15:41.068",
+      "dateStarted": "2023-01-27 07:49:43.318",
+      "dateFinished": "2023-01-27 07:49:43.383",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Реализовать функцию, осуществляющую градиентный шаг\n# (функция должна содержать параметр величины шага alpha - learning rate)\n\ndef gradient_step(theta, theta_grad, alpha):\n    return theta - alpha * theta_grad",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:51:13.072",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141068_268051912",
+      "id": "20230126-201541_170777393",
+      "dateCreated": "2023-01-26 20:15:41.068",
+      "dateStarted": "2023-01-27 07:51:13.078",
+      "dateFinished": "2023-01-27 07:51:13.143",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Реализовать функцию цикла градиентного спуска с доп. параметрами\n# начального вектора theta и числа итераций\n\ndef optimize(X, y, grad_func, start_theta, alpha, n_iters):\n    theta \u003d start_theta.copy()\n    \n    for i in range(n_iters):\n        theta_grad \u003d grad_func(X, y, theta)\n        theta \u003d gradient_step(theta, theta_grad, alpha)\n    \n    return theta\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:51:10.817",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141068_748723928",
+      "id": "20230126-201541_110326498",
+      "dateCreated": "2023-01-26 20:15:41.068",
+      "dateStarted": "2023-01-27 07:51:10.823",
+      "dateFinished": "2023-01-27 07:51:10.892",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Разбить таблицу данных на матрицы X и y\nX, y \u003d data[\u0027data\u0027], data[\u0027target\u0027]\n\n# Добавить фиктивный столбец единиц (bias линейной модели)\nX \u003d np.hstack([np.ones(X.shape[0])[:, np.newaxis], X])\nm \u003d X.shape[1]",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 18:56:19.234",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141068_1324241760",
+      "id": "20230126-201541_34779187",
+      "dateCreated": "2023-01-26 20:15:41.069",
+      "dateStarted": "2023-01-28 18:56:19.258",
+      "dateFinished": "2023-01-28 18:56:19.322",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nX.std(axis\u003d0)#.astype(int)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:55:27.399",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "array([0.00000000e+00, 8.59304135e+00, 2.32993957e+01, 6.85357058e+00,\n       2.53742935e-01, 1.15763115e-01, 7.01922514e-01, 2.81210326e+01,\n       2.10362836e+00, 8.69865112e+00, 1.68370495e+02, 2.16280519e+00,\n       9.12046075e+01, 7.13400164e+00])"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674805922841_1832433344",
+      "id": "paragraph_1674805922841_1832433344",
+      "dateCreated": "2023-01-27 07:52:02.842",
+      "dateStarted": "2023-01-27 07:55:27.408",
+      "dateFinished": "2023-01-27 07:55:27.479",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Оптимизировать параметр линейной регрессии theta на всех данных\ntheta \u003d optimize(X, y, calc_mse_gradient, np.ones(m), 0.001, 100)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:51:16.560",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141069_458533421",
+      "id": "20230126-201541_1309292086",
+      "dateCreated": "2023-01-26 20:15:41.069",
+      "dateStarted": "2023-01-27 07:51:16.567",
+      "dateFinished": "2023-01-27 07:51:16.629",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\ntheta",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:51:20.494",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "array([7.41647399e+246, 3.32349992e+247, 7.39564172e+247, 8.96295209e+247,\n       5.07578059e+245, 4.22030567e+246, 4.63094053e+247, 5.29083888e+248,\n       2.65643383e+247, 8.19991211e+247, 3.27135991e+249, 1.38363846e+248,\n       2.64323053e+249, 9.88835598e+247])"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141069_1121060144",
+      "id": "20230126-201541_714774677",
+      "dateCreated": "2023-01-26 20:15:41.069",
+      "dateStarted": "2023-01-27 07:51:20.500",
+      "dateFinished": "2023-01-27 07:51:20.567",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Проверить максимальные значения по каждому признаку в данных\nX.max(axis\u003d0)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-27 07:51:30.645",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "array([  1.    ,  88.9762, 100.    ,  27.74  ,   1.    ,   0.871 ,\n         8.78  , 100.    ,  12.1265,  24.    , 711.    ,  22.    ,\n       396.9   ,  37.97  ])"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141069_1266737351",
+      "id": "20230126-201541_923007814",
+      "dateCreated": "2023-01-26 20:15:41.069",
+      "dateStarted": "2023-01-27 07:51:30.652",
+      "dateFinished": "2023-01-27 07:51:30.722",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\nprint(data[\u0027feature_names\u0027][np.argmax(X.std(axis\u003d0)) + 1])\nprint(np.max(X.std(axis\u003d0)))",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 20:15:41.069",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "B\n168.3704950393814\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141069_1437632963",
+      "id": "20230126-201541_537351869",
+      "dateCreated": "2023-01-26 20:15:41.069",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# Нормализовать даннные с помощью стандартной нормализации\nX, y \u003d data[\u0027data\u0027], data[\u0027target\u0027]\nX \u003d (X - X.mean(axis\u003d0)) / X.std(axis\u003d0)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-28 18:56:51.036",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python",
+        "colWidth": 12.0,
+        "editorHide": false,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141070_1369182829",
+      "id": "20230126-201541_1067675405",
+      "dateCreated": "2023-01-26 20:15:41.070",
+      "dateStarted": "2023-01-28 18:56:51.054",
+      "dateFinished": "2023-01-28 18:56:51.123",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python\n# Добавить фиктивный столбец единиц (bias линейной модели)\nX \u003d np.hstack([np.ones(X.shape[0])[:, np.newaxis], X])\nX.max(axis\u003d0)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 20:15:41.070",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "array([1.        , 9.9339306 , 3.80423444, 2.42256516, 3.66839786,\n       2.73234648, 3.55504427, 1.11749449, 3.96051769, 1.66124525,\n       1.79819419, 1.63882832, 0.44105193, 3.54877081])"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141070_1379262492",
+      "id": "20230126-201541_1090717276",
+      "dateCreated": "2023-01-26 20:15:41.070",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# Оптимизировать theta на новых данных\ntheta \u003d optimize(X, y, calc_mse_gradient, np.ones(m), 0.01, 5000)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 20:15:41.070",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141070_581252880",
+      "id": "20230126-201541_1769082097",
+      "dateCreated": "2023-01-26 20:15:41.070",
+      "status": "READY"
+    },
+    {
+      "text": "%python\ntheta",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 20:15:41.070",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "array([ 2.25328063e+01, -9.21740195e-01,  1.07033639e+00,  1.06388396e-01,\n        6.86667316e-01, -2.05006416e+00,  2.68062168e+00,  1.40667969e-02,\n       -3.10608483e+00,  2.57511475e+00, -1.97802851e+00, -2.05725099e+00,\n        8.48690321e-01, -3.74025884e+00])"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141070_1777238539",
+      "id": "20230126-201541_1943670236",
+      "dateCreated": "2023-01-26 20:15:41.070",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# Сделать предсказания при полученных параметрах\ny_pred \u003d X.dot(theta)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 20:15:41.070",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141070_730418304",
+      "id": "20230126-201541_1462099885",
+      "dateCreated": "2023-01-26 20:15:41.070",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# Посчитать значение ошибок MSE и RMSE для тренировочных данных\nprint_regression_metrics(y, y_pred)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 20:15:41.071",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "MSE \u003d 21.90, RMSE \u003d 4.68\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141070_1485754639",
+      "id": "20230126-201541_248316659",
+      "dateCreated": "2023-01-26 20:15:41.071",
+      "status": "READY"
+    },
+    {
+      "text": "%python\n# Разбить выборку на train/valid, оптимизировать theta,\n# сделать предсказания и посчитать ошибки MSE и RMSE\n\nX_train, X_valid, y_train, y_valid \u003d train_test_split(X, y, test_size\u003d0.2)\ntheta \u003d optimize(X_train, y_train, calc_mse_gradient, np.ones(m), 0.01, 5000)\ny_pred \u003d X_valid.dot(theta)\n\nprint_regression_metrics(y_valid, y_pred)",
+      "user": "anonymous",
+      "dateUpdated": "2023-01-26 20:15:41.071",
+      "progress": 0,
+      "config": {
+        "editorMode": "ace/mode/python",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "MSE \u003d 20.44, RMSE \u003d 4.52\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1674764141071_566963060",
+      "id": "20230126-201541_1998684767",
+      "dateCreated": "2023-01-26 20:15:41.071",
+      "status": "READY"
+    }
+  ],
+  "name": "ML_LinearRegression_BostonDS",
+  "id": "2HRYAKVYB",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

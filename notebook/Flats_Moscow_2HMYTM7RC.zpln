@@ -42,9 +42,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "%python\nimport pandas as pd\nimport requests \n\nurl \u003d \u0027https://docs.google.com/spreadsheets/d/1J4lUpCAztLpO378ZUTriIplYENUqY4oBDByauF39Dp4/export?format\u003dcsv\u0027\n#s \u003d requests.get(url).content\n#print(s[0:100])\ndata \u003d pd.read_csv(url,sep\u003d\";\")\ndata.head()\n",
+      "text": "%python\nimport pandas as pd\nimport requests \n\n#url \u003d \u0027https://docs.google.com/spreadsheets/d/1J4lUpCAztLpO378ZUTriIplYENUqY4oBDByauF39Dp4/export?format\u003dcsv\u0027\n#s \u003d requests.get(url).content\n#print(s[0:100])\n#data \u003d pd.read_csv(url,sep\u003d\";\")\ndata \u003d pd.read_csv(\u0027/tmp/data/data_flats.csv\u0027,sep\u003d\";\")\ndata.head()\n",
       "user": "anonymous",
-      "dateUpdated": "2022-12-30 04:12:01.934",
+      "dateUpdated": "2023-01-24 13:07:43.184",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -78,8 +78,8 @@
       "jobName": "paragraph_1672290556973_2098521933",
       "id": "paragraph_1672290556973_2098521933",
       "dateCreated": "2022-12-29 05:09:16.973",
-      "dateStarted": "2022-12-30 04:12:01.938",
-      "dateFinished": "2022-12-30 04:12:15.689",
+      "dateStarted": "2023-01-24 13:07:43.211",
+      "dateFinished": "2023-01-24 13:07:47.081",
       "status": "FINISHED"
     },
     {
